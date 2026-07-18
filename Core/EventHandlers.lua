@@ -418,10 +418,10 @@ function R:OnCombat()
 	local timestamp, eventType, hideCaster, srcGuid, srcName, srcFlags, srcRaidFlags, dstGuid, dstName, dstFlags, dstRaidFlags, spellId, spellName, spellSchool, auraType =
 		CombatLogGetCurrentEventInfo()
 
-	if eventType == "UNIT_DIED" then -- A unit died near you
+	if eventType == "UNIT_DIED" or eventType == "UNIT_DESTROYED" or eventType == "PARTY_KILL" then -- A relevant unit died near you
 		local npcid = self:GetNPCIDFromGUID(dstGuid)
 		if Rarity.bosses[npcid] then -- It's a boss we're interested in
-			R:Debug("Detected UNIT_DIED for relevant NPC with ID = " .. tostring(npcid))
+			R:Debug("Detected " .. tostring(eventType) .. " for relevant NPC with ID = " .. tostring(npcid))
 			if
 				bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE)
 				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_PARTY)
@@ -462,6 +462,8 @@ end
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok
 	[70867] = "Everlasting Horn of Lavaswimming", -- Scalebane Keep (scenario completion)
+	[52847] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
+	[52848] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
 	-- Not actually from a world quest/event
 	[85830] = "Parrot Cage (Void-Scarred Parrot)", -- More accurately detected via object GUID
 }
@@ -475,18 +477,32 @@ function R:OnQuestTurnedIn(event, questID, experience, money)
 	if not relevantItem then
 		return
 	end
-	self:Debug(format("Relevant quest turnin detected for item %s (questID = %d)", questID, relevantItem))
 
-	local v = self.db.profile.groups.items[relevantItem]
-		or self.db.profile.groups.pets[relevantItem]
-		or self.db.profile.groups.mounts[relevantItem]
-	if v and type(v) == "table" and v.enabled ~= false then
-		if v.attempts == nil then
-			v.attempts = 1
-		else
-			v.attempts = v.attempts + 1
+	local relevantItems = {}
+	if type(relevantItem) == "string" then
+		table.insert(relevantItems, relevantItem)
+	elseif type(relevantItem) == "table" then
+		if relevantItem.alliance and self.Caching:IsAlliance() then
+			table.insert(relevantItems, relevantItem.alliance)
+		elseif relevantItem.horde and self.Caching:IsHorde() then
+			table.insert(relevantItems, relevantItem.horde)
 		end
-		self:OutputAttempts(v)
+	end
+
+	for _, itemName in ipairs(relevantItems) do
+		self:Debug(format("Relevant quest turnin detected for item %s (questID = %d)", tostring(itemName), tonumber(questID or 0)))
+
+		local v = self.db.profile.groups.items[itemName]
+			or self.db.profile.groups.pets[itemName]
+			or self.db.profile.groups.mounts[itemName]
+		if v and type(v) == "table" and v.enabled ~= false and self:IsAttemptAllowed(v) then
+			if v.attempts == nil then
+				v.attempts = 1
+			else
+				v.attempts = v.attempts + 1
+			end
+			self:OutputAttempts(v)
+		end
 	end
 end
 
