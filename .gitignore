@@ -1,5 +1,5 @@
 # Embedded libraries that are used for local testing only
-Libs/
+# Libs/ - manually updated Ace3 libs for 12.1 PTR
 *.CMD
 *.suo
 *.json

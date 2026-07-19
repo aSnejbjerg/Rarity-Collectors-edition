@@ -308,7 +308,7 @@ function R:PrepareOptions()
 								name = L["Join the Rarity Discord"],
 								desc = L["You can ask questions, follow the latest Rarity news and share the excitement of finally getting that one elusive drop with your fellow collectors in our Discord server.\n\nPS: We have cookies."],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://discord.gg/sQ3UqtSh6m")
+									Rarity.CopyPastePopup:SetEditBoxText("https://discord.gg/DTWKVg96PA")
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
