@@ -3,7 +3,7 @@
 ## X-Min-Interface: 120100, 120007, 20506, 20506, 50504, 11508
 ## Title: Rarity
 ## Version: 2.0 (r752-alpha-17)
-## X-Curse-Project-ID: 30801
+## X-Curse-Project-ID: 1614412
 
 ## Notes: Tracks rare drops, including companions and mounts
 
