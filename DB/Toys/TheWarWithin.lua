@@ -22,22 +22,7 @@ local twwToysAndItems = {
 		coords = { { m = CONSTANTS.UIMAPIDS.ISLE_OF_DORN } },
 		repeatable = true,
 	},
-	["Malfunctioning Mechsuit"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
-		type = CONSTANTS.ITEM_TYPES.ITEM,
-		method = CONSTANTS.DETECTION_METHODS.BOSS,
-		name = L["Malfunctioning Mechsuit"],
-		npcs = { 99999 },
-		tooltipNpcs = { 219440, 213119 },
-		statisticId = { 40722 },
-		itemId = 226683,
-		spellId = 442358,
-		chance = 200,
-		groupSize = 5,
-		equalOdds = true,
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-		coords = { { m = CONSTANTS.UIMAPIDS.THE_STONEVAULT, i = true } },
-	},
+	
 	-- 11,0.7 items and toys
 	["Glittering Vault Shard"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,

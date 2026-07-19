@@ -404,11 +404,14 @@ local bfaMounts = {
 	["Mechagon Peacekeeper"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			2291, -- HK-8 Aerial Oppression Unit
+		},
 		name = L["Mechagon Peacekeeper"],
 		spellId = 299158,
 		itemId = 168826,
-		npcs = { 150190 },
+		npcs = { 150190, 155157 },
 		chance = 200,
 		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
 		lockoutDetails = {

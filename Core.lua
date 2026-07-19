@@ -53,7 +53,7 @@ local CONSTANTS = addonTable.constants
 
 -- Methods of obtaining
 local NPC = "NPC"
-local BOSS = "BOSS"
+local ENCOUNTER = "ENCOUNTER"
 local ZONE = "ZONE"
 local USE = "USE"
 local FISHING = "FISHING"
@@ -103,7 +103,8 @@ local GetLootSourceInfo = _G.GetLootSourceInfo
 local GetBestMapForUnit = _G.C_Map.GetBestMapForUnit
 local GetMapInfo = _G.C_Map.GetMapInfo
 local C_Timer = _G.C_Timer
-local IsSpellKnown = _G.IsSpellKnown
+-- IsSpellKnown was moved to C_Spell.IsSpellKnown in WoW 12.0.0 (Midnight); use with fallback for compatibility
+local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local CombatLogGetCurrentEventInfo = _G.CombatLogGetCurrentEventInfo
 local IsQuestFlaggedCompleted = _G.C_QuestLog.IsQuestFlaggedCompleted
 local C_Covenants = _G.C_Covenants
@@ -283,6 +284,7 @@ do
 
 		-- Scan bags, currency, and instance locks 10 seconds after init
 		self:ScheduleTimer(function()
+			R:StartInitialBagSync(2)
 			R:ScanBags()
 			R:OnCurrencyUpdate("DELAYED INIT")
 			R:OnBagUpdate()
@@ -527,7 +529,7 @@ function R:UpdateInterestingThings()
 	end
 
 	table.wipe(npcs)
-	table.wipe(Rarity.bosses)
+	table.wipe(Rarity.encounters)
 	table.wipe(Rarity.zones)
 	table.wipe(Rarity.items)
 	table.wipe(Rarity.guids)
@@ -562,13 +564,16 @@ function R:UpdateInterestingThings()
 							end
 							table.insert(Rarity.npcs_to_items[vvv], vv)
 						end
-					elseif vv.method == BOSS and vv.npcs ~= nil and type(vv.npcs) == "table" then
-						for kkk, vvv in pairs(vv.npcs) do
-							Rarity.bosses[vvv] = vv
-							if Rarity.npcs_to_items[vvv] == nil then
-								Rarity.npcs_to_items[vvv] = {}
+					elseif vv.method == ENCOUNTER then
+						local encounterIDs = vv.encounters or vv.encounter
+						if type(encounterIDs) == "table" then
+							for kkk, vvv in ipairs(encounterIDs) do
+								Rarity.encounters[vvv] = Rarity.encounters[vvv] or {}
+								table.insert(Rarity.encounters[vvv], vv)
 							end
-							table.insert(Rarity.npcs_to_items[vvv], vv)
+						elseif encounterIDs ~= nil then
+							Rarity.encounters[encounterIDs] = Rarity.encounters[encounterIDs] or {}
+							table.insert(Rarity.encounters[encounterIDs], vv)
 						end
 					elseif vv.method == ZONE and vv.zones ~= nil and type(vv.zones) == "table" then
 						for kkk, vvv in pairs(vv.zones) do

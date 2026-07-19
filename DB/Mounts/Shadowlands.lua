@@ -414,12 +414,19 @@ local shadowlandsMounts = {
 		npcs = { 180863 },
 		chance = 50,
 		statisticId = { 15168 },
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+		instanceDifficulties = {
+			[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, -- Heroic 
+			[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true, -- Mythic 
+		},
 		lockoutDetails = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "So'leah",
 				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+			},
+			{
+				encounterName = "So'leah",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true },
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.TAZAVESH_THE_VEILED_MARKET, i = true } },
@@ -449,7 +456,10 @@ local shadowlandsMounts = {
 				encounterName = "The Nine",
 				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true },
 			},
-			{ encounterName = "The Nine", instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true } },
+			{   
+				encounterName = "The Nine", 
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true }, 
+			},
 		},
 		instanceDifficulties = {
 			[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true, -- Normal (Raids)

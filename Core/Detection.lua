@@ -68,7 +68,7 @@ function R:ScanCalendar(reason)
 		local calendarEvent = C_Calendar.GetDayEvent(monthOffset, day, i)
 		assert(calendarEvent.eventID, "Calendar event IDs should now be available in all WOW product lines")
 
-		if calendarEvent.calendarType == "HOLIDAY" then
+		if not issecretvalue(calendarEvent.calendarType) and calendarEvent.calendarType == "HOLIDAY" then
 			Rarity.activeHolidayEvents[calendarEvent.eventID] = calendarEvent
 		end
 	end

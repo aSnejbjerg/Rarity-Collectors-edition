@@ -8,6 +8,7 @@ local CONSTANTS = addonTable.constants
 
 -- Locals
 local coinamounts = {}
+local initialBagSyncTimer = nil
 
 -- Externals
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
@@ -48,7 +49,8 @@ local GetArchaeologyRaceInfo = _G.GetArchaeologyRaceInfo
 local GetStatistic = _G.GetStatistic
 local GetLootSourceInfo = _G.GetLootSourceInfo
 local C_Timer = _G.C_Timer
-local IsSpellKnown = _G.IsSpellKnown
+-- IsSpellKnown was moved to C_Spell.IsSpellKnown in WoW 12.0.0 (Midnight); use with fallback for compatibility
+local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentRenownLevel
 
 -- Addon APIs
@@ -63,9 +65,10 @@ function EventHandlers:Register()
 	self:RegisterEvent("LOOT_READY", "OnLootReady")
 	self:RegisterEvent("CURRENCY_DISPLAY_UPDATE", "OnCurrencyUpdate")
 	self:RegisterEvent("RESEARCH_ARTIFACT_COMPLETE", "OnResearchArtifactComplete")
-	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "OnCombat") -- Used to detect boss kills that we didn't solo
+	-- self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "OnCombat") -- Used to detect boss kills that we didn't solo
 	self:RegisterEvent("CURSOR_CHANGED", "OnCursorChanged") -- Fishing detection
-	self:RegisterEvent("UNIT_SPELLCAST_SENT", "OnSpellcastSent") -- Fishing detection
+	-- UNIT_SPELLCAST_SENT was removed in WoW 12.0.0 (Midnight); use UNIT_SPELLCAST_START instead
+	self:RegisterEvent("UNIT_SPELLCAST_START", "OnSpellcastSent") -- Fishing detection
 	self:RegisterEvent("UNIT_SPELLCAST_STOP", "OnSpellcastStopped") -- Fishing detection
 	self:RegisterEvent("UNIT_SPELLCAST_FAILED", "OnSpellcastFailed") -- Fishing detection
 	self:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED", "OnSpellcastFailed") -- Fishing detection
@@ -95,6 +98,22 @@ function EventHandlers:Register()
 
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "OnPlayerInteractionFrameShow")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", "OnPlayerInteractionFrameHide")
+	self:StartInitialBagSync()
+end
+
+function R:StartInitialBagSync(delay)
+	Rarity.isInitialBagSync = true
+
+	if initialBagSyncTimer then
+		self:CancelTimer(initialBagSyncTimer, true)
+	end
+
+	initialBagSyncTimer = self:ScheduleTimer(function()
+		self:ScanBags()
+		self:BackUpInventoryItemAmounts()
+		Rarity.isInitialBagSync = false
+		initialBagSyncTimer = nil
+	end, delay or 10)
 end
 
 -- TODO: Move elsewhere/refactor
@@ -292,42 +311,6 @@ function R:CheckForCoinItem()
 	end
 end
 
--------------------------------------------------------------------------------------
--- Raid encounter ended:
--- Used for detecting raid bosses that don't actually die when the encounter ends and
--- have no statistic tied to them (e.g., the Keepers of Ulduar)
--- While it might work to change their method from NPC to BOSS,
--- at this time I'm not sure if that wouldn't cause problems elsewhere... so I won't touch it
--------------------------------------------------------------------------------------
-local encounterLUT = {
-	-- See https://warcraft.wiki.gg/wiki/DungeonEncounterID
-	[1140] = { "Stormforged Rune" }, -- The Assembly of Iron
-	[1133] = { "Blessed Seed" }, -- Freya
-	[1135] = { "Ominous Pile of Snow" }, -- Hodir
-	[1138] = { "Overcomplicated Controller" }, -- Mimiron
-	[1143] = { "Wriggling Darkness" }, -- Yogg-Saron (mount uses the BOSS method and is tracked separately)
-	[1500] = { "Celestial Gift" }, -- Elegon
-	[1505] = { "Azure Cloud Serpent Egg" }, -- Tsulong
-	[1506] = { "Spirit of the Spring" }, -- Lei Shi
-	-- 8.3: Horrific Visions
-	[2332] = { "Swirling Black Bottle", "Void-Link Frostwolf Collar" }, -- Thrall the Corrupted
-	[2338] = { "Swirling Black Bottle", "Voidwoven Cat Collar" }, -- Alleria Windrunner
-	[2370] = { "C'Thuffer" }, -- Rexxar
-	[2377] = { "Void-Scarred Hare" }, -- Magister Umbric
-	[2372] = { "Void-Touched Souvenir Totem", "Box With Faintly Glowing 'Air' Holes" }, -- Oblivion Elemental (Final objective for Zekhan's area)
-	[2374] = { 'Box Labeled "Danger: Void Rat Inside"' }, -- Therum Deepforge (Final objective for Kelsey's area)
-	-- 11.1.5 Horrific Visions (Revisited)
-	[3081] = { "Swirling Black Bottle", "Voidwoven Cat Collar" }, -- Alleria Windrunner
-	[3082] = { 'Box Labeled "Danger: Void Rat Inside"' }, -- Therum Deepforge (Final objective for Kelsey's area)
-	[3084] = { "Eye of Chaos" }, -- Mathias Shaw (Old Town)
-	[3085] = { "Void-Scarred Hare" }, -- Magister Umbric
-	[3086] = { "Swirling Black Bottle", "Void-Link Frostwolf Collar" }, -- Thrall the Corrupted
-	[3087] = { "Void Scarred Scorpid" }, -- Inquistor Gnshal
-	[3088] = { "Void-Touched Souvenir Totem", "Box With Faintly Glowing 'Air' Holes" }, -- Oblivion Elemental (Final objective for Zekhan's area)
-	[3089] = { "Void-Scarred Egg" }, -- Vezokk
-	[3090] = { "C'Thuffer" }, -- Rexxar
-}
-
 function R:OnEncounterEnd(event, encounterID, encounterName, difficultyID, raidSize, endStatus)
 	R:Debug(
 		"ENCOUNTER_END with encounterID = "
@@ -338,29 +321,29 @@ function R:OnEncounterEnd(event, encounterID, encounterName, difficultyID, raidS
 			.. tostring(endStatus)
 	)
 
-	local items = encounterLUT[encounterID]
+	local items = Rarity.encounters[encounterID] -- TODO add the others to the actual item DB
 	if type(items) ~= "table" then
 		-- Not a relevant encounter
 		return
 	end
-	for _, item in ipairs(items) do
-		if item and type(item) == "string" then -- This encounter has an entry in the LUT and needs special handling
-			R:Debug("Found item of interest for this encounter: " .. tostring(item))
-			local v = self.db.profile.groups.pets[item]
-				or self.db.profile.groups.items[item]
-				or self.db.profile.groups.mounts[item]
-			-- v = value = number of attempts for this item
 
-			if endStatus == 1 then -- Encounter succeeded -> Check if number of attempts should be increased
-				if v and type(v) == "table" and v.enabled ~= false and R:IsAttemptAllowed(v) then -- Add one attempt for this item
-					if v.attempts == nil then
-						v.attempts = 1
-					else
-						v.attempts = v.attempts + 1
-					end
-					R:OutputAttempts(v)
-				end
+	if endStatus ~= 1 then
+		-- Not a victory = no loot (presumably)
+		return
+	end
+
+	R:Debug(format("Found %d item(s) of interest for this encounter", #items))
+	R.encitems = items -- TODO remove
+	for _, item in pairs(items) do
+		R:Debug("Found item of interest for this encounter: " .. tostring(item.name))
+		-- TODO DRY
+		if item and type(item) == "table" and item.enabled ~= false and R:IsAttemptAllowed(item) then -- Add one attempt for this item
+			if item.attempts == nil then
+				item.attempts = 1
+			else
+				item.attempts = item.attempts + 1
 			end
+			R:OutputAttempts(item)
 		end
 	end
 end
@@ -411,61 +394,62 @@ end
 -- Handle boss kills. You may not ever open a loot window on a boss, so we need to watch the combat log for its death.
 -- This event also handles some special cases.
 -------------------------------------------------------------------------------------
-function R:OnCombat()
-	self.Profiling:StartTimer("EventHandlers.OnCombat")
+-- function R:OnCombat()
+-- 	self.Profiling:StartTimer("EventHandlers.OnCombat")
 
-	-- Extract event payload (it's no longer being passed by the event iself as of 8.0.1)
-	local timestamp, eventType, hideCaster, srcGuid, srcName, srcFlags, srcRaidFlags, dstGuid, dstName, dstFlags, dstRaidFlags, spellId, spellName, spellSchool, auraType =
-		CombatLogGetCurrentEventInfo()
+-- 	-- Extract event payload (it's no longer being passed by the event iself as of 8.0.1)
+-- 	local timestamp, eventType, hideCaster, srcGuid, srcName, srcFlags, srcRaidFlags, dstGuid, dstName, dstFlags, dstRaidFlags, spellId, spellName, spellSchool, auraType =
+-- 		CombatLogGetCurrentEventInfo()
 
-	if eventType == "UNIT_DIED" or eventType == "UNIT_DESTROYED" or eventType == "PARTY_KILL" then -- A relevant unit died near you
-		local npcid = self:GetNPCIDFromGUID(dstGuid)
-		if Rarity.bosses[npcid] then -- It's a boss we're interested in
-			R:Debug("Detected " .. tostring(eventType) .. " for relevant NPC with ID = " .. tostring(npcid))
-			if
-				bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE)
-				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_PARTY)
-				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_RAID)
-			then -- You, a party member, or a raid member killed it
-				if not Rarity.guids[dstGuid] then
-					if not UnitAffectingCombat("player") and not UnitIsDead("player") then
-						Rarity:Debug("Ignoring this UNIT_DIED event because the player is alive, but not in combat")
-						self.Profiling:EndTimer("EventHandlers.OnCombat")
-						return
-					end
+-- 	if eventType == "UNIT_DIED" then -- A unit died near you
+-- 		local npcid = self:GetNPCIDFromGUID(dstGuid)
+-- 		if Rarity.bosses[npcid] then -- It's a boss we're interested in
+-- 			R:Debug("Detected UNIT_DIED for relevant NPC with ID = " .. tostring(npcid))
+-- 			if
+-- 				bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE)
+-- 				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_PARTY)
+-- 				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_RAID)
+-- 			then -- You, a party member, or a raid member killed it
+-- 				if not Rarity.guids[dstGuid] then
+-- 					if not UnitAffectingCombat("player") and not UnitIsDead("player") then
+-- 						Rarity:Debug("Ignoring this UNIT_DIED event because the player is alive, but not in combat")
+-- 						self.Profiling:EndTimer("EventHandlers.OnCombat")
+-- 						return
+-- 					end
 
-					-- Increment attempts counter(s). One NPC might drop multiple things we want, so scan for them all.
-					if Rarity.npcs_to_items[npcid] and type(Rarity.npcs_to_items[npcid]) == "table" then
-						for k, v in pairs(Rarity.npcs_to_items[npcid]) do
-							local isBossDrop = (v.method == CONSTANTS.DETECTION_METHODS.BOSS)
-							local hasKillStatistics = type(v.statisticId) ~= "nil"
-							if v.enabled ~= false and isBossDrop and not hasKillStatistics then
-								if self:IsAttemptAllowed(v) then
-									Rarity.guids[dstGuid] = true
-									if v.attempts == nil then
-										v.attempts = 1
-									else
-										v.attempts = v.attempts + 1
-									end
-									self:OutputAttempts(v)
-								end
-							end
-						end
-					end
-				end
-			end
-		end
-	end
-	self.Profiling:EndTimer("EventHandlers.OnCombat")
-end
+-- 					-- Increment attempts counter(s). One NPC might drop multiple things we want, so scan for them all.
+-- 					if Rarity.npcs_to_items[npcid] and type(Rarity.npcs_to_items[npcid]) == "table" then
+-- 						for k, v in pairs(Rarity.npcs_to_items[npcid]) do
+-- 							local isBossDrop = (v.method == CONSTANTS.DETECTION_METHODS.BOSS)
+-- 							local hasKillStatistics = type(v.statisticId) ~= "nil"
+-- 							if v.enabled ~= false and isBossDrop and not hasKillStatistics then
+-- 								if self:IsAttemptAllowed(v) then
+-- 									Rarity.guids[dstGuid] = true
+-- 									if v.attempts == nil then
+-- 										v.attempts = 1
+-- 									else
+-- 										v.attempts = v.attempts + 1
+-- 									end
+-- 									self:OutputAttempts(v)
+-- 								end
+-- 							end
+-- 						end
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- 	self.Profiling:EndTimer("EventHandlers.OnCombat")
+-- end
 
 local worldEventQuests = {
-	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok
+	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)
 	[70867] = "Everlasting Horn of Lavaswimming", -- Scalebane Keep (scenario completion)
 	[52847] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
 	[52848] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
 	-- Not actually from a world quest/event
 	[85830] = "Parrot Cage (Void-Scarred Parrot)", -- More accurately detected via object GUID
+	-- TBD: Are object GUIDs also secret now? Sigh.
 }
 
 function R:OnQuestTurnedIn(event, questID, experience, money)
@@ -477,7 +461,6 @@ function R:OnQuestTurnedIn(event, questID, experience, money)
 	if not relevantItem then
 		return
 	end
-
 	local relevantItems = {}
 	if type(relevantItem) == "string" then
 		table.insert(relevantItems, relevantItem)
@@ -503,6 +486,7 @@ function R:OnQuestTurnedIn(event, questID, experience, money)
 			end
 			self:OutputAttempts(v)
 		end
+		self:OutputAttempts(v)
 	end
 end
 
@@ -627,15 +611,7 @@ function R:OnIslandCompleted(event, mapID, winner)
 	end
 end
 
-local timewalkingCriteriaLUT = {
-	[24801] = "Ozumat", -- Legacy (seems to no longer work? Perhaps the criterion ID was changed...)
-	[34414] = "Ozumat", -- Timewalking difficulty only? (need to test)
-	[24784] = "Trial of the King", -- [126952] = "Trial of the King", -- Object: Legacy of the Clan Leaders
-	[19244] = "Master Snowdrift", -- [123096] = "Master Snowdrift", -- Object: Snowdrift's Possessions
-	[34410] = "Taran Zhu", -- [123095] = "Taran Zhu", -- Object: Taran Zhu's Personal Stash
-}
-
-local timeRiftCriteriaLUT = {
+local timeRiftCriteriaLUT = { -- TBD: Can't remove this... I think? Would need to check ingame (etrace log)
 	[60685] = "Gill'dan (Azmerloth)",
 	[60688] = "Freya (Ulderoth)",
 	[60689] = "The Lich King (Azmourne)",
@@ -664,21 +640,8 @@ local timeRiftPets = {
 }
 
 function R:OnCriteriaComplete(event, id)
-	local timewalkingEncounterName = timewalkingCriteriaLUT[id]
 	local timeRiftEncounterName = timeRiftCriteriaLUT[id]
 	R:Debug("Detected achievement criteria completion: " .. tostring(id))
-	if timewalkingEncounterName then
-		R:Debug("Completed criteria for Timewalking encounter: " .. tostring(timewalkingEncounterName))
-		local v = self.db.profile.groups.mounts["Reins of the Infinite Timereaver"]
-		if v and type(v) == "table" and v.enabled ~= false and R:IsAttemptAllowed(v) then
-			if v.attempts == nil then
-				v.attempts = 1
-			else
-				v.attempts = v.attempts + 1
-			end
-			R:OutputAttempts(v)
-		end
-	end
 
 	if timeRiftEncounterName then
 		R:Debug("Completed criteria for Time Rift encounter: " .. timeRiftEncounterName)
@@ -751,6 +714,7 @@ function R:OnProfileChanged(event, database, newProfileKey)
 	self.db:RegisterDefaults(self.defaults)
 	self:UpdateInterestingThings()
 	self:OnCurrencyUpdate(event)
+	self:StartInitialBagSync(2)
 	self:ScanAllArch(event)
 	Rarity.Collections:ScanExistingItems(event)
 	self:ScanBags()
@@ -798,9 +762,13 @@ function R:OnChatCommand(input)
 	end
 end
 
-function R:OnItemFound(itemId, item)
+function R:OnItemFound(itemId, item, suppressAlert)
 	if item.found and not item.repeatable then
 		return
+	end
+
+	if suppressAlert == nil then
+		suppressAlert = false
 	end
 
 	local playerClass = select(2, UnitClass("player"))
@@ -822,7 +790,9 @@ function R:OnItemFound(itemId, item)
 		return
 	end
 
-	self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
+	if not suppressAlert then
+		self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
+	end
 	if Rarity.Session:IsActive() then
 		Rarity.Session:End()
 	end
@@ -862,7 +832,9 @@ end
 
 local FISHING_DELAY = 22
 
-function R:OnSpellcastSent(event, unit, target, castGUID, spellID)
+function R:OnSpellcastSent(event, unit, castGUID, spellID)
+	-- Note: Previously used UNIT_SPELLCAST_SENT (removed in 12.0.0), now uses UNIT_SPELLCAST_START
+	-- UNIT_SPELLCAST_START signature: (unit, castGUID, spellID) - no "target" argument
 	if unit ~= "player" then
 		return
 	end
@@ -1129,7 +1101,7 @@ function R:ProcessOtherItem(itemID)
 	local amountIncreasedSinceLastScan = (Rarity.bagitems[itemID] or 0) > (Rarity.tempbagitems[itemID] or 0)
 	if amountIncreasedSinceLastScan then -- An inventory item went up in count
 		if item and item.enabled ~= false and not self:IsCollectionItem(item) then
-			self:OnItemFound(itemID, item)
+			self:OnItemFound(itemID, item, Rarity.isInitialBagSync)
 		end
 	end
 end
@@ -1158,7 +1130,7 @@ function R:ProcessCollectionItemSingle(collectionItem, itemID)
 			collectionItem.attempts = inventoryItemCount
 		end
 		if originalCount < inventoryItemCount and originalCount < goal and inventoryItemCount >= goal then
-			self:OnItemFound(collectionItem.itemId, collectionItem)
+			self:OnItemFound(collectionItem.itemId, collectionItem, Rarity.isInitialBagSync)
 		elseif originalCount < inventoryItemCount then
 			self:OutputAttempts(collectionItem)
 		end
@@ -1182,7 +1154,7 @@ function R:ProcessCollectionItemAggregate(collectionItem)
 			collectionItem.attempts = total
 			if originalCount < goal and total >= goal then
 				self:Debug("Triggering OnItemFound since we just reached the goal")
-				self:OnItemFound(collectionItem.itemId, collectionItem)
+				self:OnItemFound(collectionItem.itemId, collectionItem, Rarity.isInitialBagSync)
 			elseif total > originalCount then
 				self:Debug("Triggering OutputAttempts since we gained one item, but didn't reach the goal")
 				self:OutputAttempts(collectionItem)

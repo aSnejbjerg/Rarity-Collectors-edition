@@ -1,0 +1,15 @@
+## Author: Allara
+## Interface: 120100, 120007, 20506, 50504, 11508
+## X-Min-Interface: 120100, 120007, 20506, 50504, 11508
+## Notes: Rarity configuration. Should be loaded automatically on demand.
+## Title: Rarity [|caaedc99fOptions|r]
+## Dependencies: Rarity
+## X-Part-Of: Rarity
+## LoadOnDemand: 1
+## LoadSavedVariablesFirst: 1
+## X-LoadOn-Slash: /rarity, /rare
+## X-LoadOn-InterfaceOptions: Rarity
+
+## IconTexture: Interface\Icons\spell_nature_forceofnature.blp
+
+Options.lua

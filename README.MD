@@ -38,7 +38,7 @@
 </ul>
 <h2 id="w-http-www-wowace-com-addons-rarity-comments-http-www"><a href="http://www.wowace.com/addons/rarity/">Comments</a> &amp; <a href="http://www.wowace.com/addons/rarity/tickets/">bug reports</a></h2>
 <ul>
-<li><a href="https://discord.gg/sQ3UqtSh6m">Discord server</a></li>
+<li><a href="https://discord.gg/DTWKVg96PA">Discord server</a></li>
 <li><a href="https://github.com/WowRarity/Rarity">GitHub repository</a></li>
 <li><a href="http://www.wowace.com/addons/rarity/">WowAce comments and questions</a></li>
 <li><a href="http://www.wowace.com/addons/rarity/tickets/">WowAce issues tracker</a></li>

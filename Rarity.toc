@@ -1,21 +1,11 @@
 ## Author: Allara
-## Interface: 120001, 50503, 11508
-## X-Min-Interface: 120001, 50503, 11508
+## Interface: 120100, 120007, 20506, 50504, 11508
+## X-Min-Interface: 120100, 120007, 20506, 20506, 50504, 11508
 ## Title: Rarity
-## Version: 1.0 (@project-version@)
+## Version: 2.0 (r752-alpha-17)
 ## X-Curse-Project-ID: 30801
 
 ## Notes: Tracks rare drops, including companions and mounts
-## Notes-ruRU: @localization(locale="ruRU", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-deDE: @localization(locale="deDE", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-koKR: @localization(locale="koKR", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-esMX: @localization(locale="esMX", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-esES: @localization(locale="esES", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-ptBR: @localization(locale="ptBR", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-zhCN: @localization(locale="zhCN", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-zhTW: @localization(locale="zhTW", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-itIT: @localization(locale="itIT", key="Notes", namespace="ToC - Table of Contents")@
-## Notes-frFR: @localization(locale="frFR", key="Notes", namespace="ToC - Table of Contents")@
 
 ## LoadSavedVariablesFirst: 1
 
@@ -75,6 +65,7 @@ DB\Mounts\HolidayEvents_WrathOfTheLichKing.lua
 DB\Mounts\HolidayEvents_WarlordsOfDraenor.lua
 DB\Mounts\HolidayEvents_Dragonflight.lua
 DB\Mounts\HolidayEvents_TheWarWithin.lua
+DB\Mounts\HolidayEvents_Midnight.lua
 DB\Mounts\Classic.lua
 DB\Mounts\TheBurningCrusade.lua
 DB\Mounts\WrathOfTheLichKing.lua

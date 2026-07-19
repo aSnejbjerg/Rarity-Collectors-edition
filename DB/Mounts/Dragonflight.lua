@@ -78,8 +78,7 @@ local dragonflightMounts = {
 			200579,
 			200537,
 		},
-		chance = 80, --rough guess by looking at wowhead data
-		groupSize = 5,
+		chance = 150, 
 		equalOdds = true,
 		coords = {
 			{ m = CONSTANTS.UIMAPIDS.THE_FORBIDDEN_REACH, x = 68.6, y = 45.6, n = L["Mad-Eye Carrey"] },

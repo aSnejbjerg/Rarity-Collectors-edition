@@ -12,7 +12,10 @@ local twwPets = {
 	["Bop"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			2930, -- Goldie Baronbottom
+		},
 		name = L["Bop"],
 		npcs = { 218523, 214661 },
 		itemId = 223155,
@@ -63,7 +66,10 @@ local twwPets = {
 	["Craboom"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
-		method = CONSTANTS.DETECTION_METHODS.BOSS,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			3053, -- Swampface
+		},
 		name = L["Craboom"],
 		chance = 5,
 		creatureId = 238393,
@@ -89,18 +95,22 @@ local twwPets = {
 	["Parrot Cage (Void-Scarred Parrot)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
-		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+		method = CONSTANTS.DETECTION_METHODS.USE,
 		chance = 12,
 		creatureId = 237852,
 		name = L["Parrot Cage (Void-Scarred Parrot)"],
 		itemId = 235793,
+		items = { 499031 },
 		spellId = 1218379,
 		coords = { { m = CONSTANTS.UIMAPIDS.HORRIFIC_REVISION_OF_STORMWIND } },
 	},
 	["Eye of Chaos"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
-		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			3084, -- Mathias Shaw
+		},
 		chance = 12,
 		creatureId = 237850,
 		name = L["Eye of Chaos"],
@@ -111,7 +121,10 @@ local twwPets = {
 	["Void Scarred Scorpid"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
-		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			3087, -- Inquistor Gnshal (TBD Garona?)
+		},
 		chance = 12,
 		creatureId = 237855,
 		name = L["Void Scarred Scorpid"],
@@ -122,7 +135,10 @@ local twwPets = {
 	["Void-Scarred Egg"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
-		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			3089, -- Vezokk
+		},
 		chance = 12,
 		creatureId = 237856,
 		name = L["Void-Scarred Egg"],
