@@ -196,6 +196,7 @@ do
 		Rarity.Collections:ScanExistingItems("INITIALIZING") -- Checks for items you already have
 		self:ScanBags() -- Initialize our inventory list, as well as checking if you've obtained an item
 		self:OnBagUpdate() -- This will update counters for collection items
+		R:StartInitialBagSync(2)
 		self:OnCurrencyUpdate("INITIALIZING") -- Prepare our currency list
 		self:UpdateInterestingThings()
 		Rarity.Tracking:FindTrackedItem()
