@@ -75,6 +75,7 @@ DB\Mounts\HolidayEvents_WrathOfTheLichKing.lua
 DB\Mounts\HolidayEvents_WarlordsOfDraenor.lua
 DB\Mounts\HolidayEvents_Dragonflight.lua
 DB\Mounts\HolidayEvents_TheWarWithin.lua
+DB\Mounts\HolidayEvents_Midnight.lua
 DB\Mounts\Classic.lua
 DB\Mounts\TheBurningCrusade.lua
 DB\Mounts\WrathOfTheLichKing.lua
