@@ -462,6 +462,8 @@ end
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok
 	[70867] = "Everlasting Horn of Lavaswimming", -- Scalebane Keep (scenario completion)
+    [52847] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
+    [52848] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
 	-- Not actually from a world quest/event
 	[85830] = "Parrot Cage (Void-Scarred Parrot)", -- More accurately detected via object GUID
 }
