@@ -48,6 +48,7 @@ local ARCH = "ARCH"
 local SPECIAL = "SPECIAL"
 local MINING = "MINING"
 local COLLECTION = "COLLECTION"
+local ENCOUNTER = "ENCOUNTER" -- TODO use constants
 
 -- Feed text
 local FEED_MINIMAL = "FEED_MINIMAL"
@@ -182,6 +183,28 @@ local function sort(t)
 	return nt
 end
 
+local SEARCH_FILTER_CONFIG = {
+	mounts = { label = L["Search Mounts"] },
+	pets = { label = L["Search Battle Pets"] },
+	items = { label = L["Search Toys & Items"] },
+}
+
+local function itemMatchesSearch(item, searchText)
+	local search = strlower(strtrim(searchText or ""))
+	if search == "" then
+		return true
+	end
+	local itemName = select(2, GetItemInfo(item.itemId or 0)) or item.name or ""
+	if strfind(strlower(itemName), search, 1, true) then
+		return true
+	end
+	if item.itemId and tostring(item.itemId):find(search, 1, true) then
+		return true
+	end
+	return false
+end
+
+
 local function alert(msg)
 	StaticPopupDialogs["RARITY_OPTIONS_ALERT"] = {
 		text = msg,
@@ -299,7 +322,7 @@ function R:PrepareOptions()
 								name = L["Contribute on GitHub"],
 								desc = L["You can follow the development process or contribute to the project on our public GitHub repository. What could be more fun than browsing a gigantic backlog of unresolved issues?"],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://github.com/WowRarity/Rarity")
+									Rarity.CopyPastePopup:SetEditBoxText("https://github.com/aSnejbjerg/Rarity")
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
@@ -308,7 +331,7 @@ function R:PrepareOptions()
 								name = L["Join the Rarity Discord"],
 								desc = L["You can ask questions, follow the latest Rarity news and share the excitement of finally getting that one elusive drop with your fellow collectors in our Discord server.\n\nPS: We have cookies."],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://discord.gg/sQ3UqtSh6m")
+									Rarity.CopyPastePopup:SetEditBoxText("https://discord.gg/DTWKVg96PA")
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
@@ -1589,9 +1612,9 @@ function R:PrepareOptions()
 	} -- self.options
 
 	-- Create the options for each group of items
-	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false)
-	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false)
-	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false)
+	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false, "mounts")
+	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false, "pets")
+	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false, "items")
 	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
 
 	self.advancedSettings = {
@@ -1786,7 +1809,7 @@ end -- function R:PrepareOptions()
 -- ITEM GROUPS
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function R:CreateGroup(options, group, isUser)
+function R:CreateGroup(options, group, isUser, searchFilterKey)
 	options.args = {
 		name = {
 			-- type = "execute", -- Why?
@@ -1823,6 +1846,39 @@ function R:CreateGroup(options, group, isUser)
 		},
 	}
 
+		if searchFilterKey then
+		self.optionsSearchFilters = self.optionsSearchFilters or {}
+		local searchConfig = SEARCH_FILTER_CONFIG[searchFilterKey]
+		options.args.searchFilter = {
+			type = "input",
+			order = 0,
+			width = "double",
+			name = searchConfig and searchConfig.label or L["Search"],
+			desc = L["Filter the list by name or item ID."],
+			get = function()
+				return self.optionsSearchFilters[searchFilterKey] or ""
+			end,
+			set = function(info, val)
+				self.optionsSearchFilters[searchFilterKey] = strtrim(val or "")
+				LibStub("AceConfigRegistry-3.0"):NotifyChange("Rarity")
+			end,
+		}
+		options.args.searchClear = {
+			type = "execute",
+			order = 1,
+			width = "half",
+			name = L["Clear"],
+			desc = L["Clear the search filter."],
+			func = function()
+				self.optionsSearchFilters[searchFilterKey] = ""
+				LibStub("AceConfigRegistry-3.0"):NotifyChange("Rarity")
+			end,
+			disabled = function()
+				return strtrim(self.optionsSearchFilters[searchFilterKey] or "") == ""
+			end,
+		}
+	end
+
 	local g = sort(group)
 	for itemkey, item in pairs(g) do
 		local optionkey = tostring(newOrder())
@@ -1832,6 +1888,14 @@ function R:CreateGroup(options, group, isUser)
 			name = function()
 				return select(2, GetItemInfo(item.itemId or 0)) or item.name
 			end,
+			hidden = searchFilterKey
+			    and function()
+				    return not itemMatchesSearch(
+						item,
+						(self.optionsSearchFilters or {})[searchFilterKey]
+					)
+				end
+				or nil,
 			args = {
 				--  head = { -- Why?
 				-- 	 type = "description",
@@ -2004,12 +2068,13 @@ function R:CreateGroup(options, group, isUser)
 					width = "double",
 					values = {
 						[NPC] = R.string_methods[NPC],
-						[BOSS] = R.string_methods[BOSS],
+						[BOSS] = R.string_methods[BOSS], -- TODO Disable (Check DB/affected items)
 						[ZONE] = R.string_methods[ZONE],
 						[USE] = R.string_methods[USE],
 						[FISHING] = R.string_methods[FISHING],
 						[ARCH] = R.string_methods[ARCH],
 						[COLLECTION] = R.string_methods[COLLECTION],
+						[ENCOUNTER] = R.string_methods[ENCOUNTER],
 					},
 					get = function()
 						return item.method
@@ -2401,7 +2466,57 @@ function R:CreateGroup(options, group, isUser)
 						end
 					end,
 					hidden = function()
-						if item.method == NPC or item.method == BOSS then
+						if item.method == NPC then
+							return false
+						else
+							return true
+						end
+					end,
+					disabled = not isUser,
+				},
+				encounters = {
+					type = "input",
+					order = newOrder(),
+					width = "double",
+					name = L["Encounters"],
+					desc = L["A comma-separated list of encounter IDs that award this item. Use WowHead or a similar service to look up these IDs."],
+					set = function(info, val)
+						if strtrim(val) == "" then
+							alert(L["You must enter at least one ID."])
+						else
+							local list = { strsplit(",", val) }
+							for k, v in pairs(list) do
+								if strtrim(v) == "" or tonumber(strtrim(v)) == nil then
+									alert(L["Please enter a comma-separated list of IDs."])
+									return
+								elseif tonumber(strtrim(v)) <= 0 then
+									alert(L["Every ID must be a number greater than 0."])
+									return
+								end
+							end
+							item.encounters = {}
+							for k, v in pairs(list) do
+								table.insert(item.encounters, tonumber(strtrim(v)))
+							end
+						end
+						self:Update("OPTIONS")
+					end,
+					get = function(into)
+						if item.encounters and type(item.encounters) == "table" then
+							local s = ""
+							for k, v in pairs(item.encounters) do
+								if strlen(s) > 0 then
+									s = s .. ","
+								end
+								s = s .. tostring(v)
+							end
+							return s
+						else
+							return ""
+						end
+					end,
+					hidden = function()
+						if item.method == ENCOUNTER then
 							return false
 						else
 							return true
