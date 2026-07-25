@@ -1891,7 +1891,7 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 			end,
 			hidden = searchFilterKey and function()
 				return not itemMatchesSearch(item, (self.optionsSearchFilters or {})[searchFilterKey])
-			end	or nil,
+			end or nil,
 			args = {
 				--  head = { -- Why?
 				-- 	 type = "description",
