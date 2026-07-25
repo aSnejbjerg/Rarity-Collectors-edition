@@ -83,7 +83,6 @@ local wotlkToys = {
 			{ m = CONSTANTS.UIMAPIDS.ZUL_DRAK },
 			{ m = CONSTANTS.UIMAPIDS.SHOLAZAR_BASIN },
 		},
-		
 	},
 	["Super Simian Sphere"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.WOTLK,
