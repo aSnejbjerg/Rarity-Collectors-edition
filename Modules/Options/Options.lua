@@ -322,7 +322,7 @@ function R:PrepareOptions()
 								name = L["Contribute on GitHub"],
 								desc = L["You can follow the development process or contribute to the project on our public GitHub repository. What could be more fun than browsing a gigantic backlog of unresolved issues?"],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://github.com/aSnejbjerg/Rarity")
+									Rarity.CopyPastePopup:SetEditBoxText("https://github.com/aSnejbjerg/Rarity-Collectors-edition")
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
