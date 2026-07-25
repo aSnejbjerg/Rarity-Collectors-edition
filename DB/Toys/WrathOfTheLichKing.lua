@@ -83,6 +83,19 @@ local wotlkToys = {
 			{ m = CONSTANTS.UIMAPIDS.ZUL_DRAK },
 			{ m = CONSTANTS.UIMAPIDS.SHOLAZAR_BASIN },
 		},
+		
+	},
+	["Super Simian Sphere"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.WOTLK,
+		type = CONSTANTS.ITEM_TYPES_ITEM,
+		istoy = true,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Super Simian Sphere"],
+		itemId = 37254,
+		chance = 100000,
+		npcs = { 32175 },
+		sourceText = L["Drops ANYWHERE in Wrath raids, dungeons and open world wrath zones."],
+		coords = { { m = CONSTANTS.UIMAPIDS.ICECROWN } },
 	},
 }
 
