@@ -62,11 +62,11 @@ function Collections:ScanToys(reason)
 		return
 	end
 
-    --REMOVE THIS ENTIRE SECTION IF BAD
+	--REMOVE THIS ENTIRE SECTION IF BAD
 	self = Rarity
-    self:Debug("Scanning toys (" .. (reason or "") .. ")")
+	self:Debug("Scanning toys (" .. (reason or "") .. ")")
 
-    -- Load the Collections add-on if needed
+	-- Load the Collections add-on if needed
 	if not Rarity.toysScanned then
 		if not ToyBox_OnLoad then
 			if type(LoadAddOn) == "function" then
