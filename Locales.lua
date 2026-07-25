@@ -13,7 +13,8 @@ L["Clear"] = true
 L["Clear the search filter."] = true
 L["Filter the list by name or item ID."] = true
 L["Due to Blizzard API changes in Midnight, this item can no longer be tracked."] = true
-L["This pet drops from the spawned or summoned versions of Nullaeus in regular delve runs. NOT from the Nemesis delve."] = true
+L["This pet drops from the spawned or summoned versions of Nullaeus in regular delve runs. NOT from the Nemesis delve."] = 
+	true
 L["Wriggling Capybara"] = true
 L["Curious Lynx Kitten"] = true
 L["Overloaded Manaling"] = true
@@ -21,17 +22,20 @@ L["Ominous Dominus"] = true
 L["ToDebugString"] = true
 L["Madcap Redcap"] = true
 L["Mycomancer's Hearthspore"] = true
-L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"] = true
+L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"] = 
+	true
 L["Broken Lynx Leash"] = true
 L["Ashes of Belo'ren"] = true
 L["This mount can also drop on characters below Level 90."] = true
 L["This mount is obtained by interacting with Washed Up Kelp in the Daggerspine Point Ritual Site."] = true
-L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site."] = true
+L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site."] = 
+	true
 L["Sun Festival's Painted Roc"] = true
 L["This item is used to create the Stonevault Mechsuit mount."] = true
 L["This item drops the Nether-Swept Drake mount after 7 days."] = true
 L["Witherbark Warbear Harness"] = true
-L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site.'"] = true
+L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site.'"] = 
+	true
 L["Void-Corrupted Eagle Talon"] = true
 L["This mount is a guaranteed drop from completing a summoning ritual in the Broken Throne Ritual Site."] = true
 L["Void-Touched Snapdragon"] = true
@@ -47,7 +51,8 @@ L["You must enter at least one ID."] = true
 L["Please enter a comma-separated list of IDs"] = true
 L["Every ID must be a number greater than 0."] = true
 L["Obtained from a raid or dungeon encounter"] = true
-L["Can be contained in the Satchel of Chilled Goods, rewarded for defeating the World Event Dungeon during the Midsummer Fire Festival."] = true
+L["Can be contained in the Satchel of Chilled Goods, rewarded for defeating the World Event Dungeon during the Midsummer Fire Festival."] = 
+	true
 L["Midnight"] = true
 L["Unbound Star-Eater"] = true
 L["Keys to the Big G"] = true
