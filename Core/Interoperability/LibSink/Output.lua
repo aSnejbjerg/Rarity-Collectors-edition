@@ -3,7 +3,18 @@ local Output = {}
 function Output:DisplayText(text, icon)
 	-- Arguments: text, r, g, b, font, size, outline, sticky, location, icon (though most appear to be useless?)
 	-- Note: Provide r,g,b as float, i.e., in the interval [0.0, 1.0]
-	Rarity:Pour(text, nil, nil, nil, nil, nil, nil, nil, nil, icon)
+	if not text or text == "" then
+		return
+	end
+
+	local displayText = text
+	if icon then
+		displayText = "|T" .. icon .. ":15:15:0:0:64:64:4:60:4:60|t " .. displayText
+	end
+
+	if DEFAULT_CHAT_FRAME and DEFAULT_CHAT_FRAME.AddMessage then
+		DEFAULT_CHAT_FRAME:AddMessage(displayText, 1, 1, 1)
+	end
 end
 
 function Output:GetOptionsTable()
