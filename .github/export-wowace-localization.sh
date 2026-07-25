@@ -7,7 +7,7 @@ test $CF_API_KEY || echo "A CurseForge API token is required, but none was provi
 echo "Using CurseForge API token: $CF_API_KEY"
 
 API_ENDPOINT="https://wow.curseforge.com/api/projects/"
-PROJECT_ID="30801"
+PROJECT_ID="1614412"
 LANGUAGE_SHORTHAND="enUS"
 EXPORT_TYPE="Table"
 FETCH_URL="$API_ENDPOINT/$PROJECT_ID/localization/export?lang=$LANGUAGE_SHORTHAND&export-type=$EXPORT_TYPE"
