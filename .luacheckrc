@@ -1034,6 +1034,8 @@ globals = {
 	"C_Social.TwitterPostAchievement",
 	"C_Social.TwitterPostMessage",
 	"C_Social.TwitterPostScreenshot",
+	"C_SpellBook",
+	"C_SpellBook.IsSpellKnown",
 	"C_StorePublic",
 	"C_StorePublic.IsDisabledByParentalControls",
 	"C_StorePublic.IsEnabled",
