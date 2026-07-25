@@ -1,9 +1,9 @@
 ## Author: Allara
-## Interface: 120001, 50503, 11508
+## Interface: 120007, 120100,  50504, 20506, 11509
 ## X-Min-Interface: 120001, 50503, 11508
-## Title: Rarity
+## Title: Rarity: Collector's edition
 ## Version: 1.0 (@project-version@)
-## X-Curse-Project-ID: 30801
+## X-Curse-Project-ID: 1614412
 
 ## Notes: Tracks rare drops, including companions and mounts
 ## Notes-ruRU: @localization(locale="ruRU", key="Notes", namespace="ToC - Table of Contents")@
