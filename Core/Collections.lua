@@ -67,17 +67,17 @@ function Collections:ScanToys(reason)
     self:Debug("Scanning toys (" .. (reason or "") .. ")")
 
     -- Load the Collections add-on if needed
-    if not Rarity.toysScanned then
-        if not ToyBox_OnLoad then
-            if type(LoadAddOn) == "function" then
-                self:Debug("Loading Blizzard_Collections addon so the ToyBox can be scanned")
-                LoadAddOn("Blizzard_Collections")
-            else
-                self:Debug("Skipping Blizzard_Collections load: no compatible LoadAddOn API found")
-            end
-        end
-    end
-    --REMOVE THIS ENTIRE SECTION IF BAD
+	if not Rarity.toysScanned then
+		if not ToyBox_OnLoad then
+			if type(LoadAddOn) == "function" then
+				self:Debug("Loading Blizzard_Collections addon so the ToyBox can be scanned")
+				LoadAddOn("Blizzard_Collections")
+			else
+				self:Debug("Skipping Blizzard_Collections load: no compatible LoadAddOn API found")
+			end
+		end
+	end
+	--REMOVE THIS ENTIRE SECTION IF BAD
 	-- Scan all Rarity items to see if we already have a toy
 	Rarity.toysScanned = true
 	for k, v in pairs(R.db.profile.groups) do
@@ -133,7 +133,7 @@ function Collections:ScanExistingItems(reason)
 
 	self:Debug("Scanning for existing items (" .. reason .. ")")
 	self.Profiling:StartTimer("Collections.ScanExistingItems")
-	
+
 	local spellIdIndex, creatureIdIndex = BuildItemIndexes()
 
 	-- Scans need to index by spellId, creatureId, achievementId, raceId, itemId (for toys), statisticId (which is a table; for stats)
