@@ -22,7 +22,9 @@ local holidayEventMountsMidnight = {
         sourceText = L["Can be contained in the Satchel of Chilled Goods, rewarded for defeating the World Event Dungeon during the Midsummer Fire Festival."],
         lockDungeonId = 286,
 		holidayEvents = CONSTANTS.HolidayEvents["Midsummer Fire Festival"],
-        coords = { { m = 265, x = 31.2, y = 50.8, i = true, n = L["Ahune"] } },
+        coords = { 
+			{ m = 265, x = 31.2, y = 50.8, i = true, n = L["Ahune"] } 
+		},
     },
 }
 
