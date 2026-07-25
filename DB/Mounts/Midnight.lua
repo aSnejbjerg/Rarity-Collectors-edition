@@ -366,7 +366,7 @@ local midnightMounts = {
 		name = L["Broken Lynx Leash"],
 		itemId = 272392,
 		spellId = 1287359,
-		items = { 602746, 650051  },
+		items = { 602746, 650051 },
 		chance = 300,
 		sourceText = L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"],
 		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
