@@ -23,7 +23,7 @@ local holidayEventMountsMidnight = {
         lockDungeonId = 286,
 		holidayEvents = CONSTANTS.HolidayEvents["Midsummer Fire Festival"],
         coords = { 
-			{ m = 265, x = 31.2, y = 50.8, i = true, n = L["Ahune"] } 
+			{ m = 265, x = 31.2, y = 50.8, i = true, n = L["Ahune"] }
 		},
     },
 }
