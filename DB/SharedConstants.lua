@@ -149,7 +149,7 @@ C.UIMAPIDS = {
 	HALLS_OF_INFUSION = 2082,
 	RUBY_LIFE_POOLS = 2094,
 	NELTHARUS = 2080,
-    AZURE_VAULT = 2073,
+	AZURE_VAULT = 2073,
 	THE_FORBIDDEN_REACH = 2151,
 	ZARALEK_CAVERN = 2133,
 	THE_THROUGHWAY = 2165,
@@ -391,7 +391,7 @@ C.AURAS = {
 -- These are used to decide whether the tooltip should be extended to display information about an CONSTANTS.ITEM_TYPES.ITEM for the NPCs listed in its tooltipNpcs table. Useful if we want to draw attention to an CONSTANTS.ITEM_TYPES.ITEM, but not every player can obtain it
 local GetInstanceInfo = GetInstanceInfo
 -- IsSpellKnown was moved to C_Spell.IsSpellKnown in WoW 12.0.0 (Midnight); use with fallback for compatibility
-local IsSpellKnown = (C_Spell and C_Spell.IsSpellKnown) or IsSpellKnown
+local IsSpellKnown = (C_SpellBook and C_SpellBook.IsSpellKnown) or IsSpellKnown
 C.TOOLTIP_FILTERS = {
 	IS_SPELL_KNOWN = IsSpellKnown,
 	IS_PLAYER_IN_LFR = function()
