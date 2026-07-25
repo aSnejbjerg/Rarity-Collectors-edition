@@ -204,7 +204,6 @@ local function itemMatchesSearch(item, searchText)
 	return false
 end
 
-
 local function alert(msg)
 	StaticPopupDialogs["RARITY_OPTIONS_ALERT"] = {
 		text = msg,
@@ -322,7 +321,9 @@ function R:PrepareOptions()
 								name = L["Contribute on GitHub"],
 								desc = L["You can follow the development process or contribute to the project on our public GitHub repository. What could be more fun than browsing a gigantic backlog of unresolved issues?"],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://github.com/aSnejbjerg/Rarity-Collectors-edition")
+									Rarity.CopyPastePopup:SetEditBoxText(
+										"https://github.com/aSnejbjerg/Rarity-Collectors-edition"
+									)
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
@@ -1846,7 +1847,7 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 		},
 	}
 
-		if searchFilterKey then
+	if searchFilterKey then
 		self.optionsSearchFilters = self.optionsSearchFilters or {}
 		local searchConfig = SEARCH_FILTER_CONFIG[searchFilterKey]
 		options.args.searchFilter = {
@@ -1888,14 +1889,9 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 			name = function()
 				return select(2, GetItemInfo(item.itemId or 0)) or item.name
 			end,
-			hidden = searchFilterKey
-			    and function()
-				    return not itemMatchesSearch(
-						item,
-						(self.optionsSearchFilters or {})[searchFilterKey]
-					)
-				end
-				or nil,
+			hidden = searchFilterKey and function()
+				return not itemMatchesSearch(item, (self.optionsSearchFilters or {})[searchFilterKey])
+			end	or nil,
 			args = {
 				--  head = { -- Why?
 				-- 	 type = "description",
