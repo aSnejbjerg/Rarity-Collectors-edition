@@ -1,9 +1,9 @@
 ## Author: Allara
-## Interface: 120007, 120100,  50504, 20506, 11509
+## Interface: 120001, 50503, 11508
 ## X-Min-Interface: 120001, 50503, 11508
-## Title: Rarity: Collector's edition
+## Title: Rarity
 ## Version: 1.0 (@project-version@)
-## X-Curse-Project-ID: 1614412
+## X-Curse-Project-ID: 30801
 
 ## Notes: Tracks rare drops, including companions and mounts
 ## Notes-ruRU: @localization(locale="ruRU", key="Notes", namespace="ToC - Table of Contents")@
@@ -75,7 +75,6 @@ DB\Mounts\HolidayEvents_WrathOfTheLichKing.lua
 DB\Mounts\HolidayEvents_WarlordsOfDraenor.lua
 DB\Mounts\HolidayEvents_Dragonflight.lua
 DB\Mounts\HolidayEvents_TheWarWithin.lua
-DB\Mounts\HolidayEvents_Midnight.lua
 DB\Mounts\Classic.lua
 DB\Mounts\TheBurningCrusade.lua
 DB\Mounts\WrathOfTheLichKing.lua

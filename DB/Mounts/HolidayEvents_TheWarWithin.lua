@@ -50,7 +50,7 @@ local holidayEventMountsTWW = {
 			{ m = CONSTANTS.UIMAPIDS.LIBERATION_OF_UNDERMINE },
 		},
 	},
-	["Brewfest Bomber"] = {
+	["Brewfest Barrel Bomber"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
 		method = CONSTANTS.DETECTION_METHODS.USE,
@@ -66,7 +66,7 @@ local holidayEventMountsTWW = {
 			.. " "
 			.. L["Only available on the first attempt each day."],
 		lockDungeonId = 287,
-		holidayEvents = CONSTANTS.HolidayEvents["Brewfest"],
+		holidayTexture = CONSTANTS.HolidayEvents["Brewfest"],
 		coords = { { m = 242, x = 46.6, y = 60, i = true } },
 	},
 	["Love Witch's Sweeper"] = {
