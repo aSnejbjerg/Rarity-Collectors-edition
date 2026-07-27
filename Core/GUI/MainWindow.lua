@@ -320,7 +320,7 @@ local function showSubTooltip(cell, item)
 	if item.method == CONSTANTS.DETECTION_METHODS.SPECIAL and item.obtain then
 		tooltip2AddLine(colorize(item.obtain, blue))
 	else
-		local actualMethod = item.method -- TODO
+		local actualMethod = item.method
 		if item.method == CONSTANTS.DETECTION_METHODS.BOSS and item.groupSize and item.groupSize > 1 then
 			actualMethod = CONSTANTS.DETECTION_METHODS.BOSS
 		else
