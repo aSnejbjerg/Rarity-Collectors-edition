@@ -2,6 +2,18 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Reins of the Celestial Riding Crane"] = true
+L["Reins of the Black Riding Yak"] = true
+L["Reins of the Brown Riding Yak"] = true
+L["Reins of the White Riding Yak"] = true
+L["Reins of the Orange Water Strider"] = true
+L["Reins of the Golden Water Strider"] = true
+L["Reins of the Jade Water Strider"] = true
+L["Reins of the Crimson Water Strider"] = true
+L["Reins of the Jungle Riding Crane"] = true
+L["Amani War Bear"] = true
+L["Swift Zulian Tiger"] = true
+L["Swift Razzashi Raptor"] = true
 L["Search"] = true
 L["Search Mounts"] = true
 L["Search Battle Pets"] = true
