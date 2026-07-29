@@ -2200,25 +2200,27 @@ L["Reins of the Rekindled Dreamstag"] = true
 L["Dreamseed Cache"] = true
 L["Obtained by crafting with a profession"] = true
 --12.1 pets
---L["Autumn Snapling"] = true
---L["Don't know the location of origin yet"] = true
---L["Lil' Mon"] = true
---L["Dropped off a rare named Big Mon"] = true
---L["Pale Hexscale"] = true
---L["Dropped by the prey boss named Ral'kala"] = true
+L["Autumn Snapling"] = true
+L["Don't know the location of origin yet"] = true
+L["Lil' Mon"] = true
+L["Dropped off a rare named Big Mon"] = true
+L["Pale Hexscale"] = true
+L["Dropped by the prey boss named Ral'kala"] = true
 --12.1 toys
--- L["Jaktu's Cursed Blade"] = true
--- L["Ancient Amani Mask"] = true
--- L["This item is looted from a chest named Sunken Diver's Chest and it requires a key named Diver's key, to get the key you need 3 fragments that are dropped off the rare named Ss'akrithos that spawns at the end of Mlurkkr massacre in Curse surge "] = true
--- L["This item drops from the treasure Jaktu's Cursed Blade! or head over to Twitch.tv/lizzie_vargfrost"] = true
--- L["Pearl of Jubilation"] = true
--- L["Looted from a treasure named Brine-Crusted Chest"] = true
--- L["Forgotten Memento"] = true
--- L["Looted from a treasure named Grave of Someone Forgotten"] = true
--- L["Malfunctioning Staff"] = true
--- L["Looted from a treasure named Malfunctioning Staff"] = true
--- L["Idol of Blue Water and Blue Sky"] = true
--- L["Looted from a treasure named Abandoned Amani Privateer's Cache"] = true
+L["Jaktu's Cursed Blade"] = true
+L["Diver's Key Fragtment"] = true
+L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy. "] = true
+L["Ancient Amani Mask"] = true
+L["This item is looted from a chest named Sunken Diver's Chest and it requires a key named Diver's key, to get the key you need 3 fragments that are dropped off the rare named Ss'akrithos that spawns at the end of Mlurkkr massacre in Curse surge "] = true
+L["This item drops from the treasure Jaktu's Cursed Blade! or head over to Twitch.tv/lizzie_vargfrost"] = true
+L["Pearl of Jubilation"] = true
+L["Looted from a treasure named Brine-Crusted Chest"] = true
+L["Forgotten Memento"] = true
+L["Looted from a treasure named Grave of Someone Forgotten"] = true
+L["Malfunctioning Staff"] = true
+L["Looted from a treasure named Malfunctioning Staff"] = true
+L["Idol of Blue Water and Blue Sky"] = true
+L["Looted from a treasure named Abandoned Amani Privateer's Cache"] = true
 
 --[[
 					The rest of this file is auto-generated using the WoWAce localization application.
