@@ -110,6 +110,39 @@ local midnightPets = {
 		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
 	},
 }
+-- 12.1 additions, activate later ( BITE )
+--     ["Lil' Mon"] = {
+--         cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+--         type = CONSTANTS.ITEM_TYPES.PET,
+--         method = CONSTANTS.DETECTION_METHODS.NPC,
+--         name = L["Lil' Mon"],
+--         itemId = 280540,
+--         creatureId = 271772,
+--         spellId = 1309175,
+--         npc = {256631},
+--         chance = 500,
+--         sourceText = L["Dropped off a rare named Big Mon"],
+--         coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLE } },
+--     },
+    -- ["Pale Hexscale"] = {
+    --     cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+    --     type = CONSTANTS.ITEM_TYPES.PET,
+    --     method = CONSTANTS.DETECTION_METHODS.NPC,
+    --     name = L["Pale Hexscale"],
+    --     creatureId = 269712, 
+    --     itemId = 278572,
+    --     spellId = 1305199,
+    --     chance = 100,
+    --     npcs = { 258928 },
+    --     sourceText = L["Dropped by the prey boss named Ral'kala"],
+    --     coords = { 
+    --         { m = CONSTANTS.UIMAPIDS.COILED_ISLES },
+    --         { m = CONSTANTS.UIMAPIDS.EVERSONG_WOODS_MIDNIGHT },
+    --         { m = CONSTANTS.UIMAPIDS.ZUL_AMAN_MIDNIGHT },
+    --         { m = CONSTANTS.UIMAPIDS.VOIDSTORM },
+    --         { m = CONSTANTS.UIMAPIDS.HARANDAR },
+    --     },
+    -- },
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, midnightPets)
 return midnightPets

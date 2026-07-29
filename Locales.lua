@@ -2,6 +2,15 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Ruby Writhe"] = true
+L["Topaz Skyfang"] = true
+L["Hexflame Reaver"] = true
+L["The Writhing Brood"] = true
+L["Primevil Skyfriend"] = true
+L["Lil' Mon"] = true
+L["Dropped off a rare named Big Mon"] = true
+L["Pale Hexscale"] = true
+L["Dropped by the prey boss named Ral'kala"] = true 
 L["Search"] = true
 L["Search Mounts"] = true
 L["Search Battle Pets"] = true
