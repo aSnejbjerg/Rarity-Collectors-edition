@@ -17,7 +17,7 @@ local classiceraMounts = {
 		itemId = 19902,
 		npcs = { 14509 },
 		chance = 200,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Swift Razzashi Raptor"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -28,7 +28,7 @@ local classiceraMounts = {
 		itemId = 19872,
 		npcs = { 11382 },
 		chance = 200,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 }
 
