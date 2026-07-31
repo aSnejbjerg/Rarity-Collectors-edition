@@ -107,7 +107,7 @@ local moperaMounts = {
 		items = { 248666, 276086 },
 		spellId = 127178,
 		coords = { { 0, 0 } },
-	}
+	},
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, moperaMounts)
