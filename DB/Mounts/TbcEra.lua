@@ -17,7 +17,7 @@ local tbceraMounts = {
 		itemId = 33809,
 		items = { 186672 },
 		chance = 10,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 }
 
