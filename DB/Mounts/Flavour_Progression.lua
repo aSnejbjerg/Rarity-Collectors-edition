@@ -18,7 +18,7 @@ local moperaMounts = {
 		itemId = 248741,
 		items = { 248666, 276086 },
 		spellId = 1247591,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Black Riding Yak"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -29,7 +29,7 @@ local moperaMounts = {
 		itemId = 87786,
 		items = { 248666, 276086 },
 		spellId = 127209,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Brown Riding Yak"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -40,7 +40,7 @@ local moperaMounts = {
 		itemId = 87787,
 		items = { 248666, 276086 },
 		spellId = 127213,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the White Riding Yak"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -51,7 +51,7 @@ local moperaMounts = {
 		itemId = 84753,
 		items = { 248666, 276086 },
 		spellId = 123182,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Orange Water Strider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -62,7 +62,7 @@ local moperaMounts = {
 		itemId = 87792,
 		items = { 248666, 276086 },
 		spellId = 127272,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Golden Water Strider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -73,7 +73,7 @@ local moperaMounts = {
 		itemId = 87794,
 		items = { 248666, 276086 },
 		spellId = 127278,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Jade Water Strider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -84,7 +84,7 @@ local moperaMounts = {
 		itemId = 87793,
 		items = { 248666, 276086 },
 		spellId = 127274,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Crimson Water Strider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -95,7 +95,7 @@ local moperaMounts = {
 		itemId = 87791,
 		items = { 248666, 276086 },
 		spellId = 127271,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	},
 	["Reins of the Jungle Riding Crane"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
@@ -106,7 +106,7 @@ local moperaMounts = {
 		itemId = 87784,
 		items = { 248666, 276086 },
 		spellId = 127178,
-		coords = { { 0,0 } },
+		coords = { { 0, 0 } },
 	}
 }
 
