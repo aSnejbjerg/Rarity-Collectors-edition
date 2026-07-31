@@ -9,16 +9,16 @@ end
 
 local tbceraMounts = {
 	["Amani War Bear"] = {
-        cat = CONSTANTS.ITEM_CATEGORIES.TBC,
-        type = CONSTANTS.ITEM_TYPES.MOUNT,
-        method = CONSTANTS.DETECTION_METHODS.USE,
-        name = L["Amani War Bear"],
-        spellId = 43688,
-        itemId = 33809,
-        items = { 186672 },
-        chance = 10,
-        coords = { { 0,0 } },
-    },
+		cat = CONSTANTS.ITEM_CATEGORIES.TBC,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		name = L["Amani War Bear"],
+		spellId = 43688,
+		itemId = 33809,
+		items = { 186672 },
+		chance = 10,
+		coords = { { 0,0 } },
+	},
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, tbceraMounts)
