@@ -3,7 +3,7 @@ name: Table of Contents
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
-    branches: [master]
+    branches: [default-donotuse]
 
 jobs:
   toc:
