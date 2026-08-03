@@ -33,7 +33,7 @@
 <li>Lets you modify your attempt count manually without having to edit saved variables.</li>
 </ul>
 
-<h3>Slash Commands:</h3>
+<h3 style="border-top: solid 5px #100; padding-top: 10px;">Slash Commands:</h3>
 <p>Simply typing <strong>/rarity</strong> should open the options menu (unless disabled).</p>
    <p>For troubleshooting issues:</p> 
 <ul>
@@ -41,7 +41,7 @@
     <li><strong>/rarity dump</strong> <br>displays the most recent debug log entries (even if the debug mode is disabled).</li>
     <li><strong>/rarity validate</strong> <br>checks the consistency of your item database, including custom items (experimental).</li>
 </ul>
-<h3>Comments & Bug Reports:</h3>    
+<h3 style="border-top: solid 5px #100; padding-top: 10px;">Comments & Bug Reports:</h3>    
 <ul>
     <li><a href="https://github.com/aSnejbjerg/Rarity-Collectors-edition/issues" target="_blank">GitHub Issues</a></li>
     <li><a href="https://discord.gg/bgbj3PfVVD" target="_blank">Discord</a></li>
@@ -49,7 +49,7 @@
     <li><a href="https://legacy.curseforge.com/wow/addons/rarity-collectors-edition/localization" target="_blank">Translation</a></li>
 </ul>
 
-   <h3>With special thanks to the WoW Ambassadors:</h3>
+   <h3 style="border-top: solid 5px #100; padding-top: 10px;">With special thanks to the WoW Ambassadors:</h3>
     <ul>
         <li><a href="https://discord.gg/lordofthereins" target="_blank">The Lord of the Reins Discord</a>-> Mount Collecting LFG Community</li>
         <li><a href="https://discord.gg/achievements" target="_blank">The Achievements Discord </a>-> Achievement Hunting Community</li>

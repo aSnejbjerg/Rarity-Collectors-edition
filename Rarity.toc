@@ -1,6 +1,6 @@
 ## Author: Allara
 ## Interface: 120007, 120100,  50504, 20506, 11509
-## X-Min-Interface: 120001, 50503, 11508
+## X-Min-Interface: 120007, 120100,  50504, 20506, 11509
 ## Title: Rarity: Collector's edition
 ## Version: 1.0 (@project-version@)
 ## X-Curse-Project-ID: 1614412
@@ -77,10 +77,13 @@ DB\Mounts\HolidayEvents_Dragonflight.lua
 DB\Mounts\HolidayEvents_TheWarWithin.lua
 DB\Mounts\HolidayEvents_Midnight.lua
 DB\Mounts\Classic.lua
+DB\Mounts\Flavour_ClassicEra.lua
 DB\Mounts\TheBurningCrusade.lua
+DB\Mounts\TbcEra.lua
 DB\Mounts\WrathOfTheLichKing.lua
 DB\Mounts\Cataclysm.lua
 DB\Mounts\MistsOfPandaria.lua
+DB\Mounts\Flavour_Progression.lua
 DB\Mounts\WarlordsOfDraenor.lua
 DB\Mounts\Legion.lua
 DB\Mounts\BattleForAzeroth.lua
