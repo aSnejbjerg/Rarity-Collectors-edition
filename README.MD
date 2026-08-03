@@ -57,7 +57,3 @@
 
 <p>For your invaluable contributions in rewriting this addon for the Midnight client.</p>
 <h4>The Rarity: Collector's edition Team</h4>
-
-    
-    
-
