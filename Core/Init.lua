@@ -35,3 +35,4 @@ Rarity.items_to_items = {}
 Rarity.bagitems = {}
 Rarity.tempbagitems = {}
 Rarity.used = {}
+Rarity.isInitialBagSync = true
