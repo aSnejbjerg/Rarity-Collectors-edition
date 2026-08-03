@@ -2,6 +2,55 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Reins of the Celestial Riding Crane"] = true
+L["Reins of the Black Riding Yak"] = true
+L["Reins of the Brown Riding Yak"] = true
+L["Reins of the White Riding Yak"] = true
+L["Reins of the Orange Water Strider"] = true
+L["Reins of the Golden Water Strider"] = true
+L["Reins of the Jade Water Strider"] = true
+L["Reins of the Crimson Water Strider"] = true
+L["Reins of the Jungle Riding Crane"] = true
+L["Amani War Bear"] = true
+L["Swift Zulian Tiger"] = true
+L["Swift Razzashi Raptor"] = true
+L["Search"] = true
+L["Search Mounts"] = true
+L["Search Battle Pets"] = true
+L["Search Toys & Items"] = true
+L["Search mounts"] = true
+L["Search battle pets"] = true
+L["Search toys & items"] = true
+L["Clear"] = true
+L["Clear the search filter."] = true
+L["Filter the list by name or item ID."] = true
+L["Due to Blizzard API changes in Midnight, this item can no longer be tracked."] = true
+L["This pet drops from the spawned or summoned versions of Nullaeus in regular delve runs. NOT from the Nemesis delve."] =
+	true
+L["Wriggling Capybara"] = true
+L["Curious Lynx Kitten"] = true
+L["Overloaded Manaling"] = true
+L["Ominous Dominus"] = true
+L["ToDebugString"] = true
+L["Madcap Redcap"] = true
+L["Mycomancer's Hearthspore"] = true
+L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"] =
+	true
+L["Broken Lynx Leash"] = true
+L["Ashes of Belo'ren"] = true
+L["This mount can also drop on characters below Level 90."] = true
+L["This mount is obtained by interacting with Washed Up Kelp in the Daggerspine Point Ritual Site."] = true
+L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site."] =
+	true
+L["Sun Festival's Painted Roc"] = true
+L["This item is used to create the Stonevault Mechsuit mount."] = true
+L["This item drops the Nether-Swept Drake mount after 7 days."] = true
+L["Witherbark Warbear Harness"] = true
+L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site.'"] =
+	true
+L["Void-Corrupted Eagle Talon"] = true
+L["This mount is a guaranteed drop from completing a summoning ritual in the Broken Throne Ritual Site."] = true
+L["Void-Touched Snapdragon"] = true
 L["Duskbrute Harrower"] = true
 L["Cosmic Ritual Stone"] = true
 L["Saptor Salve"] = true

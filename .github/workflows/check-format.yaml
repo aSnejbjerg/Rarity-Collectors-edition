@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches:
-      - master
+      - default
     paths-ignore:
       - "README.MD"
 
