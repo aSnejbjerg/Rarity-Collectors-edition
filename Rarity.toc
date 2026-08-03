@@ -3,7 +3,7 @@
 ## X-Min-Interface: 120007, 120100,  50504, 20506, 11509
 ## Title: Rarity: Collector's edition
 ## Version: 1.0 (@project-version@)
-## X-Curse-Project-ID: 30801
+## X-Curse-Project-ID: 1614412
 
 ## Notes: Tracks rare drops, including companions and mounts
 ## Notes-ruRU: @localization(locale="ruRU", key="Notes", namespace="ToC - Table of Contents")@
@@ -75,6 +75,7 @@ DB\Mounts\HolidayEvents_WrathOfTheLichKing.lua
 DB\Mounts\HolidayEvents_WarlordsOfDraenor.lua
 DB\Mounts\HolidayEvents_Dragonflight.lua
 DB\Mounts\HolidayEvents_TheWarWithin.lua
+DB\Mounts\HolidayEvents_Midnight.lua
 DB\Mounts\Classic.lua
 DB\Mounts\Flavour_ClassicEra.lua
 DB\Mounts\TheBurningCrusade.lua
