@@ -63,6 +63,8 @@ L["You must enter at least one ID."] = true
 L["Please enter a comma-separated list of IDs"] = true
 L["Every ID must be a number greater than 0."] = true
 L["Obtained from a raid or dungeon encounter"] = true
+L["Can be contained in the Satchel of Chilled Goods, rewarded for defeating the World Event Dungeon during the Midsummer Fire Festival."] =
+	true
 L["Midnight"] = true
 L["Unbound Star-Eater"] = true
 L["Keys to the Big G"] = true
