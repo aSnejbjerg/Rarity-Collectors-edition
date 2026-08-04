@@ -8,6 +8,7 @@ local CONSTANTS = addonTable.constants
 
 -- Locals
 local coinamounts = {}
+local initialBagSyncTimer = nil
 
 -- Externals
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
@@ -95,6 +96,21 @@ function EventHandlers:Register()
 
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "OnPlayerInteractionFrameShow")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", "OnPlayerInteractionFrameHide")
+end
+
+function R:StartInitialBagSync(delay)
+	Rarity.isInitialBagSync = true
+
+	if initialBagSyncTimer then
+		self:CancelTimer(initialBagSyncTimer, true)
+	end
+
+	initialBagSyncTimer = self:ScheduleTimer(function()
+		self:ScanBags()
+		self:BackUpInventoryItemAmounts()
+		Rarity.isInitialBagSync = false
+		initialBagSyncTimer = nil
+	end, delay or 10)
 end
 
 -- TODO: Move elsewhere/refactor
@@ -426,6 +442,8 @@ end
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)
 	[70867] = "Everlasting Horn of Lavaswimming", -- Scalebane Keep (scenario completion)
+	[52847] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
+	[52848] = { alliance = "Toy Siege Tower", horde = "Toy War Machine" }, -- Doom's Howl / The Lion's Roar (Arathi Warfront world boss completion)
 	-- Not actually from a world quest/event
 	[85830] = "Parrot Cage (Void-Scarred Parrot)", -- More accurately detected via object GUID
 	-- TBD: Are object GUIDs also secret now? Sigh.
@@ -726,7 +744,11 @@ function R:OnChatCommand(input)
 	end
 end
 
-function R:OnItemFound(itemId, item)
+function R:OnItemFound(itemId, item, suppressAlert)
+	if suppressAlert == nil then
+		suppressAlert = false
+	end
+
 	if item.found and not item.repeatable then
 		return
 	end
@@ -749,7 +771,10 @@ function R:OnItemFound(itemId, item)
 	if item.unique and item.attempts - item.lastAttempts <= 1 then
 		return
 	end
-
+	
+	if not suppressAlert then
+		self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
+	end
 	self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
 	if Rarity.Session:IsActive() then
 		Rarity.Session:End()
@@ -995,18 +1020,18 @@ function R:ProcessContainerItems()
 	end
 end
 
-function R:ProcessInventoryItems()
+function R:ProcessInventoryItems(suppressAlert)
 	self.Profiling:StartTimer("EventHandlers.ProcessInventoryItems")
 
 	for itemID, _ in pairs(Rarity.bagitems) do
-		self:ProcessCollectionItem(itemID)
-		self:ProcessOtherItem(itemID)
+		self:ProcessCollectionItem(itemID, suppressAlert)
+		self:ProcessOtherItem(itemID, suppressAlert)
 	end
 
 	self.Profiling:EndTimer("EventHandlers.ProcessInventoryItems")
 end
 
-function R:ProcessCollectionItem(itemID)
+function R:ProcessCollectionItem(itemID, suppressAlert)
 	if not itemID then
 		return
 	end
@@ -1028,9 +1053,9 @@ function R:ProcessCollectionItem(itemID)
 	for collectionItemID, collectionItem in pairs(Rarity.collection_items) do
 		-- This item is a collection of several items; add them all up and check for attempts
 		if self:HasMultipleCollectionItems(collectionItem) then
-			self:ProcessCollectionItemAggregate(collectionItem)
+			self:ProcessCollectionItemAggregate(collectionItem, suppressAlert)
 		else
-			self:ProcessCollectionItemSingle(collectionItem, itemID)
+			self:ProcessCollectionItemSingle(collectionItem, itemID, suppressAlert)
 		end
 	end
 end
@@ -1044,7 +1069,7 @@ function R:IsCollectionItem(item)
 	return item.method == CONSTANTS.DETECTION_METHODS.COLLECTION
 end
 
-function R:ProcessOtherItem(itemID)
+function R:ProcessOtherItem(itemID, suppressAlert)
 	if not itemID then
 		return
 	end
@@ -1057,7 +1082,7 @@ function R:ProcessOtherItem(itemID)
 	local amountIncreasedSinceLastScan = (Rarity.bagitems[itemID] or 0) > (Rarity.tempbagitems[itemID] or 0)
 	if amountIncreasedSinceLastScan then -- An inventory item went up in count
 		if item and item.enabled ~= false and not self:IsCollectionItem(item) then
-			self:OnItemFound(itemID, item)
+			self:OnItemFound(itemID, item, suppressAlert)
 		end
 	end
 end
@@ -1068,7 +1093,7 @@ function R:GetInventoryItemCount(itemID)
 end
 
 -- Still incomprehensible, but I'll leave it for now
-function R:ProcessCollectionItemSingle(collectionItem, itemID)
+function R:ProcessCollectionItemSingle(collectionItem, itemID, suppressAlert)
 	local inventoryItemCount = self:GetInventoryItemCount(itemID)
 	local item = Rarity.items[itemID]
 
@@ -1086,7 +1111,7 @@ function R:ProcessCollectionItemSingle(collectionItem, itemID)
 			collectionItem.attempts = inventoryItemCount
 		end
 		if originalCount < inventoryItemCount and originalCount < goal and inventoryItemCount >= goal then
-			self:OnItemFound(collectionItem.itemId, collectionItem)
+			self:OnItemFound(collectionItem.itemId, collectionItem, suppressAlert)
 		elseif originalCount < inventoryItemCount then
 			self:OutputAttempts(collectionItem)
 		end
@@ -1094,7 +1119,7 @@ function R:ProcessCollectionItemSingle(collectionItem, itemID)
 end
 
 -- Still incomprehensible, but I'll leave it for now
-function R:ProcessCollectionItemAggregate(collectionItem)
+function R:ProcessCollectionItemAggregate(collectionItem, suppressAlert)
 	if collectionItem.enabled ~= false then
 		local total = 0
 		local originalCount = (collectionItem.attempts or 0)
@@ -1110,7 +1135,7 @@ function R:ProcessCollectionItemAggregate(collectionItem)
 			collectionItem.attempts = total
 			if originalCount < goal and total >= goal then
 				self:Debug("Triggering OnItemFound since we just reached the goal")
-				self:OnItemFound(collectionItem.itemId, collectionItem)
+				self:OnItemFound(collectionItem.itemId, collectionItem, suppressAlert)
 			elseif total > originalCount then
 				self:Debug("Triggering OutputAttempts since we gained one item, but didn't reach the goal")
 				self:OutputAttempts(collectionItem)
@@ -1145,7 +1170,7 @@ function R:OnBagUpdate()
 	R:ProcessContainerItems()
 
 	-- Check for an increase in quantity of any items we're watching for
-	R:ProcessInventoryItems()
+	R:ProcessInventoryItems(Rarity.isInitialBagSync)
 end
 
 function R:OnResearchArtifactComplete(event, _)
