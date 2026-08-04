@@ -79,6 +79,7 @@ L["Ominous Domanus"] = true
 L["Princess Bloodshed"] = true
 L["Sanguine Harrower"] = true
 L["Augmented Stormray"] = true
+L["Lost Nether Drake"] = true
 L["Amani Sharptalon"] = true
 L["Escaped Witherbark Pango"] = true
 L["Cerulean Hawkstrider"] = true
@@ -2221,7 +2222,6 @@ L["Dreamseed Cache"] = true
 					Please go to http://www.wowace.com/projects/rarity/localization/ to update translations.
 					Anyone with a WowAce/CurseForge account can edit them.
 ]]
-
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "deDE")
 if L then
 	-- @localization(locale="deDE", format="lua_additive_table", handle-subnamespaces="concat", same-key-is-true="true", handle-unlocalized="english")@
