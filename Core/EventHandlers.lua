@@ -771,7 +771,7 @@ function R:OnItemFound(itemId, item, suppressAlert)
 	if item.unique and item.attempts - item.lastAttempts <= 1 then
 		return
 	end
-	
+
 	if not suppressAlert then
 		self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
 	end
