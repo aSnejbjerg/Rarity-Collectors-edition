@@ -183,6 +183,27 @@ local function sort(t)
 	return nt
 end
 
+local SEARCH_FILTER_CONFIG = {
+	mounts = { label = L["Search Mounts"] },
+	pets = { label = L["Search Battle Pets"] },
+	items = { label = L["Search Toys & Items"] },
+}
+
+local function itemMatchesSearch(item, searchText)
+	local search = strlower(strtrim(searchText or ""))
+	if search == "" then
+		return true
+	end
+	local itemName = select(2, GetItemInfo(item.itemId or 0)) or item.name or ""
+	if strfind(strlower(itemName), search, 1, true) then
+		return true
+	end
+	if item.itemId and tostring(item.itemId):find(search, 1, true) then
+		return true
+	end
+	return false
+end
+
 local function alert(msg)
 	StaticPopupDialogs["RARITY_OPTIONS_ALERT"] = {
 		text = msg,
@@ -300,7 +321,9 @@ function R:PrepareOptions()
 								name = L["Contribute on GitHub"],
 								desc = L["You can follow the development process or contribute to the project on our public GitHub repository. What could be more fun than browsing a gigantic backlog of unresolved issues?"],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://github.com/WowRarity/Rarity")
+									Rarity.CopyPastePopup:SetEditBoxText(
+										"https://github.com/aSnejbjerg/Rarity-Collectors-edition"
+									)
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
@@ -309,7 +332,7 @@ function R:PrepareOptions()
 								name = L["Join the Rarity Discord"],
 								desc = L["You can ask questions, follow the latest Rarity news and share the excitement of finally getting that one elusive drop with your fellow collectors in our Discord server.\n\nPS: We have cookies."],
 								func = function(info)
-									Rarity.CopyPastePopup:SetEditBoxText("https://discord.gg/sQ3UqtSh6m")
+									Rarity.CopyPastePopup:SetEditBoxText("https://discord.gg/DTWKVg96PA")
 									Rarity.CopyPastePopup:Show()
 								end,
 							},
@@ -1590,9 +1613,9 @@ function R:PrepareOptions()
 	} -- self.options
 
 	-- Create the options for each group of items
-	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false)
-	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false)
-	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false)
+	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false, "mounts")
+	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false, "pets")
+	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false, "items")
 	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
 
 	self.advancedSettings = {
@@ -1787,7 +1810,7 @@ end -- function R:PrepareOptions()
 -- ITEM GROUPS
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function R:CreateGroup(options, group, isUser)
+function R:CreateGroup(options, group, isUser, searchFilterKey)
 	options.args = {
 		name = {
 			-- type = "execute", -- Why?
@@ -1824,6 +1847,39 @@ function R:CreateGroup(options, group, isUser)
 		},
 	}
 
+	if searchFilterKey then
+		self.optionsSearchFilters = self.optionsSearchFilters or {}
+		local searchConfig = SEARCH_FILTER_CONFIG[searchFilterKey]
+		options.args.searchFilter = {
+			type = "input",
+			order = 0,
+			width = "double",
+			name = searchConfig and searchConfig.label or L["Search"],
+			desc = L["Filter the list by name or item ID."],
+			get = function()
+				return self.optionsSearchFilters[searchFilterKey] or ""
+			end,
+			set = function(info, val)
+				self.optionsSearchFilters[searchFilterKey] = strtrim(val or "")
+				LibStub("AceConfigRegistry-3.0"):NotifyChange("Rarity")
+			end,
+		}
+		options.args.searchClear = {
+			type = "execute",
+			order = 1,
+			width = "half",
+			name = L["Clear"],
+			desc = L["Clear the search filter."],
+			func = function()
+				self.optionsSearchFilters[searchFilterKey] = ""
+				LibStub("AceConfigRegistry-3.0"):NotifyChange("Rarity")
+			end,
+			disabled = function()
+				return strtrim(self.optionsSearchFilters[searchFilterKey] or "") == ""
+			end,
+		}
+	end
+
 	local g = sort(group)
 	for itemkey, item in pairs(g) do
 		local optionkey = tostring(newOrder())
@@ -1833,6 +1889,9 @@ function R:CreateGroup(options, group, isUser)
 			name = function()
 				return select(2, GetItemInfo(item.itemId or 0)) or item.name
 			end,
+			hidden = searchFilterKey and function()
+				return not itemMatchesSearch(item, (self.optionsSearchFilters or {})[searchFilterKey])
+			end or nil,
 			args = {
 				--  head = { -- Why?
 				-- 	 type = "description",
