@@ -35,6 +35,7 @@ function CopyPastePopup:ConfigureStaticPopUp()
 		end
 		popup.OnShow = function(frame, data)
 			local editBox = frame.GetEditBox and frame:GetEditBox() or frame.editBox
+			editBox:SetMaxLetters(0)
 			editBox:SetText(text)
 			editBox:SetJustifyH("CENTER")
 			editBox:SetWidth(240)
