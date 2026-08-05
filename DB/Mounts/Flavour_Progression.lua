@@ -3,7 +3,7 @@ local addonName, addonTable = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
-if LE_EXPANSION_MISTS_OF_PANDARIA > LE_EXPANSION_WARLORDS_OF_DRAENOR then
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_WARLORDS_OF_DRAENOR then
 	return {}
 end
 
