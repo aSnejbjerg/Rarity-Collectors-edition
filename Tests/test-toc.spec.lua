@@ -29,7 +29,7 @@ local EXAMPLE_PRODUCT_INFO = {
 	VersionsName = "11.0.5.57212",
 }
 
-local NUM_SUPPORTED_PRODUCT_LINES = 3
+local NUM_SUPPORTED_PRODUCT_LINES = 5
 
 describe("TOC", function()
 	describe("BlizzardTOC", function()
@@ -50,9 +50,9 @@ describe("TOC", function()
 				local RarityOptionsTOC = BlizzardTOC:DecodeFileContents(RARITY_OPTIONS_TOC)
 
 				-- For now, only parse the header (other fields can be added as needed)
-				assertEquals(RarityCoreTOC["Title"], "Rarity")
+				assertEquals(RarityCoreTOC["Title"], "Rarity: Collector's edition")
 				assertEquals(RarityCoreTOC["Author"], "Allara")
-				assertEquals(RarityCoreTOC["X-Curse-Project-ID"], 30801)
+				assertEquals(RarityCoreTOC["X-Curse-Project-ID"], 1614412)
 				assertTrue(#RarityCoreTOC["Interface"] == NUM_SUPPORTED_PRODUCT_LINES)
 				assertTrue(#RarityCoreTOC["X-Min-Interface"] == NUM_SUPPORTED_PRODUCT_LINES)
 				assertEquals(RarityCoreTOC["Interface"][1], RarityCoreTOC["X-Min-Interface"][1])
