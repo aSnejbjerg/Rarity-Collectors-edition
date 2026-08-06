@@ -2,6 +2,10 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Lil' Mon"] = true
+L["Dropped off a rare named Big Mon"] = true
+L["Pale Hexscale"] = true
+L["Dropped by the prey boss named Ral'kala"] = true 
 L["Reins of the Celestial Riding Crane"] = true
 L["Reins of the Black Riding Yak"] = true
 L["Reins of the Brown Riding Yak"] = true
