@@ -727,6 +727,8 @@ function R:OnChatCommand(input)
 		self.Database:PurgeObsoleteEntries()
 	elseif strlower(input) == "progress" then
 		self.GUI:ToggleProgressBar()
+	elseif strlower(input) == "standalone" then
+		self:ToggleStandaloneTooltip()
 	elseif strlower(input) == "test" then
 		self.Testing:RunIntegrationTests()
 	elseif strlower(input) == "profiling" then

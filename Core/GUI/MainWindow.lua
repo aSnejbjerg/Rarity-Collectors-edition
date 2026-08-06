@@ -33,6 +33,8 @@ local STATUS_TOOLTIP_MAX_WIDTH = 200
 
 -- Locals
 local tooltip, tooltip2, quicktip
+local standaloneAnchor
+local standaloneMode = false
 local renderingQuicktip = false
 local numHolidayReminders = 0
 local showedHolidayReminderOverflow = false
@@ -115,8 +117,73 @@ function R:ShowQuicktip(hidden)
 end
 
 function R:HideTooltip()
-	if tooltip:IsVisible() then
+	if tooltip and tooltip:IsVisible() then
 		tooltip:Release()
+	end
+	if standaloneAnchor then
+		standaloneAnchor:Hide()
+	end
+	standaloneMode = false
+end
+
+function R:GetStandaloneTooltipAnchor()
+	if standaloneAnchor then
+		return standaloneAnchor
+	end
+
+	standaloneAnchor = _G.CreateFrame("Frame", "RarityStandaloneTooltipAnchor", _G.UIParent)
+	standaloneAnchor:SetSize(260, 24)
+	standaloneAnchor:SetPoint("CENTER", _G.UIParent, "CENTER", 0, 0)
+	standaloneAnchor:SetFrameStrata("DIALOG")
+	standaloneAnchor:SetMovable(true)
+	standaloneAnchor:EnableMouse(true)
+	standaloneAnchor:RegisterForDrag("LeftButton")
+	standaloneAnchor:SetScript("OnDragStart", function(frame)
+		frame:StartMoving()
+	end)
+	standaloneAnchor:SetScript("OnDragStop", function(frame)
+		frame:StopMovingOrSizing()
+	end)
+	standaloneAnchor:SetClampedToScreen(true)
+
+	local background = standaloneAnchor:CreateTexture(nil, "BACKGROUND")
+	background:SetAllPoints(standaloneAnchor)
+	background:SetColorTexture(0, 0, 0, 0.55)
+
+	local title = standaloneAnchor:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+	title:SetPoint("LEFT", standaloneAnchor, "LEFT", 8, 0)
+	title:SetText(L["Rarity: Collector's Edition"])
+
+	local closeButton = _G.CreateFrame("Button", nil, standaloneAnchor, "UIPanelCloseButton")
+	closeButton:SetSize(18, 18)
+	closeButton:SetPoint("RIGHT", standaloneAnchor, "RIGHT", -2, 0)
+	closeButton:SetScript("OnClick", function()
+		Rarity:HideTooltip()
+	end)
+
+	standaloneAnchor:Hide()
+
+	return standaloneAnchor
+end
+
+function R:ShowTooltipStandalone()
+	self:HideQuicktip()
+
+	standaloneMode = true
+	local anchor = self:GetStandaloneTooltipAnchor()
+	anchor:Show()
+
+	if tooltip and tooltip:IsVisible() then
+		tooltip:Release()
+	end
+	self:ShowTooltip()
+end
+
+function R:ToggleStandaloneTooltip()
+	if standaloneMode then
+		self:HideTooltip()
+	else
+		self:ShowTooltipStandalone()
 	end
 end
 
@@ -1375,6 +1442,8 @@ function R:ShowTooltip(hidden)
 	end
 	renderingTip = true
 
+	local anchorFrame = standaloneMode and standaloneAnchor or Rarity.frame
+
 	if Rarity.Tooltips:IsTooltipAcquired("RarityTooltip") and tooltip then
 		-- Don't show the tooltip if it's already showing
 		if tooltip:IsVisible() then
@@ -1407,14 +1476,20 @@ function R:ShowTooltip(hidden)
 	numHolidayReminders = 0
 	showedHolidayReminderOverflow = false
 	local delay
-	if self.db.profile.tooltipHideDelay <= 0 then
+	if standaloneMode then
+		delay = 86400 -- Hardcoded value ¯\_(ツ)_/¯ to not close the tooltip when in standalone mode (1 day)
+	elseif self.db.profile.tooltipHideDelay <= 0 then
 		local hideOnClick = (Rarity.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK)
 		delay = hideOnClick and 0 or 0.01 -- Hiding manually is only possible when not in hover mode
 	else
 		delay = self.db.profile.tooltipHideDelay or 0.6
 	end
-	tooltip:SetAutoHideDelay(delay, Rarity.frame, function()
+	tooltip:SetAutoHideDelay(delay, anchorFrame, function()
 		tooltip = nil
+		if standaloneMode and standaloneAnchor then
+			standaloneAnchor:Hide()
+			standaloneMode = false
+		end
 		Rarity.Tooltips:ReleaseTooltip("RarityTooltip")
 	end)
 
@@ -1422,11 +1497,16 @@ function R:ShowTooltip(hidden)
 	if InCombatLockdown() then
 		local line = tooltip:AddLine()
 		tooltip:SetCell(line, 1, colorize(L["Tooltip can't be shown in combat"], gray), nil, nil, 3)
-		if hidden == true or Rarity.frame == nil then
+		if hidden == true or anchorFrame == nil then
 			renderingTip = false
 			return
 		end
-		tooltip:SmartAnchorTo(Rarity.frame)
+		if standaloneMode then
+			tooltip:ClearAllPoints()
+			tooltip:SetPoint("TOPLEFT", anchorFrame, "BOTTOMLEFT", 0, -4)
+		else
+			tooltip:SmartAnchorTo(anchorFrame)
+		end
 		tooltip:UpdateScrolling()
 		tooltip:Show()
 		renderingTip = false
@@ -1437,11 +1517,16 @@ function R:ShowTooltip(hidden)
 	if not Rarity.Caching:IsReady() then
 		local line = tooltip:AddLine()
 		tooltip:SetCell(line, 1, colorize(L["Rarity is loading..."], gray), nil, nil, 3)
-		if hidden == true or Rarity.frame == nil then
+		if hidden == true or anchorFrame == nil then
 			renderingTip = false
 			return
 		end
-		tooltip:SmartAnchorTo(Rarity.frame)
+		if standaloneMode then
+			tooltip:ClearAllPoints()
+			tooltip:SetPoint("TOPLEFT", anchorFrame, "BOTTOMLEFT", 0, -4)
+		else
+			tooltip:SmartAnchorTo(anchorFrame)
+		end
 		tooltip:UpdateScrolling()
 		tooltip:Show()
 		renderingTip = false
@@ -1608,12 +1693,17 @@ function R:ShowTooltip(hidden)
 
 	self.Profiling:EndTimer("GUI.MainWindow.ShowTooltip")
 
-	if hidden == true or Rarity.frame == nil then
+	if hidden == true or anchorFrame == nil then
 		renderingTip = false
 		return
 	end
 
-	tooltip:SmartAnchorTo(Rarity.frame)
+	if standaloneMode then
+		tooltip:ClearAllPoints()
+		tooltip:SetPoint("TOPLEFT", anchorFrame, "BOTTOMLEFT", 0, -4)
+	else
+		tooltip:SmartAnchorTo(anchorFrame)
+	end
 	tooltip:UpdateScrolling()
 	tooltip:Show()
 

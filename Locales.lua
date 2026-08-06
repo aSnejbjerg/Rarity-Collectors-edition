@@ -953,6 +953,7 @@ L["Left click"] = true
 L["Open Rarity window"] = true
 L["Right click"] = true
 L["Toggle tracker"] = true
+L["Rarity: Collector's Edition"] = true
 L["Shift + Left click"] = true
 L["Open settings"] = true
 L["Ctrl + Left click"] = true
