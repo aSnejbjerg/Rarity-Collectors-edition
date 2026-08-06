@@ -105,7 +105,7 @@ local midnightToys = {
 		method = CONSTANTS.DETECTION_METHODS.NPC,
 		name = L["Diver's Key Fragtment"],
 		itemId = 271424,
-		chance = 25, 
+		chance = 25,
 		npcs = {258254},
 		sourceText = L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy. "],
 		coords = {{ m = CONSTANTS.UIMAPIDS.COILED_ISLES}},
