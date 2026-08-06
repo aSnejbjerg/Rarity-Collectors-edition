@@ -109,6 +109,34 @@ local midnightPets = {
 		spellId = 1287339,
 		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
 	},
+	-- 12.1 pets 
+	--Two big mon detected on wowhead, donno which one it is that drops the pet. fix as we get to closer to the patch, and change the drop chance 
+    ["Lil' Mon"] = {
+        cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+        type = CONSTANTS.ITEM_TYPES.PET,
+        method = CONSTANTS.DETECTION_METHODS.NPC,
+        name = L["Lil' Mon"],
+        itemId = 280540,
+        creatureId = 271772,
+        spellId = 1309175,
+        npc = {256631, 256266},
+        chance = 500,
+        sourceText = L["Dropped off a rare named Big Mon"],
+        coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLE } },
+    },
+    ["Pale Hexscale"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+		type = CONSTANTS.ITEM_TYPES.PET,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Pale Hexscale"],
+		creatureId = 269712,
+		itemId = 278572,
+		spellId = 1305199,
+		chance = 100,
+		npcs = { 258928 },
+		sourceText = L["Dropped by the prey boss named Ral'kala"],
+		coords = {{ m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+    },
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, midnightPets)
