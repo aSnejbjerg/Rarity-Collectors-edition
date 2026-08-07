@@ -296,7 +296,8 @@ function R:PrepareOptions()
 			if self.db.profile.debugMode then
 				debugMsg = debugMsg .. L["(running in debug mode)"]
 			end
-			return "Rarity         r|cff20ff20" .. self.MINOR_VERSION .. "|r" .. debugMsg
+			local displayVersion = self.ADDON_VERSION or tostring(self.MINOR_VERSION or 0)
+			return "Rarity: Collector's Edition         |cff20ff20" .. displayVersion .. "|r" .. debugMsg
 		end,
 		handler = Rarity,
 		type = "group",
