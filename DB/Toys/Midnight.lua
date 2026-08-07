@@ -108,7 +108,7 @@ local midnightToys = {
 		chance = 25,
 		npcs = { 258254 },
 		sourceText = L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy. "],
-		coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES} },
+		coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 		repeatable = true,
 	},
 	-- Diver's key is added because you need it to unlock the Sunken Diver's Chest. I've left this one in incase we decide to track the mask instead of the keyfragment.
