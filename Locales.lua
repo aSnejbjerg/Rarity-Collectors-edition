@@ -5,8 +5,8 @@ L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 L["Jaktu's Cursed Blade"] = true
 L["This item drops from the treasure Jaktu's Cursed Blade!"] = true
 L["Diver's Key Fragtment"] = true
-L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy. "] =
-true
+L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy."] =
+	true
 L["Pearl of Jubilation"] = true
 L["Looted from a treasure named Brine-Crusted Chest"] = true
 L["Forgotten Memento"] = true
