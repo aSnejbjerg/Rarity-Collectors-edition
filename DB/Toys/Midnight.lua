@@ -107,7 +107,7 @@ local midnightToys = {
 		itemId = 271424,
 		chance = 25,
 		npcs = { 258254 },
-		sourceText = L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy. "],
+		sourceText = L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy."],
 		coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 		repeatable = true,
 	},
