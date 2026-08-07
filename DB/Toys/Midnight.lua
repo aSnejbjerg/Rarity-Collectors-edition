@@ -86,7 +86,7 @@ local midnightToys = {
 		groupSize = 25,
 		equalOdds = true,
 	},
-			--12.1 toys
+	--12.1 toys
 	["Jaktu's Cursed Blade"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
@@ -106,12 +106,12 @@ local midnightToys = {
 		name = L["Diver's Key Fragtment"],
 		itemId = 271424,
 		chance = 25,
-		npcs = {258254},
+		npcs = { 258254 },
 		sourceText = L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy. "],
-		coords = {{ m = CONSTANTS.UIMAPIDS.COILED_ISLES}},
+		coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES} },
 		repeatable = true,
 	},
-	-- Diver's key is added because you need it to unlock the Sunken Diver's Chest. I've left this one in incase we decide to track the mask instead of the keyfragment. 
+	-- Diver's key is added because you need it to unlock the Sunken Diver's Chest. I've left this one in incase we decide to track the mask instead of the keyfragment.
 	-- ["Ancient Amani Mask"] = {
 	-- 	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
 	-- 	type = CONSTANTS.ITEM_TYPES.ITEM,
