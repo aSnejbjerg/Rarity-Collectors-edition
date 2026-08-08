@@ -100,7 +100,7 @@ function R:ShowQuicktip(hidden)
 	quicktip:AddHeader(L["Rarity"])
 	quicktip:AddSeparator(1, 1, 1, 1, 1)
 	quicktip:AddLine(L["Left click"], L["Open Rarity window"])
-	quicktip:AddLine(L["Right click"], L["Toggle tracker"])
+	quicktip:AddLine(L["Right click"], L["Toggle progress bar"])
 	quicktip:AddLine(L["Shift + Left click"], L["Open settings"])
 	quicktip:AddLine(L["Ctrl + Left click"], L["Change sorting"])
 
@@ -1670,14 +1670,6 @@ function R:ShowTooltip(hidden)
 			3
 		)
 	end
-
-	-- Footer
-	line = tooltip:AddLine()
-	tooltip:SetCell(line, 1, colorize(L["Click to toggle the progress bar"], gray), nil, nil, 3)
-	line = tooltip:AddLine()
-	tooltip:SetCell(line, 1, colorize(L["Shift-Click to open options"], gray), nil, nil, 3)
-	line = tooltip:AddLine()
-	tooltip:SetCell(line, 1, colorize(L["Ctrl-Click to change sort order"], gray), nil, nil, 3)
 
 	if Rarity.anyReminderDone and not Rarity.allRemindersDone then
 		Rarity.allRemindersDone = true

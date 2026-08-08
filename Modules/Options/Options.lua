@@ -366,7 +366,7 @@ function R:PrepareOptions()
 								type = "toggle",
 								order = newOrder(),
 								name = L["Show progress bar"],
-								desc = L["Click to toggle the progress bar"] .. ".",
+								desc = L["Right-Click to toggle the progress bar"] .. ".",
 								get = function()
 									return self.db.profile.bar.visible
 								end,

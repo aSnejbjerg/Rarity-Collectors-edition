@@ -29,18 +29,7 @@ end
 
 function dataobj.OnEnter(self)
 	Rarity.frame = self
-	if Rarity.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_HOVER then
-		Rarity.tooltipOpenDelay = true
-		-- The following will queue opening of the tooltip based on a user set delay that triggers on mouseover.
-		C_Timer.After(
-			Rarity.db.profile.tooltipShowDelay or 0.1, -- Delay in seconds
-			function()
-				Rarity.GUI:ShowDelayedTooltip()
-			end
-		)
-	else
-		Rarity:ShowQuicktip()
-	end
+	Rarity:ShowQuicktip()
 end
 
 -- Helper function to open the Tooltip GUI unless the delayed opening has been aborted meanwhile.
@@ -63,18 +52,10 @@ function dataobj:OnClick(button)
 		Rarity:TryShowOptionsUI()
 	elseif IsControlKeyDown() and isLeftButton then
 		Rarity.GUI:SelectNextSortOrder()
-	elseif
-		(self.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK and isRightButton)
-		or (self.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_HOVER and isLeftButton)
-	then
+	elseif isRightButton then
 		Rarity.GUI:ToggleProgressBar()
-	elseif self.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK and isLeftButton then
-		if Rarity.Tooltips:IsTooltipAcquired("RarityTooltip") then
-			Rarity:HideTooltip()
-		else
-			Rarity:HideQuicktip()
-			Rarity:ShowTooltip()
-		end
+	elseif isLeftButton then
+		Rarity:ToggleStandaloneTooltip()
 	end
 end
 
