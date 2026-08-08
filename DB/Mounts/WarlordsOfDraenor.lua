@@ -607,6 +607,37 @@ local wodMounts = {
 			2361, -- Executor Tarvold
 			2362, -- Grand Proctor Beryllia
 			2363, -- General Kaal
+			
+			-- Dragonflight Timewalking
+			---- Algeth'ar Academy
+			2562, -- Vexamus
+			2563, -- Overgrown Ancient
+			2564, -- Crawth
+			2565, -- Echo of Doragosa
+			---- Brackenhide Hollow
+			2567, -- Gutshot
+			2568, -- Treemouth
+			2569, -- Decatriarch Wratheye
+			2570, -- Hackclaw's War-Band
+			---- Halls of Infusion
+			2615, -- Watcher Irideus
+			2616, -- Gulping Goliath
+			2617, -- Khajin the Unyielding
+			2618, -- Primal Tsunami
+			---- Neltharus
+			2610, -- Magmatusk
+			2611, -- Warlord Sargha
+			2612, -- Forgemaster Gorek
+			2613, -- Chargath, Bane of Scales
+			---- Ruby Life Pools
+			2606, -- Kokia Blazehoof
+			2609, -- Melidrussa Chillworn
+			2623, -- Kyrakka and Erkhart Stormvein
+			---- The Azure Vault
+			2582, -- Leymor
+			2583, -- Telash Greywing
+			2584, -- Umbrelskul
+			2585, -- Azureblade
 		},
 		name = L["Reins of the Infinite Timereaver"],
 		spellId = 201098,
@@ -616,36 +647,75 @@ local wodMounts = {
 		equalOdds = true,
 		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.TIMEWALKING_DUNGEON] = true },
 		coords = {
+			-- Classic
 			{ m = CONSTANTS.UIMAPIDS.THE_DEADMINES, i = true },
 			{ m = CONSTANTS.UIMAPIDS.DIREMAUL_CAPITAL_GARDENS, i = true },
 			{ m = CONSTANTS.UIMAPIDS.DIREMAUL_WARPWOOD_QUARTER, i = true },
 			{ m = CONSTANTS.UIMAPIDS.ZUL_FARRAK, i = true },
 			{ m = CONSTANTS.UIMAPIDS.STRATHOLME, i = true },
+			-- The Burning Crusade
 			{ m = 348, i = true },
 			{ m = 265, i = true },
 			{ m = 246, i = true },
 			{ m = 272, i = true },
 			{ m = 273, i = true },
 			{ m = 269, i = true },
+			-- Wrath of the Lich King
 			{ m = 184, i = true },
 			{ m = 136, i = true },
 			{ m = 129, i = true },
 			{ m = 138, i = true },
 			{ m = 153, i = true },
 			{ m = 132, i = true },
+			-- Cataclysm
 			{ m = 322, i = true },
 			{ m = 325, i = true },
 			{ m = 324, i = true },
 			{ m = 277, i = true },
 			{ m = 293, i = true },
 			{ m = 401, i = true },
+			-- Mists of Pandaria
 			{ m = 437, i = true },
 			{ m = 429, i = true },
 			{ m = 439, i = true },
 			{ m = 457, i = true },
 			{ m = 443, i = true },
 			{ m = 453, i = true },
-			-- TODO add the missing IDs (Shadowlands, possibly others)
+			-- Warlords of Draenor
+			{ m = CONSTANTS.UIMAPIDS.AUCHINDOUN, i = true },
+			{ m = CONSTANTS.UIMAPIDS.BLOODMAUL, i = true },
+			{ m = CONSTANTS.UIMAPIDS.EVERBLOOM, i = true },
+			{ m = CONSTANTS.UIMAPIDS.GRIMRAIL, i = true },
+			{ m = CONSTANTS.UIMAPIDS.SHADOWMOON_BURIAL_GROUNDS, i = true },
+			{ m = CONSTANTS.UIMAPIDS.SKYREACH, i = true },
+			-- Legion
+			{ m = CONSTANTS.UIMAPIDS.BLACK_ROOK_HOLD, i = true },
+			{ m = CONSTANTS.UIMAPIDS.EYE_OF_AZSHARA, i = true },
+			{ m = CONSTANTS.UIMAPIDS.DARKHEART, i = true },
+			{ m = CONSTANTS.UIMAPIDS.VAULT_OF_THE_WARDENS, i = true },
+			{ m = CONSTANTS.UIMAPIDS.NELTHARIONS_LAIR, i = true },
+			{ m = CONSTANTS.UIMAPIDS.COURT_OF_STARS, i = true },
+			-- Battle For Azeroth
+			{ m = CONSTANTS.UIMAPIDS.ATALDAZAR, i = true },
+			{ m = CONSTANTS.UIMAPIDS.FREEHOLD, i = true },
+			{ m = CONSTANTS.UIMAPIDS.KINGS_REST, i = true },
+			{ m = CONSTANTS.UIMAPIDS.SHRINE_OF_THE_STORM, i = true },
+			{ m = CONSTANTS.UIMAPIDS.TEMPLE_OF_SETHRALISS, i = true },
+			{ m = CONSTANTS.UIMAPIDS.WAYCREST_MANOR, i = true },
+			-- Shadowlands
+			{ m = CONSTANTS.UIMAPIDS.DE_OTHER_SIDE, i = true },
+			{ m = CONSTANTS.UIMAPIDS.HALLS_OF_ATONEMENT, i = true },
+			{ m = CONSTANTS.UIMAPIDS.THE_NECROTIC_WAKE, i = true },
+			{ m = CONSTANTS.UIMAPIDS.PLAGUEFALL, i = true },
+			{ m = CONSTANTS.UIMAPIDS.SANGUINE_DEPTHS, i = true },
+			{ m = CONSTANTS.UIMAPIDS.SPIRES_OF_ASCENSION, i = true },
+			-- Dragonflight
+			{ m = CONSTANTS.UIMAPIDS.ALGETHAR_ACADEMY, i = true },
+			{ m = CONSTANTS.UIMAPIDS.BRACKENHIDE_HOLLOW, i = true },
+			{ m = CONSTANTS.UIMAPIDS.HALLS_OF_INFUSION, i = true },
+			{ m = CONSTANTS.UIMAPIDS.RUBY_LIFE_POOLS, i = true },
+			{ m = CONSTANTS.UIMAPIDS.NELTHARUS, i = true },
+			{ m = CONSTANTS.UIMAPIDS.AZURE_VAULT, i = true },
 		},
 	},
 }
