@@ -483,7 +483,7 @@ local midnightMounts = {
 		npcs = { 258928 },
 		chance = 100,
 		coords = { { m = CONSTANTS.UIMAPIDS.VOIDSTORM },
- 					{ m = CONSTANTS.UIMAPIDS.SILVERMOON },
+					{ m = CONSTANTS.UIMAPIDS.SILVERMOON },
 					{ m = CONSTANTS.UIMAPIDS.EVERSONG },
 					{ m = CONSTANTS.UIMAPIDS.HARANDAR },
 					{ m = CONSTANTS.UIMAPIDS.COILED_ISLES },
