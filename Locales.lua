@@ -2,6 +2,10 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Lil' Mon"] = true
+L["Dropped off a rare named Big Mon"] = true
+L["Pale Hexscale"] = true
+L["Dropped by the prey boss named Ral'kala"] = true
 L["Jaktu's Cursed Blade"] = true
 L["This item drops from the treasure Jaktu's Cursed Blade!"] = true
 L["Diver's Key Fragtment"] = true
