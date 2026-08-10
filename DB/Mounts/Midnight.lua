@@ -80,6 +80,7 @@ local midnightMounts = {
 		name = L["Nether-Warped Egg"],
 		itemId = 268730,
 		chance = 2500,
+		spellId = 3363,
 		sourceText = L["This item drops the Nether-Swept Drake mount after 7 days."],
 		coords = {
 			{ m = CONSTANTS.UIMAPIDS.EVERSONG_WOODS_MIDNIGHT },
