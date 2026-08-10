@@ -60,3 +60,8 @@ end
 _G.geterrorhandler = function()
 	return error
 end
+
+--Simulate getting build info. It just needs to be higher than the current highest patch number of the game.
+_G.GetBuildInfo = function()
+	return "25.0.0", "99965", "Jan 01 2035", 250000
+end
