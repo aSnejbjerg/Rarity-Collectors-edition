@@ -177,6 +177,5 @@ midnightToys["Idol of Blue Water and Blue Sky"] = {
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
 
-
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
 return midnightToys
