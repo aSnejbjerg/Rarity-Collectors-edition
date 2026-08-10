@@ -2233,7 +2233,8 @@ L["Reins of the Springtide Dreamtalon"] = true
 L["Reins of the Morning Flourish Dreamsaber"] = true
 L["Reins of the Rekindled Dreamstag"] = true
 L["Dreamseed Cache"] = true
-
+L["Drops ANYWHERE in Wrath raids, dungeons and open world wrath zones."] = true
+L["Super Simian Sphere"] = true
 --[[
 					The rest of this file is auto-generated using the WoWAce localization application.
 					Please go to http://www.wowace.com/projects/rarity/localization/ to update translations.
