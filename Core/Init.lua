@@ -14,10 +14,8 @@ Rarity = LibStub("AceAddon-3.0"):NewAddon(
 	"AceSerializer-3.0"
 )
 -- Rarity.MINOR_VERSION = tonumber(("$Revision: 650 $"):match("%d+"))  -- Disabled after switching entirely to Git (from SVN)
-local projectVersion, noReplacements = (C_AddOns.GetAddOnMetadata("Rarity", "Version"):match("r%d+") or "r0"):gsub(
-	"r",
-	""
-) -- e.g., r654	1 (the second value can be discarded)
+Rarity.ADDON_VERSION = C_AddOns.GetAddOnMetadata("Rarity", "Version") or "0"
+local projectVersion, noReplacements = (Rarity.ADDON_VERSION:match("r%d+") or "r0"):gsub("r", "") -- e.g., r654	1 (the second value can be discarded)
 Rarity.MINOR_VERSION = tonumber(projectVersion)
 
 -- Set up modules

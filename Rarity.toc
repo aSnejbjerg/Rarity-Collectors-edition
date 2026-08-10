@@ -2,7 +2,7 @@
 ## Interface: 120007, 120100,  50504, 20506, 11509
 ## X-Min-Interface: 120007, 120100,  50504, 20506, 11509
 ## Title: Rarity: Collector's edition
-## Version: 1.0 (@project-version@)
+## Version: (@project-version@)
 ## X-Curse-Project-ID: 1614412
 
 ## Notes: Tracks rare drops, including companions and mounts
