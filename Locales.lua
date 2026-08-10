@@ -2,6 +2,19 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Jaktu's Cursed Blade"] = true
+L["This item drops from the treasure Jaktu's Cursed Blade!"] = true
+L["Diver's Key Fragtment"] = true
+L["This item is needed to get the diver's key to be able to open the Sunken Diver's Chest to get the Ancient Amani Mask Toy."] =
+	true
+L["Pearl of Jubilation"] = true
+L["Looted from a treasure named Brine-Crusted Chest"] = true
+L["Forgotten Memento"] = true
+L["Looted from a treasure named Grave of Someone Forgotten"] = true
+L["Malfunctioning Staff"] = true
+L["Looted from a treasure named Malfunctioning Staff"] = true
+L["Idol of Blue Water and Blue Sky"] = true
+L["Looted from a treasure named Abandoned Amani Privateer's Cache"] = true
 L["Reins of the Celestial Riding Crane"] = true
 L["Reins of the Black Riding Yak"] = true
 L["Reins of the Brown Riding Yak"] = true
