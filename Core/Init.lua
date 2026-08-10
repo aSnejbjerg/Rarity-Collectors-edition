@@ -15,10 +15,7 @@ Rarity = LibStub("AceAddon-3.0"):NewAddon(
 )
 -- Rarity.MINOR_VERSION = tonumber(("$Revision: 650 $"):match("%d+"))  -- Disabled after switching entirely to Git (from SVN)
 Rarity.ADDON_VERSION = C_AddOns.GetAddOnMetadata("Rarity", "Version") or "0"
-local projectVersion, noReplacements = (Rarity.ADDON_VERSION:match("r%d+") or "r0"):gsub(
-	"r",
-	""
-) -- e.g., r654	1 (the second value can be discarded)
+local projectVersion, noReplacements = (Rarity.ADDON_VERSION:match("r%d+") or "r0"):gsub("r", "") -- e.g., r654	1 (the second value can be discarded)
 Rarity.MINOR_VERSION = tonumber(projectVersion)
 
 -- Set up modules
