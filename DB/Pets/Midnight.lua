@@ -122,7 +122,7 @@ midnightPets["Lil' Mon"] = {
 	itemId = 280540,
 	creatureId = 271772,
 	spellId = 1309175,
-	npc = {256631, 256266},
+	npc = { 256631, 256266 },
 	chance = 500,
 	sourceText = L["Dropped off a rare named Big Mon"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLE } },
@@ -138,7 +138,7 @@ midnightPets["Pale Hexscale"] = {
 	chance = 100,
 	npcs = { 258928 },
 	sourceText = L["Dropped by the prey boss named Ral'kala"],
-	coords = {{ m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, midnightPets)
