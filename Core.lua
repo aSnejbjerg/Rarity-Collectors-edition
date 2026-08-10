@@ -70,6 +70,8 @@ local SORT_ZONE = "SORT_ZONE"
 
 Rarity.CONSTANTS = addonTable.constants
 
+Rarity.CONSTANTS.WOW_INTERFACE_VER = select(4, GetBuildInfo())
+
 --[[
       UPVALUES -----------------------------------------------------------------------------------------------------------------
   ]]
