@@ -8,7 +8,7 @@ addonTable.constants = addonTable.constants or {}
 local C = addonTable.constants
 
 -- Interface versions
-C.WOW_INTERFACE_VER = select(4, GetBuildInfo()) -- luacheck: ignore
+C.WOW_INTERFACE_VER = select(4, GetBuildInfo())
 
 C.PATCH_INTERFACE_VERSIONS = {
 	THE_WAR_WITHIN = {
