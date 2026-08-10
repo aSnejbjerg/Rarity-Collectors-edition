@@ -87,6 +87,11 @@ local midnightToys = {
 		equalOdds = true,
 	},
 }
+
+-- Debugging the globals here...
+print("WOW_INTERFACE_VER: ", tostring(CONSTANTS.WOW_INTERFACE_VER))
+print("PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK:", tostring(CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK))
+
 if CONSTANTS.WOW_INTERFACE_VER < CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK then
 	Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
 	return midnightToys
