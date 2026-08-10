@@ -607,7 +607,6 @@ local wodMounts = {
 			2361, -- Executor Tarvold
 			2362, -- Grand Proctor Beryllia
 			2363, -- General Kaal
-			
 			-- Dragonflight Timewalking
 			---- Algeth'ar Academy
 			2562, -- Vexamus
