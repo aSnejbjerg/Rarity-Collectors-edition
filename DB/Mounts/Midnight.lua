@@ -389,6 +389,111 @@ local midnightMounts = {
 		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
 	},
 }
+if CONSTANTS.WOW_INTERFACE_VER < CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK then
+	Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, midnightMounts)
+	return midnightMounts
+end
+midnightMounts["Primevil Skyfriend"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.MOUNT,
+	method = CONSTANTS.DETECTION_METHODS.BOSS,
+	name = L["Primevil Skyfriend"],
+	spellId = 1297405,
+	itemId = 275658,
+	npcs = { 99999 },
+	tooltipNpcs = { 268956 },
+	chance = 100,
+	statisticId = { 63569 },
+	lockBossName = "Queen Ansurek",
+	instanceDifficulties = {
+		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
+	},
+	groupSize = 5,
+	equalOdds = true,
+	coords = { { m = CONSTANTS.UIMAPIDS.VENOMOUS_ABYSS, i = true } },
+	wasGuaranteed = true,
+}
+midnightMounts["The Writhing Brood"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.MOUNT,
+	method = CONSTANTS.DETECTION_METHODS.NPC,
+	name = L["The Writhing Brood"],
+	itemId = 276804,
+	spellId = 1300776,
+	tooltipNpcs = { 259447 },
+	npcs = { 99999 },
+	statisticId = { 62287 },
+	groupSize = 5,
+	equalOdds = true,
+	chance = 20,
+	instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+	coords = { { m = CONSTANTS.UIMAPIDS.ALTAR_OF_FANGS_MIDNIGHT, i = true } },
+}
+midnightMounts["Ruby Writhe"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.MOUNT,
+	method = CONSTANTS.DETECTION_METHODS.NPC,
+	name = L["Ruby Writhe"],
+	itemId = 276803,
+	spellId = 1300779,
+	npcs = {
+		263456,
+		258920,
+		256631,
+		261142,
+		264854,
+		268090,
+		265262,
+		258916,
+		257906,
+		261109,
+		268049,
+		265237,
+	},
+	chance = 500,
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+}
+midnightMounts["Topaz Skyfang"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.MOUNT,
+	method = CONSTANTS.DETECTION_METHODS.NPC,
+	name = L["Topaz Skyfang"],
+	itemId = 276549,
+	spellId = 1299961,
+	npcs = {
+		263456,
+		258920,
+		256631,
+		261142,
+		264854,
+		268090,
+		265262,
+		258916,
+		257906,
+		261109,
+		268049,
+		265237,
+	},
+	chance = 500,
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+}
+midnightMounts["Hexflame Reaver"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.MOUNT,
+	method = CONSTANTS.DETECTION_METHODS.NPC,
+	name = L["Hexflame Reaver"],
+	itemId = 275659,
+	spellId = 1297407,
+	npcs = { 258928 },
+	chance = 100,
+	coords = {
+		{ m = CONSTANTS.UIMAPIDS.VOIDSTORM },
+		{ m = CONSTANTS.UIMAPIDS.SILVERMOON },
+		{ m = CONSTANTS.UIMAPIDS.EVERSONG },
+		{ m = CONSTANTS.UIMAPIDS.HARANDAR },
+		{ m = CONSTANTS.UIMAPIDS.COILED_ISLES },
+	},
+}
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, midnightMounts)
 return midnightMounts
