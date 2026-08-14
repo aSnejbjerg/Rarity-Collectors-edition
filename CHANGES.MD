@@ -1,16 +1,9 @@
-**v0.2.0:**
+**v0.2.1:**
 
 ## What's Changed
-* added IDs to 2 voidstorm rare mounts drops by @Shelinka in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/55
-* Added interface version functionality by @aSnejbjerg in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/62
-* Version display update in options menu by @Shelinka in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/59
-* swapped df, tww and wod icons for a better looking ones by @Shelinka in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/68
-* Add spellId for Nether-Warped Egg item by @DannyXeX in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/67
-* 12.1 toy collection by @DannyXeX in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/57
-* 12.1 midnight pets by @DannyXeX in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/58
-* 12.1 mounts by @DannyXeX in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/72
-* Super simian sphere by @DannyXeX in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/70
-* Timewalking additions by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/65
+* 12.1.5 PTR detected, getting ready for testing by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/73
+* Fixed Progression server mounts showing on Anniversary servers by @aSnejbjerg in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/75
+* Updates to Lil' Mon by @DannyXeX in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/77
 
 
-**Full Changelog**: https://github.com/aSnejbjerg/Rarity-Collectors-edition/compare/v0.1.1...v0.2.0
+**Full Changelog**: https://github.com/aSnejbjerg/Rarity-Collectors-edition/compare/v0.2.0...v0.2.1
