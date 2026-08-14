@@ -122,7 +122,7 @@ midnightPets["Lil' Mon"] = {
 	itemId = 280540,
 	creatureId = 271772,
 	spellId = 1309175,
-	npc = { 256631, 256266 },
+	npc = { 256631 },
 	chance = 500,
 	sourceText = L["Dropped off a rare named Big Mon"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLE } },
