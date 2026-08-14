@@ -76,6 +76,8 @@ globals = {
 	"LE_EXPANSION_DRAGONFLIGHT",
 	"LE_EXPANSION_WAR_WITHIN",
 	"LE_EXPANSION_MIDNIGHT",
+	"WOW_PROJECT_ID",
+	"WOW_PROJECT_MAINLINE",
 
 	"AuraUtil",
 	"BackdropTemplateMixin",
