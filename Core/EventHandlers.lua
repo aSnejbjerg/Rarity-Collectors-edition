@@ -473,7 +473,13 @@ function R:OnQuestTurnedIn(event, questID, experience, money)
 	end
 
 	for _, itemName in ipairs(relevantItems) do
-		self:Debug(format("Relevant quest turnin detected for item %s (questID = %d)", tostring(itemName), tonumber(questID or 0)))
+		self:Debug(
+			format(
+				"Relevant quest turnin detected for item %s (questID = %d)",
+				tostring(itemName),
+				tonumber(questID or 0)
+			)
+		)
 
 		local v = self.db.profile.groups.items[itemName]
 			or self.db.profile.groups.pets[itemName]
