@@ -449,6 +449,11 @@ midnightMounts["Ruby Writhe"] = {
 		261109,
 		268049,
 		265237,
+		255088, -- Looming Mutagenitor
+		258254, -- Ss'akrithos
+		255087, -- Malformed Leviathan
+		257863, -- Vassti
+		255927, -- Venom Lancer Ori'kassi
 	},
 	chance = 500,
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
@@ -473,6 +478,11 @@ midnightMounts["Topaz Skyfang"] = {
 		261109,
 		268049,
 		265237,
+		255088, -- Looming Mutagenitor
+		258254, -- Ss'akrithos
+		255087, -- Malformed Leviathan
+		257863, -- Vassti
+		255927, -- Venom Lancer Ori'kassi
 	},
 	chance = 500,
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
