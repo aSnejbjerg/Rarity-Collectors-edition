@@ -669,6 +669,7 @@ local bfaToys = {
 		itemId = 174230,
 		npcs = { 157162 },
 		chance = 50,
+		spellId = 315427,
 		questId = { 57346 },
 		unique = true,
 		coords = {
@@ -701,11 +702,11 @@ local bfaToys = {
 			157160, -- Houndlord Ren
 		},
 		chance = 100,
+		spellId = 315014,
 		unique = true,
 		coords = { { m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS } },
 		sourceText = L["Can be used to capture the Ivory Cloud Serpent"],
 	},
-
 	["All-Seeing Right Eye"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
