@@ -481,7 +481,7 @@ local legionToys = {
 	},
 	["Fel-Spotted Egg"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.LEGION,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		type = CONSTANTS.ITEM_TYPES.ITEM,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
 		name = L["Fel-Spotted Egg"],
 		itemId = 153190,
