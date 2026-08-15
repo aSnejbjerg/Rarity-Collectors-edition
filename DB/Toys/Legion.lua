@@ -481,13 +481,13 @@ local legionToys = {
 	},
 	["Fel-Spotted Egg"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.LEGION,
-		type = CONSTANTS.ITEM_TYPES.ITEM,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
 		name = L["Fel-Spotted Egg"],
 		itemId = 153190,
 		npcs = { 126898, 126208, 126419 },
+		spellId = 235764, 253106, 253108, 253109, 254295, 254296, 
 		chance = 2.5,
-		unique = false,
 		sourceText = L["Dropped by the panthara rares on Argus. Has a chance to hatch into one of four Mana Ray mounts as well as one of two Skyfin pets after five days."],
 		coords = {
 			{ m = CONSTANTS.UIMAPIDS.ANTORAN_WASTES, x = 64.32, y = 48.62, n = L["Varga"] },
