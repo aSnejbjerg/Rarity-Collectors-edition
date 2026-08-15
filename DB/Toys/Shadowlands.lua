@@ -208,6 +208,7 @@ local shadowlandsToys = {
 		name = L["Necroray Egg"],
 		itemId = 184159,
 		items = { 181732, 181733 },
+		spellId = 344574, 344576, 344575,
 		chance = 50,
 		sourceText = L["Sometimes contained in the caches awarded for completing any covenant's Calling in Maldraxxus. Will hatch into one of three Necroray mounts after three days."],
 		coords = { { m = CONSTANTS.UIMAPIDS.MALDRAXXUS } },
