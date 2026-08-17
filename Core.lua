@@ -283,6 +283,7 @@ do
 
 		-- Scan bags, currency, and instance locks 10 seconds after init
 		self:ScheduleTimer(function()
+			R:StartInitialBagSync(2)
 			R:ScanBags()
 			R:OnCurrencyUpdate("DELAYED INIT")
 			R:OnBagUpdate()

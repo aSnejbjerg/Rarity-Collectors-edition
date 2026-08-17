@@ -49,7 +49,8 @@ local GetArchaeologyRaceInfo = _G.GetArchaeologyRaceInfo
 local GetStatistic = _G.GetStatistic
 local GetLootSourceInfo = _G.GetLootSourceInfo
 local C_Timer = _G.C_Timer
-local IsSpellKnown = _G.IsSpellKnown
+-- IsSpellKnown was moved to C_Spell.IsSpellKnown in WoW 12.0.0 (Midnight); use with fallback for compatibility
+local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentRenownLevel
 
 -- Addon APIs
@@ -66,7 +67,8 @@ function EventHandlers:Register()
 	self:RegisterEvent("RESEARCH_ARTIFACT_COMPLETE", "OnResearchArtifactComplete")
 	-- self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "OnCombat") -- Used to detect boss kills that we didn't solo
 	self:RegisterEvent("CURSOR_CHANGED", "OnCursorChanged") -- Fishing detection
-	self:RegisterEvent("UNIT_SPELLCAST_SENT", "OnSpellcastSent") -- Fishing detection
+	-- UNIT_SPELLCAST_SENT was removed in WoW 12.0.0 (Midnight); use UNIT_SPELLCAST_START instead
+	self:RegisterEvent("UNIT_SPELLCAST_START", "OnSpellcastSent") -- Fishing detection
 	self:RegisterEvent("UNIT_SPELLCAST_STOP", "OnSpellcastStopped") -- Fishing detection
 	self:RegisterEvent("UNIT_SPELLCAST_FAILED", "OnSpellcastFailed") -- Fishing detection
 	self:RegisterEvent("UNIT_SPELLCAST_INTERRUPTED", "OnSpellcastFailed") -- Fishing detection
@@ -96,6 +98,7 @@ function EventHandlers:Register()
 
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "OnPlayerInteractionFrameShow")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", "OnPlayerInteractionFrameHide")
+	self:StartInitialBagSync()
 end
 
 function R:StartInitialBagSync(delay)
@@ -458,16 +461,36 @@ function R:OnQuestTurnedIn(event, questID, experience, money)
 	if not relevantItem then
 		return
 	end
-	self:Debug(format("Relevant quest turnin detected for item %s (questID = %d)", questID, relevantItem))
+	local relevantItems = {}
+	if type(relevantItem) == "string" then
+		table.insert(relevantItems, relevantItem)
+	elseif type(relevantItem) == "table" then
+		if relevantItem.alliance and self.Caching:IsAlliance() then
+			table.insert(relevantItems, relevantItem.alliance)
+		elseif relevantItem.horde and self.Caching:IsHorde() then
+			table.insert(relevantItems, relevantItem.horde)
+		end
+	end
 
-	local v = self.db.profile.groups.items[relevantItem]
-		or self.db.profile.groups.pets[relevantItem]
-		or self.db.profile.groups.mounts[relevantItem]
-	if v and type(v) == "table" and v.enabled ~= false then
-		if v.attempts == nil then
-			v.attempts = 1
-		else
-			v.attempts = v.attempts + 1
+	for _, itemName in ipairs(relevantItems) do
+		self:Debug(
+			format(
+				"Relevant quest turnin detected for item %s (questID = %d)",
+				tostring(itemName),
+				tonumber(questID or 0)
+			)
+		)
+
+		local v = self.db.profile.groups.items[itemName]
+			or self.db.profile.groups.pets[itemName]
+			or self.db.profile.groups.mounts[itemName]
+		if v and type(v) == "table" and v.enabled ~= false and self:IsAttemptAllowed(v) then
+			if v.attempts == nil then
+				v.attempts = 1
+			else
+				v.attempts = v.attempts + 1
+			end
+			self:OutputAttempts(v)
 		end
 		self:OutputAttempts(v)
 	end
@@ -697,6 +720,7 @@ function R:OnProfileChanged(event, database, newProfileKey)
 	self.db:RegisterDefaults(self.defaults)
 	self:UpdateInterestingThings()
 	self:OnCurrencyUpdate(event)
+	self:StartInitialBagSync(2)
 	self:ScanAllArch(event)
 	Rarity.Collections:ScanExistingItems(event)
 	self:ScanBags()
@@ -745,12 +769,12 @@ function R:OnChatCommand(input)
 end
 
 function R:OnItemFound(itemId, item, suppressAlert)
-	if suppressAlert == nil then
-		suppressAlert = false
-	end
-
 	if item.found and not item.repeatable then
 		return
+	end
+
+	if suppressAlert == nil then
+		suppressAlert = Rarity.isInitialBagSync
 	end
 
 	local playerClass = select(2, UnitClass("player"))
@@ -775,7 +799,6 @@ function R:OnItemFound(itemId, item, suppressAlert)
 	if not suppressAlert then
 		self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
 	end
-	self:ShowFoundAlert(itemId, item.attempts - item.lastAttempts, item, item)
 	if Rarity.Session:IsActive() then
 		Rarity.Session:End()
 	end
@@ -815,7 +838,9 @@ end
 
 local FISHING_DELAY = 22
 
-function R:OnSpellcastSent(event, unit, target, castGUID, spellID)
+function R:OnSpellcastSent(event, unit, castGUID, spellID)
+	-- Note: Previously used UNIT_SPELLCAST_SENT (removed in 12.0.0), now uses UNIT_SPELLCAST_START
+	-- UNIT_SPELLCAST_START signature: (unit, castGUID, spellID) - no "target" argument
 	if unit ~= "player" then
 		return
 	end
@@ -1020,18 +1045,18 @@ function R:ProcessContainerItems()
 	end
 end
 
-function R:ProcessInventoryItems(suppressAlert)
+function R:ProcessInventoryItems()
 	self.Profiling:StartTimer("EventHandlers.ProcessInventoryItems")
 
 	for itemID, _ in pairs(Rarity.bagitems) do
-		self:ProcessCollectionItem(itemID, suppressAlert)
-		self:ProcessOtherItem(itemID, suppressAlert)
+		self:ProcessCollectionItem(itemID)
+		self:ProcessOtherItem(itemID)
 	end
 
 	self.Profiling:EndTimer("EventHandlers.ProcessInventoryItems")
 end
 
-function R:ProcessCollectionItem(itemID, suppressAlert)
+function R:ProcessCollectionItem(itemID)
 	if not itemID then
 		return
 	end
@@ -1053,9 +1078,9 @@ function R:ProcessCollectionItem(itemID, suppressAlert)
 	for collectionItemID, collectionItem in pairs(Rarity.collection_items) do
 		-- This item is a collection of several items; add them all up and check for attempts
 		if self:HasMultipleCollectionItems(collectionItem) then
-			self:ProcessCollectionItemAggregate(collectionItem, suppressAlert)
+			self:ProcessCollectionItemAggregate(collectionItem)
 		else
-			self:ProcessCollectionItemSingle(collectionItem, itemID, suppressAlert)
+			self:ProcessCollectionItemSingle(collectionItem, itemID)
 		end
 	end
 end
@@ -1069,7 +1094,7 @@ function R:IsCollectionItem(item)
 	return item.method == CONSTANTS.DETECTION_METHODS.COLLECTION
 end
 
-function R:ProcessOtherItem(itemID, suppressAlert)
+function R:ProcessOtherItem(itemID)
 	if not itemID then
 		return
 	end
@@ -1082,7 +1107,7 @@ function R:ProcessOtherItem(itemID, suppressAlert)
 	local amountIncreasedSinceLastScan = (Rarity.bagitems[itemID] or 0) > (Rarity.tempbagitems[itemID] or 0)
 	if amountIncreasedSinceLastScan then -- An inventory item went up in count
 		if item and item.enabled ~= false and not self:IsCollectionItem(item) then
-			self:OnItemFound(itemID, item, suppressAlert)
+			self:OnItemFound(itemID, item, Rarity.isInitialBagSync)
 		end
 	end
 end
@@ -1093,7 +1118,7 @@ function R:GetInventoryItemCount(itemID)
 end
 
 -- Still incomprehensible, but I'll leave it for now
-function R:ProcessCollectionItemSingle(collectionItem, itemID, suppressAlert)
+function R:ProcessCollectionItemSingle(collectionItem, itemID)
 	local inventoryItemCount = self:GetInventoryItemCount(itemID)
 	local item = Rarity.items[itemID]
 
@@ -1111,7 +1136,7 @@ function R:ProcessCollectionItemSingle(collectionItem, itemID, suppressAlert)
 			collectionItem.attempts = inventoryItemCount
 		end
 		if originalCount < inventoryItemCount and originalCount < goal and inventoryItemCount >= goal then
-			self:OnItemFound(collectionItem.itemId, collectionItem, suppressAlert)
+			self:OnItemFound(collectionItem.itemId, collectionItem, Rarity.isInitialBagSync)
 		elseif originalCount < inventoryItemCount then
 			self:OutputAttempts(collectionItem)
 		end
@@ -1119,7 +1144,7 @@ function R:ProcessCollectionItemSingle(collectionItem, itemID, suppressAlert)
 end
 
 -- Still incomprehensible, but I'll leave it for now
-function R:ProcessCollectionItemAggregate(collectionItem, suppressAlert)
+function R:ProcessCollectionItemAggregate(collectionItem)
 	if collectionItem.enabled ~= false then
 		local total = 0
 		local originalCount = (collectionItem.attempts or 0)
@@ -1135,7 +1160,7 @@ function R:ProcessCollectionItemAggregate(collectionItem, suppressAlert)
 			collectionItem.attempts = total
 			if originalCount < goal and total >= goal then
 				self:Debug("Triggering OnItemFound since we just reached the goal")
-				self:OnItemFound(collectionItem.itemId, collectionItem, suppressAlert)
+				self:OnItemFound(collectionItem.itemId, collectionItem, Rarity.isInitialBagSync)
 			elseif total > originalCount then
 				self:Debug("Triggering OutputAttempts since we gained one item, but didn't reach the goal")
 				self:OutputAttempts(collectionItem)
@@ -1170,7 +1195,7 @@ function R:OnBagUpdate()
 	R:ProcessContainerItems()
 
 	-- Check for an increase in quantity of any items we're watching for
-	R:ProcessInventoryItems(Rarity.isInitialBagSync)
+	R:ProcessInventoryItems()
 end
 
 function R:OnResearchArtifactComplete(event, _)
