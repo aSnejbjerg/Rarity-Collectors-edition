@@ -209,7 +209,7 @@ local mopToys = {
 		chance = 6,
 		coords = { { m = 379, x = 57.6, y = 75.0, n = L["Havak"] } },
 	},
-	["Primal Egg"] = {
+		["Primal Egg"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MOP,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -241,6 +241,9 @@ local mopToys = {
 		},
 		chance = 100,
 		unique = true,
+		spellId = 138642,
+		138643,
+		138641,
 		sourceText = L["Dropped by dinosaurs on Isle of Giants Will hatch into one of three Primal Raptor mounts after three days."],
 		coords = { { m = 507 } },
 	},
