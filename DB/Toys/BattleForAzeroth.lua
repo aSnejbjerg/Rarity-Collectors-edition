@@ -755,7 +755,7 @@ local bfaToys = {
 		sourceText = L["Dropped by Merektha in Temple of Sethraliss. Will hatch into Spawn of Merektha pet after three days."],
 		coords = { { m = CONSTANTS.UIMAPIDS.TEMPLE_OF_SETHRALISS, i = true } },
 	},
-	["Nightwreathed Egg"] = {
+["Nightwreathed Egg"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -764,6 +764,8 @@ local bfaToys = {
 		npcs = { 149659, 149662 },
 		chance = 7,
 		questId = { 54891, 54889 },
+		spellId = 289359,
+		creatureId = 149205,
 		coords = {
 			{
 				m = CONSTANTS.UIMAPIDS.DARKSHORE,
