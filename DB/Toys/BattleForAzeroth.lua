@@ -745,6 +745,8 @@ local bfaToys = {
 		name = L["Viable Cobra Egg"],
 		itemId = 160832,
 		npcs = { 133384 },
+		spellId = 273159, 
+		creatureId = 138964,
 		chance = 50,
 		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
 		lockoutDetails = {
