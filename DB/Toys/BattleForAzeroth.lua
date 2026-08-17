@@ -649,6 +649,7 @@ local bfaToys = {
 			131718,
 		},
 		chance = 2500,
+		spellId = 267270,
 		unique = true,
 		requiresHorde = true,
 		sourceText = L["Starts a series of quests that ultimately award Kua'fon's Harness (Pterrordax mount)"],
