@@ -64,6 +64,7 @@ local twwToysAndItems = {
 			231357, -- Zek'ul the Shipbreaker
 		},
 		chance = 100,
+		spellId = 471562,
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_FORGOTTEN_VAULT } },
 	},
 	-- 11.1 toys
