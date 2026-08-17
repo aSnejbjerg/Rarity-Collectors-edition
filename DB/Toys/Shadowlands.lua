@@ -190,7 +190,7 @@ local shadowlandsToys = {
 		questId = { 60368 },
 		coords = { { m = CONSTANTS.UIMAPIDS.MALDRAXXUS, x = 44.1, y = 40.0, n = L["Blackhound Cache"] } },
 	},
-	["Blight-Touched Egg"] = {
+		["Blight-Touched Egg"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.SHADOWLANDS,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -198,6 +198,7 @@ local shadowlandsToys = {
 		itemId = 184104,
 		npcs = { 162258, 162588, 172390, 162259, 170456, 162589, 170893, 164587 },
 		chance = 500,
+		spellId = 336038,
 		sourceText = L["Dropped by various flying creatures in Maldraxxus. Will hatch into Callow Flayedwing after five days."],
 		coords = { { m = CONSTANTS.UIMAPIDS.MALDRAXXUS } },
 	},
