@@ -235,6 +235,7 @@ local shadowlandsToys = {
 		itemId = 187181,
 		npcs = { 180042 },
 		chance = 100, -- Blind guess
+		spellId = 347250,
 		unique = true,
 		requiresCovenant = true,
 		requiredCovenantID = CONSTANTS.COVENANT_IDS.NECROLORD,
