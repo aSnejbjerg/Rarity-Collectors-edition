@@ -174,6 +174,11 @@ function R:OnSpellcastSucceeded(event, unitID, castGUID, spellID)
 
 	R:Debug("OnSpellcastSucceeded triggered with relevant spell " .. spellID)
 
+	-- Fishing is an instant cast, so UNIT_SPELLCAST_START does not fire for it.
+	if Rarity.relevantSpells[spellID] == "Fishing" then
+		self:OnSpellcastSent(event, unitID, castGUID, spellID)
+	end
+
 	if IsPlayerInHorrificVision() and spellID == 312881 then
 		self:Debug("Finished searching mailbox in a Horrific Vision")
 		addAttemptForItem("Mail Muncher", "mounts")
