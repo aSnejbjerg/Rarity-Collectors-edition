@@ -83,6 +83,7 @@ local midnightMounts = {
 		spellId = 3363,
 		sourceText = L["This item drops the Nether-Swept Drake mount after 7 days."],
 		coords = {
+			{ m = CONSTANTS.UIMAPIDS.SILVERMOON_CITY_MIDNIGHT },
 			{ m = CONSTANTS.UIMAPIDS.EVERSONG_WOODS_MIDNIGHT },
 			{ m = CONSTANTS.UIMAPIDS.ZUL_AMAN_MIDNIGHT },
 			{ m = CONSTANTS.UIMAPIDS.VOIDSTORM },
@@ -90,6 +91,7 @@ local midnightMounts = {
 			{ m = CONSTANTS.UIMAPIDS.HARANDAR },
 		},
 		zones = {
+			tostring{CONSTANTS.UIMAPIDS.SILVERMOON_CITY_MIDNIGHT},
 			tostring(CONSTANTS.UIMAPIDS.EVERSONG_WOODS_MIDNIGHT),
 			tostring(CONSTANTS.UIMAPIDS.ZUL_AMAN_MIDNIGHT),
 			tostring(CONSTANTS.UIMAPIDS.VOIDSTORM),
