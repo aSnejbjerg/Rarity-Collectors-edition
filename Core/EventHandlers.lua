@@ -52,6 +52,7 @@ local C_Timer = _G.C_Timer
 -- IsSpellKnown was moved to C_Spell.IsSpellKnown in WoW 12.0.0 (Midnight); use with fallback for compatibility
 local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentRenownLevel
+local GetPlayerAuraBySpellID = _G.C_UnitAuras and _G.C_UnitAuras.GetPlayerAuraBySpellID
 
 -- Addon APIs
 local DebugCache = Rarity.Utils.DebugCache
@@ -2110,11 +2111,17 @@ function Rarity:OnChestOfMassiveGainsOpened()
 	end
 
 	local wasRequiredAuraFoundOnPlayer = false
-	AuraUtil.ForEachAura("player", "HELPFUL", nil, function(_, _, _, _, _, _, _, _, _, spellID)
-		if spellID == CONSTANTS.AURAS.ROCKS_ON_THE_ROCKS then
-			wasRequiredAuraFoundOnPlayer = true
-		end
-	end)
+	if CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK and GetPlayerAuraBySpellID then
+		-- Patch 12.1 (Curse of Ula'tek) makes index/slot-based aura access (e.g. AuraUtil.ForEachAura) taint
+		-- and error while auras are secret; spellID-based lookups remain safe, so use those instead.
+		wasRequiredAuraFoundOnPlayer = GetPlayerAuraBySpellID(CONSTANTS.AURAS.ROCKS_ON_THE_ROCKS) ~= nil
+	else
+		AuraUtil.ForEachAura("player", "HELPFUL", nil, function(_, _, _, _, _, _, _, _, _, spellID)
+			if spellID == CONSTANTS.AURAS.ROCKS_ON_THE_ROCKS then
+				wasRequiredAuraFoundOnPlayer = true
+			end
+		end)
+	end
 
 	if not wasRequiredAuraFoundOnPlayer then
 		Rarity:Debug(format("Required aura %s NOT found on player", L["Rocks on the Rocks"]))
