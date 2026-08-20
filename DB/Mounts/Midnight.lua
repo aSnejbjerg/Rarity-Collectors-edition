@@ -78,9 +78,11 @@ local midnightMounts = {
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		method = CONSTANTS.DETECTION_METHODS.FISHING,
 		name = L["Nether-Warped Egg"],
+		zones = { "2393", "2395", "2437", "2413", "2405", "2444","2512" },
 		itemId = 268730,
 		chance = 2500,
 		spellId = 3363,
+		requiresPool = false,
 		sourceText = L["This item drops the Nether-Swept Drake mount after 7 days."],
 		coords = {
 			{ m = CONSTANTS.UIMAPIDS.SILVERMOON_CITY_MIDNIGHT },
@@ -89,14 +91,7 @@ local midnightMounts = {
 			{ m = CONSTANTS.UIMAPIDS.VOIDSTORM },
 			{ m = CONSTANTS.UIMAPIDS.SLAYERS_RISE },
 			{ m = CONSTANTS.UIMAPIDS.HARANDAR },
-		},
-		zones = {
-			tostring{CONSTANTS.UIMAPIDS.SILVERMOON_CITY_MIDNIGHT},
-			tostring(CONSTANTS.UIMAPIDS.EVERSONG_WOODS_MIDNIGHT),
-			tostring(CONSTANTS.UIMAPIDS.ZUL_AMAN_MIDNIGHT),
-			tostring(CONSTANTS.UIMAPIDS.VOIDSTORM),
-			tostring(CONSTANTS.UIMAPIDS.SLAYERS_RISE),
-			tostring(CONSTANTS.UIMAPIDS.HARANDAR),
+			{ m = CONSTANTS.UIMAPIDS.COILED_ISLES },
 		},
 	},
 	["Amani Sharptalon"] = {
