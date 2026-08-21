@@ -2112,8 +2112,8 @@ function Rarity:OnChestOfMassiveGainsOpened()
 
 	local wasRequiredAuraFoundOnPlayer = false
 	if 
-		CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK 
-		and GetPlayerAuraBySpellID 
+		CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK
+		and GetPlayerAuraBySpellID
 	then
 		-- Patch 12.1 (Curse of Ula'tek) makes index/slot-based aura access (e.g. AuraUtil.ForEachAura) taint
 		-- and error while auras are secret; spellID-based lookups remain safe, so use those instead.
