@@ -2111,7 +2111,7 @@ function Rarity:OnChestOfMassiveGainsOpened()
 	end
 
 	local wasRequiredAuraFoundOnPlayer = false
-	if 
+	if
 		CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK
 		and GetPlayerAuraBySpellID
 	then
