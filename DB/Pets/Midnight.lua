@@ -130,13 +130,14 @@ midnightPets["Lil' Mon"] = {
 midnightPets["Pale Hexscale"] = {
 	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
 	type = CONSTANTS.ITEM_TYPES.PET,
-	method = CONSTANTS.DETECTION_METHODS.NPC,
+	method = CONSTANTS.DETECTION_METHODS.SPECIAL,
 	name = L["Pale Hexscale"],
 	creatureId = 269712,
 	itemId = 278572,
 	spellId = 1305199,
-	chance = 100,
+	chance = 33,
 	npcs = { 258928 },
+	tooltipNpcs = { 258928 },
 	sourceText = L["Dropped by the prey boss named Ral'kala"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }

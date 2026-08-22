@@ -86,6 +86,7 @@ function EventHandlers:Register()
 	self:RegisterEvent("ISLAND_COMPLETED", "OnIslandCompleted")
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "OnSpellcastSucceeded")
 	self:RegisterEvent("QUEST_TURNED_IN", "OnQuestTurnedIn")
+	self:RegisterEvent("UNIT_AURA", "OnUnitAura")
 
 	if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_MISTS_OF_PANDARIA then
 		self:RegisterEvent("SHOW_LOOT_TOAST", "OnShowLootToast")
@@ -396,57 +397,39 @@ do
 	end
 end
 
--------------------------------------------------------------------------------------
--- Handle boss kills. You may not ever open a loot window on a boss, so we need to watch the combat log for its death.
--- This event also handles some special cases.
--------------------------------------------------------------------------------------
--- function R:OnCombat()
--- 	self.Profiling:StartTimer("EventHandlers.OnCombat")
+local RALKALA_CONTRIBUTION_AURA_ID = 1305910
+local ralkalaAttemptTimer
+local ralkalaDrops = {
+	{ name = "Pale Hexscale", category = "pets" },
+	{ name = "Hexflame Reaver", category = "mounts" },
+	{ name = "Preyhunter's Masquerade", category = "toys" },
+}
 
--- 	-- Extract event payload (it's no longer being passed by the event iself as of 8.0.1)
--- 	local timestamp, eventType, hideCaster, srcGuid, srcName, srcFlags, srcRaidFlags, dstGuid, dstName, dstFlags, dstRaidFlags, spellId, spellName, spellSchool, auraType =
--- 		CombatLogGetCurrentEventInfo()
+local function addRalkalaAttempts(self)
+	self:Debug("Detected personal attack on Ral'kala (Prey hunt) - adding attempts for its drops")
+	for _, drop in ipairs(ralkalaDrops) do
+		addAttemptForItem(drop.name, drop.category)
+	end
+end
 
--- 	if eventType == "UNIT_DIED" then -- A unit died near you
--- 		local npcid = self:GetNPCIDFromGUID(dstGuid)
--- 		if Rarity.bosses[npcid] then -- It's a boss we're interested in
--- 			R:Debug("Detected UNIT_DIED for relevant NPC with ID = " .. tostring(npcid))
--- 			if
--- 				bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_MINE)
--- 				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_PARTY)
--- 				or bit_band(srcFlags, COMBATLOG_OBJECT_AFFILIATION_RAID)
--- 			then -- You, a party member, or a raid member killed it
--- 				if not Rarity.guids[dstGuid] then
--- 					if not UnitAffectingCombat("player") and not UnitIsDead("player") then
--- 						Rarity:Debug("Ignoring this UNIT_DIED event because the player is alive, but not in combat")
--- 						self.Profiling:EndTimer("EventHandlers.OnCombat")
--- 						return
--- 					end
+function R:OnUnitAura(_, unit, updateInfo)
+	if unit ~= "player" or not updateInfo or not updateInfo.addedAuras then
+		return
+	end
 
--- 					-- Increment attempts counter(s). One NPC might drop multiple things we want, so scan for them all.
--- 					if Rarity.npcs_to_items[npcid] and type(Rarity.npcs_to_items[npcid]) == "table" then
--- 						for k, v in pairs(Rarity.npcs_to_items[npcid]) do
--- 							local isBossDrop = (v.method == CONSTANTS.DETECTION_METHODS.BOSS)
--- 							local hasKillStatistics = type(v.statisticId) ~= "nil"
--- 							if v.enabled ~= false and isBossDrop and not hasKillStatistics then
--- 								if self:IsAttemptAllowed(v) then
--- 									Rarity.guids[dstGuid] = true
--- 									if v.attempts == nil then
--- 										v.attempts = 1
--- 									else
--- 										v.attempts = v.attempts + 1
--- 									end
--- 									self:OutputAttempts(v)
--- 								end
--- 							end
--- 						end
--- 					end
--- 				end
--- 			end
--- 		end
--- 	end
--- 	self.Profiling:EndTimer("EventHandlers.OnCombat")
--- end
+	if issecretvalue and issecretvalue(updateInfo.addedAuras) then
+		return
+	end
+
+	for _, aura in ipairs(updateInfo.addedAuras) do
+		if aura and aura.spellId and not (issecretvalue and issecretvalue(aura.spellId)) then
+			if aura.spellId == RALKALA_CONTRIBUTION_AURA_ID then
+				addRalkalaAttempts(self)
+				return
+			end
+		end
+	end
+end
 
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)
