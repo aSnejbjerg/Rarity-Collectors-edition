@@ -385,6 +385,19 @@ local midnightMounts = {
 		sourceText = L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"],
 		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
 	},
+	["Arcanovoid Construct"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = { 3372, 3430 }, -- Nullaeus
+		name = L["Arcanovoid Construct"],
+		itemId = 263222,
+		spellId = 1268949,
+		chance = 100,
+		wasGuaranteed = true,
+		sourceText = L["This mount drops only on ?? difficulty."],
+		coords = { { m = CONSTANTS.UIMAPIDS.TORMENTS_RISE } },
+	},
 }
 if CONSTANTS.WOW_INTERFACE_VER < CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK then
 	Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, midnightMounts)
@@ -401,7 +414,7 @@ midnightMounts["Primevil Skyfriend"] = {
 	tooltipNpcs = { 268956 },
 	chance = 100,
 	statisticId = { 63569 },
-	lockBossName = "Queen Ansurek",
+	lockBossName = "Ula'tek",
 	instanceDifficulties = {
 		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
 	},
