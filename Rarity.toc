@@ -1,7 +1,7 @@
 ## Author: Allara
 ## Interface: 120100, 120105, 50504, 20506, 11509
 ## X-Min-Interface: 120100, 120105, 50504, 20506, 11509
-## Title: Rarity: Collector's edition
+## Title: Rarity: Collector's Edition
 ## Version: (@project-version@)
 ## X-Curse-Project-ID: 1614412
 
