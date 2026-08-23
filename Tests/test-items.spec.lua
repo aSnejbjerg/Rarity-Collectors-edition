@@ -175,7 +175,7 @@ describe("ItemDB", function()
 		end)
 
 		it("should register all recognized world objects by default", function()
-			local numExpectedEntries = 55
+			local numExpectedEntries = 56
 			assertEquals(table.count(Rarity.opennodes), numExpectedEntries)
 
 			for name, isEnabled in pairs(Rarity.opennodes) do
