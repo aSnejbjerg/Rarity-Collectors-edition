@@ -278,6 +278,7 @@ R.opennodes = {
 	[L["Frozen Coffer"]] = true,
 	[L["Dreamseed Cache"]] = true,
 	[L["Awakened Cache"]] = true,
+	[L["Unfortunate Scout's Satchel"]] = true,
 }
 
 return { R.coins, R.fishnodes, R.miningnodes, R.opennodes }

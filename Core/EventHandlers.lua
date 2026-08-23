@@ -1791,6 +1791,31 @@ function R:OnLootReady(event, ...)
 			end
 		end
 
+		-- Handle opening Unfortunate Scout Satchels (12.1 Poison Dart Frog Pet )
+		if
+			Rarity.isFishing
+			and Rarity.isOpening
+			and Rarity.lastNode
+			and (Rarity.lastNode == L["Unfortunate Scout's Satchel"])
+		then
+			local names = { "Poison Dart Frog" }
+			Rarity:Debug("Detected Opening on " .. L["Unfortunate Scout's Satchel"] .. " (method = SPECIAL)")
+			-- This mount has a prerequisite to drop. Renown 9 with Zul'jarra's Forces
+			if GetCurrentRenownLevel(CONSTANTS.FACTION_IDS.ZULJARRAS_FORCES) >= 9 then
+				for _, name in pairs(names) do
+					local v = self.db.profile.groups.pets[name]
+					if v and type(v) == "table" and v.enabled ~= false then
+						if v.attempts == nil then
+							v.attempts = 1
+						else
+							v.attempts = v.attempts + 1
+						end
+						self:OutputAttempts(v)
+					end
+				end
+			end
+		end
+
 		if Rarity.isOpening and Rarity.lastNode and Rarity.lastNode == L["Awakened Cache"] then
 			Rarity:Debug("Detected Opening on " .. Rarity.lastNode .. " (method = SPECIAL)")
 			addAttemptForItem("Machine Defense Unit 1-11", "mounts")
