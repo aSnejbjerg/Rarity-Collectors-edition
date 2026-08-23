@@ -487,19 +487,15 @@ midnightMounts["Topaz Skyfang"] = {
 midnightMounts["Hexflame Reaver"] = {
 	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
 	type = CONSTANTS.ITEM_TYPES.MOUNT,
-	method = CONSTANTS.DETECTION_METHODS.NPC,
+	method = CONSTANTS.DETECTION_METHODS.SPECIAL,
 	name = L["Hexflame Reaver"],
 	itemId = 275659,
 	spellId = 1297407,
 	npcs = { 258928 },
+	tooltipNpcs = { 258928 },
 	chance = 100,
-	coords = {
-		{ m = CONSTANTS.UIMAPIDS.VOIDSTORM },
-		{ m = CONSTANTS.UIMAPIDS.SILVERMOON },
-		{ m = CONSTANTS.UIMAPIDS.EVERSONG },
-		{ m = CONSTANTS.UIMAPIDS.HARANDAR },
-		{ m = CONSTANTS.UIMAPIDS.COILED_ISLES },
-	},
+	sourceText = L["Dropped by the prey boss named Ral'kala"],
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, midnightMounts)

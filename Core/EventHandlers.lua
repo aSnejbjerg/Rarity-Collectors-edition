@@ -86,6 +86,7 @@ function EventHandlers:Register()
 	self:RegisterEvent("ISLAND_COMPLETED", "OnIslandCompleted")
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "OnSpellcastSucceeded")
 	self:RegisterEvent("QUEST_TURNED_IN", "OnQuestTurnedIn")
+	self:RegisterEvent("UNIT_AURA", "OnUnitAura")
 
 	if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_MISTS_OF_PANDARIA then
 		self:RegisterEvent("SHOW_LOOT_TOAST", "OnShowLootToast")
@@ -447,6 +448,40 @@ end
 -- 	end
 -- 	self.Profiling:EndTimer("EventHandlers.OnCombat")
 -- end
+
+local RALKALA_CONTRIBUTION_AURA_ID = 1305910
+local ralkalaAttemptTimer
+local ralkalaDrops = {
+	{ name = "Pale Hexscale", category = "pets" },
+	{ name = "Hexflame Reaver", category = "mounts" },
+	{ name = "Preyhunter's Masquerade", category = "toys" },
+}
+
+local function addRalkalaAttempts(self)
+	self:Debug("Detected personal attack on Ral'kala (Prey hunt) - adding attempts for its drops")
+	for _, drop in ipairs(ralkalaDrops) do
+		addAttemptForItem(drop.name, drop.category)
+	end
+end
+
+function R:OnUnitAura(_, unit, updateInfo)
+	if unit ~= "player" or not updateInfo or not updateInfo.addedAuras then
+		return
+	end
+
+	if issecretvalue and issecretvalue(updateInfo.addedAuras) then
+		return
+	end
+
+	for _, aura in ipairs(updateInfo.addedAuras) do
+		if aura and aura.spellId and not (issecretvalue and issecretvalue(aura.spellId)) then
+			if aura.spellId == RALKALA_CONTRIBUTION_AURA_ID then
+				addRalkalaAttempts(self)
+				return
+			end
+		end
+	end
+end
 
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)

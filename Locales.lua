@@ -10,6 +10,7 @@ L["Primevil Skyfriend"] = true
 L["Lil' Mon"] = true
 L["Dropped off a rare named Big Mon"] = true
 L["Pale Hexscale"] = true
+L["Preyhunter's Masquerade"] = true
 L["Dropped by the prey boss named Ral'kala"] = true
 L["Jaktu's Cursed Blade"] = true
 L["This item drops from the treasure Jaktu's Cursed Blade!"] = true

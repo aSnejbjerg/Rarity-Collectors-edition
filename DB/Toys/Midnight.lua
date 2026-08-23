@@ -176,6 +176,19 @@ midnightToys["Idol of Blue Water and Blue Sky"] = {
 	sourceText = L["Looted from a treasure named Abandoned Amani Privateer's Cache"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
+midnightToys["Preyhunter's Masquerade"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.ITEM,
+	isToy = true,
+	method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+	name = L["Preyhunter's Masquerade"],
+	itemId = 276207,
+	npcs = { 258928 },
+	tooltipNpcs = { 258928 },
+	chance = 33,
+	sourceText = L["Dropped by the prey boss named Ral'kala"],
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+}
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
 return midnightToys
