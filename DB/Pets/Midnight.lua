@@ -141,6 +141,31 @@ midnightPets["Pale Hexscale"] = {
 	sourceText = L["Dropped by the prey boss named Ral'kala"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
+midnightPets["Poison Dart Frog"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.PET,
+	method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+	name = L["Poison Dart Frog"],
+	creatureId = 271106,
+	itemId = 280178,
+	spellId = 1307875,
+	chance = 100,
+	sourceText = L["This pet can only drop at Zul'jarra's Forces Renown 9."],
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+}
+midnightPets["Cauldron Concoction"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.PET,
+	method = CONSTANTS.DETECTION_METHODS.USE,
+	name = L["Cauldron Concoction"],
+	creatureId = 271163,
+	itemId = 280189,
+	items = { 277946, 277938, 277939, 277944, 277942, 277943, 277945, 277940, 277941 },
+	spellId = 1307902,
+	chance = 300,
+	sourceText = L["This pet is a rare drop from any of Ofi the Sly's mysterious concoctions."],
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+}
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, midnightPets)
 return midnightPets

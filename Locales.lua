@@ -2,6 +2,11 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Cauldron Concoction"] = true
+L["This pet is a rare drop from any of Ofi the Sly's mysterious concoctions."] = true
+L["Poison Dart Frog"] = true
+L["This pet can only drop at Zul'jarra's Forces Renown 9."] = true
+L["Unfortunate Scout's Satchel"] = true
 L["Arcanovoid Construct"] = true
 L["This mount drops only on ?? difficulty."] = true
 L["Ruby Writhe"] = true
