@@ -649,6 +649,7 @@ local bfaToys = {
 			131718,
 		},
 		chance = 2500,
+		spellId = 267270,
 		unique = true,
 		requiresHorde = true,
 		sourceText = L["Starts a series of quests that ultimately award Kua'fon's Harness (Pterrordax mount)"],
@@ -669,6 +670,7 @@ local bfaToys = {
 		itemId = 174230,
 		npcs = { 157162 },
 		chance = 50,
+		spellId = 315427,
 		questId = { 57346 },
 		unique = true,
 		coords = {
@@ -701,6 +703,7 @@ local bfaToys = {
 			157160, -- Houndlord Ren
 		},
 		chance = 100,
+		spellId = 315014,
 		unique = true,
 		coords = { { m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS } },
 		sourceText = L["Can be used to capture the Ivory Cloud Serpent"],
@@ -742,6 +745,8 @@ local bfaToys = {
 		name = L["Viable Cobra Egg"],
 		itemId = 160832,
 		npcs = { 133384 },
+		spellId = 273159,
+		creatureId = 138964,
 		chance = 50,
 		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
 		lockoutDetails = {
@@ -763,6 +768,8 @@ local bfaToys = {
 		npcs = { 149659, 149662 },
 		chance = 7,
 		questId = { 54891, 54889 },
+		spellId = 289359,
+		creatureId = 149205,
 		coords = {
 			{
 				m = CONSTANTS.UIMAPIDS.DARKSHORE,
