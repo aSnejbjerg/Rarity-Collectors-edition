@@ -52,6 +52,7 @@ local C_Timer = _G.C_Timer
 -- IsSpellKnown was moved to C_Spell.IsSpellKnown in WoW 12.0.0 (Midnight); use with fallback for compatibility
 local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentRenownLevel
+local GetPlayerAuraBySpellID = _G.C_UnitAuras and _G.C_UnitAuras.GetPlayerAuraBySpellID
 
 -- Addon APIs
 local DebugCache = Rarity.Utils.DebugCache
@@ -85,6 +86,7 @@ function EventHandlers:Register()
 	self:RegisterEvent("ISLAND_COMPLETED", "OnIslandCompleted")
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "OnSpellcastSucceeded")
 	self:RegisterEvent("QUEST_TURNED_IN", "OnQuestTurnedIn")
+	self:RegisterEvent("UNIT_AURA", "OnUnitAura")
 
 	if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_MISTS_OF_PANDARIA then
 		self:RegisterEvent("SHOW_LOOT_TOAST", "OnShowLootToast")
@@ -446,6 +448,40 @@ end
 -- 	end
 -- 	self.Profiling:EndTimer("EventHandlers.OnCombat")
 -- end
+
+local RALKALA_CONTRIBUTION_AURA_ID = 1305910
+local ralkalaAttemptTimer
+local ralkalaDrops = {
+	{ name = "Pale Hexscale", category = "pets" },
+	{ name = "Hexflame Reaver", category = "mounts" },
+	{ name = "Preyhunter's Masquerade", category = "toys" },
+}
+
+local function addRalkalaAttempts(self)
+	self:Debug("Detected personal attack on Ral'kala (Prey hunt) - adding attempts for its drops")
+	for _, drop in ipairs(ralkalaDrops) do
+		addAttemptForItem(drop.name, drop.category)
+	end
+end
+
+function R:OnUnitAura(_, unit, updateInfo)
+	if unit ~= "player" or not updateInfo or not updateInfo.addedAuras then
+		return
+	end
+
+	if issecretvalue and issecretvalue(updateInfo.addedAuras) then
+		return
+	end
+
+	for _, aura in ipairs(updateInfo.addedAuras) do
+		if aura and aura.spellId and not (issecretvalue and issecretvalue(aura.spellId)) then
+			if aura.spellId == RALKALA_CONTRIBUTION_AURA_ID then
+				addRalkalaAttempts(self)
+				return
+			end
+		end
+	end
+end
 
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)
@@ -2135,11 +2171,20 @@ function Rarity:OnChestOfMassiveGainsOpened()
 	end
 
 	local wasRequiredAuraFoundOnPlayer = false
-	AuraUtil.ForEachAura("player", "HELPFUL", nil, function(_, _, _, _, _, _, _, _, _, spellID)
-		if spellID == CONSTANTS.AURAS.ROCKS_ON_THE_ROCKS then
-			wasRequiredAuraFoundOnPlayer = true
-		end
-	end)
+	if
+		CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK
+		and GetPlayerAuraBySpellID
+	then
+		-- Patch 12.1 (Curse of Ula'tek) makes index/slot-based aura access (e.g. AuraUtil.ForEachAura) taint
+		-- and error while auras are secret; spellID-based lookups remain safe, so use those instead.
+		wasRequiredAuraFoundOnPlayer = GetPlayerAuraBySpellID(CONSTANTS.AURAS.ROCKS_ON_THE_ROCKS) ~= nil
+	else
+		AuraUtil.ForEachAura("player", "HELPFUL", nil, function(_, _, _, _, _, _, _, _, _, spellID)
+			if spellID == CONSTANTS.AURAS.ROCKS_ON_THE_ROCKS then
+				wasRequiredAuraFoundOnPlayer = true
+			end
+		end)
+	end
 
 	if not wasRequiredAuraFoundOnPlayer then
 		Rarity:Debug(format("Required aura %s NOT found on player", L["Rocks on the Rocks"]))
