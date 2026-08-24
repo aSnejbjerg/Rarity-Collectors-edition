@@ -8,7 +8,10 @@ if LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_BATTLE_FOR_AZEROTH then
 end
 
 local bfaMounts = {
-	--- 8.0
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- Patch 8.0: BFA Mounts
+-----------------------------------------------------------------------------------------------------------------------------------------
+	-- 8.0 Arathi Warfront
 	["Witherbark Direwing"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
@@ -111,6 +114,7 @@ local bfaMounts = {
 			},
 		},
 	},
+	-- 8.0 Open World Zone Drops
 	["Captured Dune Scavenger"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
@@ -219,8 +223,174 @@ local bfaMounts = {
 		chance = 3000,
 		coords = { { m = CONSTANTS.UIMAPIDS.STORMSONG_VALLEY } },
 	},
-	-- 8.1
-
+	-- 8.0 Fishing
+	["Great Sea Ray"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.FISHING,
+		name = L["Great Sea Ray"],
+		spellId = 278803,
+		itemId = 163131,
+		chance = 10000,
+		zones = {
+			"896", -- Drustvar
+			"895", -- Tiragarde
+			"942", -- SSValley
+			"862", -- Zuldazar
+			"863", -- Nazmir
+			"864", -- Vol'dun
+			"875", -- Zandalar
+			"876", -- Kul'tiras
+			"974", -- Tol'Dagor
+			"1161", -- Boralus
+			"1352", -- Battle for Dazar'alor (Raid)
+			"1462", -- Mechagon Island
+			"1165", -- Dazar'alor
+		},
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.DRUSTVAR },
+			{ m = CONSTANTS.UIMAPIDS.TIRAGARDE_SOUND },
+			{ m = CONSTANTS.UIMAPIDS.STORMSONG_VALLEY },
+			{ m = CONSTANTS.UIMAPIDS.ZULDAZAR },
+			{ m = CONSTANTS.UIMAPIDS.NAZMIR },
+			{ m = CONSTANTS.UIMAPIDS.VOLDUN },
+			{ m = CONSTANTS.UIMAPIDS.ZANDALAR },
+			{ m = CONSTANTS.UIMAPIDS.KULTIRAS },
+			{ m = CONSTANTS.UIMAPIDS.TORDAGOR },
+			{ m = CONSTANTS.UIMAPIDS.BORALUS },
+			{ m = CONSTANTS.UIMAPIDS.BATTLE_FOR_DAZARALOR_RAID, i = true },
+			{ m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND },
+			{ m = CONSTANTS.UIMAPIDS.DAZARALOR },
+		},
+	},
+	-- 8.0 Island Expeditions
+	["Twilight Avenger"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		items = { 173950, 173989 },
+		name = L["Twilight Avenger"],
+		spellId = 279466,
+		itemId = 163584,
+		npcs = 99999,
+		chance = 100,
+		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
+	},
+	["Craghorn Chasm-Leaper"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		items = { 173992, 173950, 173949, 173993 },
+		name = L["Craghorn Chasm-Leaper"],
+		spellId = 279467,
+		itemId = 163583,
+		npcs = 99999,
+		chance = 100,
+		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
+	},
+	["Qinsho's Eternal Hound"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		items = { 173949, 173993 },
+		name = L["Qinsho's Eternal Hound"],
+		spellId = 279469,
+		itemId = 163582,
+		npcs = 99999,
+		chance = 100,
+		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
+	},
+	["Squawks"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		items = { 173991, 173950 },
+		name = L["Squawks"],
+		spellId = 254811,
+		itemId = 163586,
+		npcs = 99999,
+		chance = 100,
+		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
+	},
+	["Surf Jelly"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		items = { 173996, 173997, 173990, 173992 },
+		name = L["Surf Jelly"],
+		spellId = 278979,
+		itemId = 163585,
+		npcs = 99999,
+		chance = 100,
+		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
+	},
+	-- 8.0 Dungeons
+	["Sharkbait's Favorite Crackers"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Sharkbait's Favorite Crackers"],
+		spellId = 254813,
+		itemId = 159842,
+		npcs = { 126983 },
+		statisticId = { 12752 },
+		chance = 200,
+		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+		lockoutDetails = {
+			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
+			{
+				encounterName = "Lord Harlan Sweete",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+			},
+		},
+		coords = { { m = CONSTANTS.UIMAPIDS.FREEHOLD, i = true } },
+	},
+	["Underrot Crawg Harness"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.BOSS,
+		name = L["Underrot Crawg Harness"],
+		spellId = 273541,
+		itemId = 160829,
+		npcs = { 99999 },
+		tooltipNpcs = { 133007 },
+		statisticId = { 12745 },
+		chance = 200,
+		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+		lockoutDetails = {
+			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
+			{
+				encounterName = "Unbound Abomination",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+			},
+		},
+		coords = { { m = CONSTANTS.UIMAPIDS.THE_UNDERROT, i = true } },
+	},
+	["Mummified Raptor Skull"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.BOSS,
+		name = L["Mummified Raptor Skull"],
+		spellId = 266058,
+		itemId = 159921,
+		npcs = { 99999 },
+		tooltipNpcs = { 136160 },
+		statisticId = { 12763 },
+		chance = 200,
+		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+		lockoutDetails = {
+			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
+			{
+				encounterName = "King Dazar",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+			},
+		},
+		coords = { { m = CONSTANTS.UIMAPIDS.KINGS_REST, i = true } },
+	},
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- Patch 8.1: BFA: Tides of Vengeance Mounts
+-----------------------------------------------------------------------------------------------------------------------------------------
+	-- 8.1 Darkshore Warfront
 	["Ashenvale Chimaera"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
@@ -338,405 +508,7 @@ local bfaMounts = {
 			},
 		},
 	},
-	["Glacial Tidestorm"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.BOSS,
-		name = L["Glacial Tidestorm"],
-		spellId = 289555,
-		itemId = 166705,
-		npcs = { 99999 },
-		tooltipNpcs = { 165396 }, -- Lady Jaina Proudmoore
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true },
-		chance = 100,
-		wasGuaranteed = true,
-		statisticId = { 13382 },
-		coords = { { m = CONSTANTS.UIMAPIDS.BATTLE_FOR_DAZARALOR_RAID, i = true } },
-	},
-	-- 8.2 Mounts
-	["Royal Snapdragon"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
-		name = L["Royal Snapdragon"],
-		spellId = 294038,
-		itemId = 169198,
-		items = { 169940, 169939 },
-		chance = 19,
-		coords = { { m = CONSTANTS.UIMAPIDS.NAZJATAR } },
-	},
-	["Rusted Keys to the Junkheap Drifter"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Rusted Keys to the Junkheap Drifter"],
-		itemId = 168370,
-		spellId = 297157,
-		npcs = { 152182 },
-		chance = 200,
-		questId = { 55811 },
-		coords = { { m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND, x = 65.8, y = 79.6, n = L["Rustfeather"] } },
-	},
-	["Rusty Mechanocrawler"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Rusty Mechanocrawler"],
-		itemId = 168823,
-		spellId = 291492,
-		npcs = { 154342, 151934 },
-		chance = 333,
-		questId = { 55512 },
-		coords = { { m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND, x = 52.0, y = 41.4, n = L["Arachnoid Harvester"] } },
-	},
-	["Silent Glider"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Silent Glider"],
-		itemId = 169163,
-		spellId = 300149,
-		npcs = { 152290 },
-		chance = 200,
-		questId = { 56298 },
-		coords = { { m = CONSTANTS.UIMAPIDS.NAZJATAR } },
-	},
-	["Mechagon Peacekeeper"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
-		encounters = {
-			2291, -- HK-8 Aerial Oppression Unit
-		},
-		name = L["Mechagon Peacekeeper"],
-		spellId = 299158,
-		itemId = 168826,
-		npcs = { 150190 },
-		chance = 200,
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-		lockoutDetails = {
-			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
-			{
-				encounterName = "HK-8 Aerial Oppression Unit",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-			},
-		},
-		coords = { { m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND_DUNGEON, i = true } },
-	},
-	-- 8.3 Mounts
-	["Xinlao"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Xinlao"],
-		itemId = 174840,
-		spellId = 316723,
-		npcs = { 157466 },
-		chance = 33,
-		questId = { 57363 },
-		coords = {
-			{ m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS, x = 34.15, y = 68.05, n = L["Anh-De the Loyal"] },
-		},
-	},
-	["Reins of the Drake of the Four Winds"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Reins of the Drake of the Four Winds"],
-		itemId = 174641,
-		spellId = 315847,
-		npcs = { 157134 },
-		chance = 33,
-		questId = { 57259 },
-		coords = { { m = CONSTANTS.UIMAPIDS.ULDUM, x = 73.96, y = 83.52, n = L["Ishak of the Four Winds"] } },
-	},
-	["Malevolent Drone"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Malevolent Drone"],
-		itemId = 174769,
-		spellId = 316337,
-		npcs = { 162147 },
-		chance = 100,
-		questId = { 58696 },
-		coords = { { m = CONSTANTS.UIMAPIDS.ULDUM, x = 30.85, y = 49.71, n = L["Corpse Eater"] } },
-	},
-	["Clutch of Ha-Li"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Clutch of Ha-Li"],
-		itemId = 173887,
-		spellId = 312751,
-		npcs = { 157153 },
-		chance = 33,
-		questId = { 57344 },
-		coords = { { m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS, x = 36.6, y = 37.6, n = L["Ha-Li"] } },
-	},
-	["Ren's Stalwart Hound"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Ren's Stalwart Hound"],
-		itemId = 174841,
-		spellId = 316722,
-		npcs = { 157160 },
-		chance = 33,
-		questId = { 57345 },
-		coords = { { m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS, x = 10, y = 33, n = L["Houndlord Ren"] } },
-	},
-	["Waste Marauder"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Waste Marauder"],
-		itemId = 174753,
-		spellId = 316275,
-		npcs = { 157146 },
-		chance = 33,
-		questId = { 57273 },
-		coords = { { m = CONSTANTS.UIMAPIDS.ULDUM, x = 68.23, y = 31.97, n = L["Rotfeaster"] } },
-	},
-	["Slightly Damp Pile of Fur"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
-		name = L["Slightly Damp Pile of Fur"],
-		itemId = 174842,
-		spellId = 298367,
-		npcs = { 138794 },
-		chance = 100,
-		groupSize = 3,
-		equalOdds = true,
-		questId = { 53000 },
-		worldQuestId = 52196,
-		coords = { { m = CONSTANTS.UIMAPIDS.VOLDUN, x = 44.6, y = 56.2, n = L["Dunegorger Kraulok"] } },
-	},
-	["Mail Muncher"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
-		name = L["Mail Muncher"],
-		itemId = 174653,
-		spellId = 315987,
-		npcs = { 160708 },
-		tooltipNpcs = { 160708 },
-		chance = 100,
-		coords = {
-			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_VISION_OF_STORMWIND },
-			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_VISION_OF_ORGRIMMAR },
-			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_REVISION_OF_STORMWIND },
-			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_REVISION_OF_ORGRIMMAR },
-		},
-	},
-	-- 8.0 Mounts
-	["Sharkbait's Favorite Crackers"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
-		name = L["Sharkbait's Favorite Crackers"],
-		spellId = 254813,
-		itemId = 159842,
-		npcs = { 126983 },
-		statisticId = { 12752 },
-		chance = 200,
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-		lockoutDetails = {
-			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
-			{
-				encounterName = "Lord Harlan Sweete",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-			},
-		},
-		coords = { { m = CONSTANTS.UIMAPIDS.FREEHOLD, i = true } },
-	},
-	["Underrot Crawg Harness"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.BOSS,
-		name = L["Underrot Crawg Harness"],
-		spellId = 273541,
-		itemId = 160829,
-		npcs = { 99999 },
-		tooltipNpcs = { 133007 },
-		statisticId = { 12745 },
-		chance = 200,
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-		lockoutDetails = {
-			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
-			{
-				encounterName = "Unbound Abomination",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-			},
-		},
-		coords = { { m = CONSTANTS.UIMAPIDS.THE_UNDERROT, i = true } },
-	},
-	["Mummified Raptor Skull"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.BOSS,
-		name = L["Mummified Raptor Skull"],
-		spellId = 266058,
-		itemId = 159921,
-		npcs = { 99999 },
-		tooltipNpcs = { 136160 },
-		statisticId = { 12763 },
-		chance = 200,
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-		lockoutDetails = {
-			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
-			{
-				encounterName = "King Dazar",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
-			},
-		},
-		coords = { { m = CONSTANTS.UIMAPIDS.KINGS_REST, i = true } },
-	},
-	["Twilight Avenger"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
-		items = { 173950, 173989 },
-		name = L["Twilight Avenger"],
-		spellId = 279466,
-		itemId = 163584,
-		npcs = 99999,
-		chance = 100,
-		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
-	},
-	["Craghorn Chasm-Leaper"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
-		items = { 173992, 173950, 173949, 173993 },
-		name = L["Craghorn Chasm-Leaper"],
-		spellId = 279467,
-		itemId = 163583,
-		npcs = 99999,
-		chance = 100,
-		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
-	},
-	["Qinsho's Eternal Hound"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
-		items = { 173949, 173993 },
-		name = L["Qinsho's Eternal Hound"],
-		spellId = 279469,
-		itemId = 163582,
-		npcs = 99999,
-		chance = 100,
-		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
-	},
-	["Squawks"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
-		items = { 173991, 173950 },
-		name = L["Squawks"],
-		spellId = 254811,
-		itemId = 163586,
-		npcs = 99999,
-		chance = 100,
-		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
-	},
-	["Surf Jelly"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
-		items = { 173996, 173997, 173990, 173992 },
-		name = L["Surf Jelly"],
-		spellId = 278979,
-		itemId = 163585,
-		npcs = 99999,
-		chance = 100,
-		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
-	},
-	["Great Sea Ray"] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.FISHING,
-		name = L["Great Sea Ray"],
-		spellId = 278803,
-		itemId = 163131,
-		chance = 10000,
-		zones = {
-			"896", -- Drustvar
-			"895", -- Tiragarde
-			"942", -- SSValley
-			"862", -- Zuldazar
-			"863", -- Nazmir
-			"864", -- Vol'dun
-			"875", -- Zandalar
-			"876", -- Kul'tiras
-			"974", -- Tol'Dagor
-			"1161", -- Boralus
-			"1352", -- Battle for Dazar'alor (Raid)
-			"1462", -- Mechagon Island
-			"1165", -- Dazar'alor
-		},
-		coords = {
-			{ m = CONSTANTS.UIMAPIDS.DRUSTVAR },
-			{ m = CONSTANTS.UIMAPIDS.TIRAGARDE_SOUND },
-			{ m = CONSTANTS.UIMAPIDS.STORMSONG_VALLEY },
-			{ m = CONSTANTS.UIMAPIDS.ZULDAZAR },
-			{ m = CONSTANTS.UIMAPIDS.NAZMIR },
-			{ m = CONSTANTS.UIMAPIDS.VOLDUN },
-			{ m = CONSTANTS.UIMAPIDS.ZANDALAR },
-			{ m = CONSTANTS.UIMAPIDS.KULTIRAS },
-			{ m = CONSTANTS.UIMAPIDS.TORDAGOR },
-			{ m = CONSTANTS.UIMAPIDS.BORALUS },
-			{ m = CONSTANTS.UIMAPIDS.BATTLE_FOR_DAZARALOR_RAID, i = true },
-			{ m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND },
-			{ m = CONSTANTS.UIMAPIDS.DAZARALOR },
-		},
-	},
-	-- 8.1 Mounts
-
-	["G.M.O.D."] = {
-		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
-		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.BOSS,
-		name = L["G.M.O.D."],
-		spellId = 289083,
-		itemId = 166518,
-		npcs = { 99999 },
-		tooltipNpcs = { 144796 },
-		tooltipModifier = {
-			condition = CONSTANTS.TOOLTIP_FILTERS.IS_PLAYER_IN_LFR,
-			action = CONSTANTS.TOOLTIP_ACTIONS.OVERRIDE_TOOLTIP_NPCS,
-			value = 146409,
-		},
-		chance = 100,
-		statisticId = { 13372, 13373, 13374, 13379 },
-		lockoutDetails = {
-			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
-			{
-				encounterName = "Mekkatorque",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true },
-			},
-			{
-				encounterName = "Mekkatorque",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true },
-			},
-			{
-				encounterName = "Mekkatorque",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true },
-			},
-			{
-				encounterName = "Lady Jaina Proudmoore",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true },
-			},
-		},
-		instanceDifficulties = {
-			[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true, -- Normal (Raids)
-			[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true, -- Heroic (Raids)
-			[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true, -- Mythic (Raids)
-			[CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true, -- LFR
-		},
-		coords = { { m = CONSTANTS.UIMAPIDS.BATTLE_FOR_DAZARALOR_RAID, i = true } },
-	},
+	-- 8.1 Island Expeditions
 	["Risen Mare"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
@@ -797,7 +569,255 @@ local bfaMounts = {
 		chance = 100,
 		coords = { { m = CONSTANTS.UIMAPIDS.BORALUS }, { m = CONSTANTS.UIMAPIDS.DAZARALOR } },
 	},
-	-- 8.3
+	-- 8.1 Raids
+	["Glacial Tidestorm"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.BOSS,
+		name = L["Glacial Tidestorm"],
+		spellId = 289555,
+		itemId = 166705,
+		npcs = { 99999 },
+		tooltipNpcs = { 165396 }, -- Lady Jaina Proudmoore
+		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true },
+		chance = 100,
+		wasGuaranteed = true,
+		statisticId = { 13382 },
+		coords = { { m = CONSTANTS.UIMAPIDS.BATTLE_FOR_DAZARALOR_RAID, i = true } },
+	},
+	["G.M.O.D."] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.BOSS,
+		name = L["G.M.O.D."],
+		spellId = 289083,
+		itemId = 166518,
+		npcs = { 99999 },
+		tooltipNpcs = { 144796 },
+		tooltipModifier = {
+			condition = CONSTANTS.TOOLTIP_FILTERS.IS_PLAYER_IN_LFR,
+			action = CONSTANTS.TOOLTIP_ACTIONS.OVERRIDE_TOOLTIP_NPCS,
+			value = 146409,
+		},
+		chance = 100,
+		statisticId = { 13372, 13373, 13374, 13379 },
+		lockoutDetails = {
+			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
+			{
+				encounterName = "Mekkatorque",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true },
+			},
+			{
+				encounterName = "Mekkatorque",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true },
+			},
+			{
+				encounterName = "Mekkatorque",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true },
+			},
+			{
+				encounterName = "Lady Jaina Proudmoore",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true },
+			},
+		},
+		instanceDifficulties = {
+			[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true, -- Normal (Raids)
+			[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true, -- Heroic (Raids)
+			[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true, -- Mythic (Raids)
+			[CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true, -- LFR
+		},
+		coords = { { m = CONSTANTS.UIMAPIDS.BATTLE_FOR_DAZARALOR_RAID, i = true } },
+	},
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- Patch 8.2: BFA: Rise of Azshara Mounts
+-----------------------------------------------------------------------------------------------------------------------------------------
+	-- 8.2 Reputation / Paragon
+	["Royal Snapdragon"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		name = L["Royal Snapdragon"],
+		spellId = 294038,
+		itemId = 169198,
+		items = { 169940, 169939 },
+		chance = 19,
+		coords = { { m = CONSTANTS.UIMAPIDS.NAZJATAR } },
+	},
+	-- 8.2 Mechagon Rares
+	["Rusted Keys to the Junkheap Drifter"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Rusted Keys to the Junkheap Drifter"],
+		itemId = 168370,
+		spellId = 297157,
+		npcs = { 152182 },
+		chance = 200,
+		questId = { 55811 },
+		coords = { { m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND, x = 65.8, y = 79.6, n = L["Rustfeather"] } },
+	},
+	["Rusty Mechanocrawler"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Rusty Mechanocrawler"],
+		itemId = 168823,
+		spellId = 291492,
+		npcs = { 154342, 151934 },
+		chance = 333,
+		questId = { 55512 },
+		coords = { { m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND, x = 52.0, y = 41.4, n = L["Arachnoid Harvester"] } },
+	},
+	-- 8.2 Nazjatar Rares
+	["Silent Glider"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Silent Glider"],
+		itemId = 169163,
+		spellId = 300149,
+		npcs = { 152290 },
+		chance = 200,
+		questId = { 56298 },
+		coords = { { m = CONSTANTS.UIMAPIDS.NAZJATAR } },
+	},
+	-- 8.2 Dungeons
+	["Mechagon Peacekeeper"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			2291, -- HK-8 Aerial Oppression Unit
+		},
+		name = L["Mechagon Peacekeeper"],
+		spellId = 299158,
+		itemId = 168826,
+		npcs = { 150190 },
+		chance = 200,
+		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+		lockoutDetails = {
+			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
+			{
+				encounterName = "HK-8 Aerial Oppression Unit",
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+			},
+		},
+		coords = { { m = CONSTANTS.UIMAPIDS.MECHAGON_ISLAND_DUNGEON, i = true } },
+	},
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- Patch 8.3: BFA: Visions of N'Zoth Mounts
+-----------------------------------------------------------------------------------------------------------------------------------------
+	-- 8.3 Uldum Rares
+	["Waste Marauder"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Waste Marauder"],
+		itemId = 174753,
+		spellId = 316275,
+		npcs = { 157146 },
+		chance = 33,
+		questId = { 57273 },
+		coords = { { m = CONSTANTS.UIMAPIDS.ULDUM, x = 68.23, y = 31.97, n = L["Rotfeaster"] } },
+	},
+	["Reins of the Drake of the Four Winds"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Reins of the Drake of the Four Winds"],
+		itemId = 174641,
+		spellId = 315847,
+		npcs = { 157134 },
+		chance = 33,
+		questId = { 57259 },
+		coords = { { m = CONSTANTS.UIMAPIDS.ULDUM, x = 73.96, y = 83.52, n = L["Ishak of the Four Winds"] } },
+	},
+	["Malevolent Drone"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Malevolent Drone"],
+		itemId = 174769,
+		spellId = 316337,
+		npcs = { 162147 },
+		chance = 100,
+		questId = { 58696 },
+		coords = { { m = CONSTANTS.UIMAPIDS.ULDUM, x = 30.85, y = 49.71, n = L["Corpse Eater"] } },
+	},
+	-- 8.3 Vale of Eternal Blossoms Rares
+	["Xinlao"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Xinlao"],
+		itemId = 174840,
+		spellId = 316723,
+		npcs = { 157466 },
+		chance = 33,
+		questId = { 57363 },
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS, x = 34.15, y = 68.05, n = L["Anh-De the Loyal"] },
+		},
+	},
+	["Clutch of Ha-Li"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Clutch of Ha-Li"],
+		itemId = 173887,
+		spellId = 312751,
+		npcs = { 157153 },
+		chance = 33,
+		questId = { 57344 },
+		coords = { { m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS, x = 36.6, y = 37.6, n = L["Ha-Li"] } },
+	},
+	["Ren's Stalwart Hound"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Ren's Stalwart Hound"],
+		itemId = 174841,
+		spellId = 316722,
+		npcs = { 157160 },
+		chance = 33,
+		questId = { 57345 },
+		coords = { { m = CONSTANTS.UIMAPIDS.VALE_OF_ETERNAL_BLOSSOMS, x = 10, y = 33, n = L["Houndlord Ren"] } },
+	},
+	-- 8.3 World Boss
+	["Slightly Damp Pile of Fur"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+		name = L["Slightly Damp Pile of Fur"],
+		itemId = 174842,
+		spellId = 298367,
+		npcs = { 138794 },
+		chance = 100,
+		groupSize = 3,
+		equalOdds = true,
+		questId = { 53000 },
+		worldQuestId = 52196,
+		coords = { { m = CONSTANTS.UIMAPIDS.VOLDUN, x = 44.6, y = 56.2, n = L["Dunegorger Kraulok"] } },
+	},
+	-- 8.3 Horrific Visions of N'Zoth
+	["Mail Muncher"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
+		name = L["Mail Muncher"],
+		itemId = 174653,
+		spellId = 315987,
+		npcs = { 160708 },
+		tooltipNpcs = { 160708 },
+		chance = 100,
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_VISION_OF_STORMWIND },
+			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_VISION_OF_ORGRIMMAR },
+			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_REVISION_OF_STORMWIND },
+			{ m = CONSTANTS.UIMAPIDS.HORRIFIC_REVISION_OF_ORGRIMMAR },
+		},
+	},
+	-- 8.3 Raids
 	["Ny'alotha Allseer"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.BFA,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
