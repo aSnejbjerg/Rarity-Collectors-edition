@@ -522,7 +522,7 @@ local function pollRalkalaBuff(self)
 	end
 
 	if isRalkalaBuffPresentOrUnknown() then
-		return 
+		return
 	end
 
 	resetRalkalaCooldown(self, "contribution buff no longer present")
@@ -530,7 +530,7 @@ end
 
 local function startRalkalaCooldown(self)
 	ralkalaCooldownActive = true
-	stopRalkalaBuffPolling(self) 
+	stopRalkalaBuffPolling(self)
 
 	ralkalaBuffPollTimerHandle = self:ScheduleRepeatingTimer(function()
 		pollRalkalaBuff(self)
