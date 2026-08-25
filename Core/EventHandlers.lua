@@ -53,6 +53,7 @@ local C_Timer = _G.C_Timer
 local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentRenownLevel
 local GetPlayerAuraBySpellID = _G.C_UnitAuras and _G.C_UnitAuras.GetPlayerAuraBySpellID
+local InCombatLockdown = _G.InCombatLockdown
 
 -- Addon APIs
 local DebugCache = Rarity.Utils.DebugCache
@@ -473,7 +474,7 @@ local function isRalkalaBuffPresentOrUnknown()
 	if
 		CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK
 		and GetPlayerAuraBySpellID
-	then		
+	then
 		local auraInfo = GetPlayerAuraBySpellID(RALKALA_CONTRIBUTION_AURA_ID)
 		if issecretvalue and issecretvalue(auraInfo) then
 			return true
@@ -489,9 +490,6 @@ local function isRalkalaBuffPresentOrUnknown()
 	end)
 	return found
 end
-
--- testing: attempt is counted but I think I missed something in the logic right now, will come back to it tomorrow
--- TODO: rework the buff tracking; will have to somehow figure out how to incorporate secret auras (╯°□°）╯︵ ┻━┻
 
 local function stopRalkalaBuffPolling(self)
 	if ralkalaBuffPollTimerHandle then
@@ -519,6 +517,10 @@ local function pollRalkalaBuff(self)
 		return
 	end
 
+	if InCombatLockdown() then
+		return
+	end
+
 	if isRalkalaBuffPresentOrUnknown() then
 		return 
 	end
@@ -534,7 +536,6 @@ local function startRalkalaCooldown(self)
 		pollRalkalaBuff(self)
 	end, RALKALA_BUFF_BUFFCHECK_INTERVAL)
 
-	-- Safety net in case the buff poll never sees it drop (e.g. addon reload mid-fight).
 	ralkalaCooldownTimerHandle = self:ScheduleTimer(function()
 		resetRalkalaCooldown(self, "60 minute safety timeout")
 	end, RALKALA_COOLDOWN_DURATION)
@@ -570,7 +571,6 @@ end
 function R:OnGossipClosed()
 	isHauntedBrazierGossipOpen = false
 end
-
 -- Ral'kala shenanigans end here --
 
 local worldEventQuests = {
