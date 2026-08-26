@@ -78,15 +78,14 @@ function Waypoints:HasItemWaypoints(item)
 		return false
 	end
 
-	-- Has at least one assigned map ID (TBD: is this actually an optional field?)
-	local hasWaypointMapID = false -- At least one (slightly awkward, should streamline this later?)
+	-- Has at least one assigned map ID
 	for waypointID, waypointData in pairs(item.coords) do
 		if type(waypointData) == "table" and waypointData.m ~= nil then
-			hasWaypointMapID = true
+			return true
 		end
 	end
 
-	return hasWaypointMapID
+	return return false
 end
 
 function Waypoints:GetFirstMapForItem(item)
