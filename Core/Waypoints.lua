@@ -85,7 +85,7 @@ function Waypoints:HasItemWaypoints(item)
 		end
 	end
 
-	return return false
+	return false
 end
 
 function Waypoints:GetFirstMapForItem(item)
