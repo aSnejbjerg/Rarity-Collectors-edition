@@ -2,6 +2,9 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Vibrant Venomfang"] = true
+L["Soulcoil Remnant"] = true
+L["Drops from the Wiggling version of the Venom-Soaked Satchel, a rare alternative drop from completing Curse Surges."] = true
 L["Cauldron Concoction"] = true
 L["This pet is a rare drop from any of Ofi the Sly's mysterious concoctions."] = true
 L["Poison Dart Frog"] = true
