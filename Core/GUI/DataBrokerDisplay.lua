@@ -1,4 +1,4 @@
-local _, addonTable = ...
+local addonName, addonTable = ...
 
 -- Externals
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
@@ -14,12 +14,15 @@ local CONSTANTS = addonTable.constants
 local GetItemInfo = _G.C_Item.GetItemInfo
 local LoadAddOn = _G.C_AddOns.LoadAddOn
 
+-- Read the icon straight from the TOC's ## IconTexture field so there is only one place that ever defines it
+local iconTexture = C_AddOns.GetAddOnMetadata(addonName, "IconTexture")
+
 local dataobj = ldb:NewDataObject("Rarity", {
 	type = "data source",
 	text = L["Loading"],
 	label = "Rarity",
 	tocname = "Rarity",
-	icon = [[Interface\Icons\spell_nature_forceofnature]],
+	icon = iconTexture,
 })
 GUI.dataobj = dataobj
 
@@ -103,11 +106,6 @@ function GUI:UpdateText()
 	-- Feed text
 	local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice =
 		GetItemInfo(trackedItem.itemId)
-	if not itemTexture then
-		dataobj.icon = [[Interface\Icons\spell_nature_forceofnature]]
-	else
-		dataobj.icon = itemTexture
-	end
 	attempts = 0
 	if trackedItem.attempts then
 		attempts = trackedItem.attempts
