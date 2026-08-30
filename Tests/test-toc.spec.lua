@@ -50,7 +50,7 @@ describe("TOC", function()
 				local RarityOptionsTOC = BlizzardTOC:DecodeFileContents(RARITY_OPTIONS_TOC)
 
 				-- For now, only parse the header (other fields can be added as needed)
-				assertEquals(RarityCoreTOC["Title"], "Rarity: Collector's edition")
+				assertEquals(RarityCoreTOC["Title"], "Rarity: Collector's Edition")
 				assertEquals(RarityCoreTOC["Author"], "Allara")
 				assertEquals(RarityCoreTOC["X-Curse-Project-ID"], 1614412)
 				assertTrue(#RarityCoreTOC["Interface"] == NUM_SUPPORTED_PRODUCT_LINES)
