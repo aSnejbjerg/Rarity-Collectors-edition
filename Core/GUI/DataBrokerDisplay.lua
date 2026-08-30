@@ -1,4 +1,4 @@
-local addonName, addonTable = ...
+local _, addonTable = ...
 
 -- Externals
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
@@ -15,7 +15,7 @@ local GetItemInfo = _G.C_Item.GetItemInfo
 local LoadAddOn = _G.C_AddOns.LoadAddOn
 
 -- Read the icon straight from the TOC's ## IconTexture field so there is only one place that ever defines it
-local iconTexture = C_AddOns.GetAddOnMetadata(addonName, "IconTexture")
+local iconTexture = C_AddOns.GetAddOnMetadata(_, "IconTexture")
 
 local dataobj = ldb:NewDataObject("Rarity", {
 	type = "data source",
@@ -205,8 +205,8 @@ function GUI:UpdateText()
 		self.bar2 = nil
 	else
 		self.hadBarTwo = true
-		addonName, -- itemName,
-			addonName, -- itemLink,
+		_, -- itemName,
+			_, -- itemLink,
 			itemRarity,
 			itemLevel,
 			itemMinLevel,
