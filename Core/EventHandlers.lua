@@ -454,7 +454,6 @@ end
 -- 	self.Profiling:EndTimer("EventHandlers.OnCombat")
 -- end
 
-
 -- Ral'kala shenanigans start here --
 local RALKALA_CONTRIBUTION_AURA_ID = 1305910
 local RALKALA_COOLDOWN_DURATION = 60 * 60
@@ -469,7 +468,6 @@ local ralkalaDrops = {
 local ralkalaCooldownActive = false
 local ralkalaCooldownTimerHandle
 local ralkalaBuffPollTimerHandle
-
 
 local function isRalkalaBuffPresentOrUnknown()
 	if
