@@ -1,5 +1,4 @@
 local addonName, addonTable = ...
-local _, addonTable = ...
 
 -- Externals
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
@@ -206,8 +205,8 @@ function GUI:UpdateText()
 		self.bar2 = nil
 	else
 		self.hadBarTwo = true
-		_, -- itemName,
-			_, -- itemLink,
+		addonName, -- itemName,
+			addonName, -- itemLink,
 			itemRarity,
 			itemLevel,
 			itemMinLevel,
