@@ -53,6 +53,8 @@ local C_Timer = _G.C_Timer
 local IsSpellKnown = (_G.C_Spell and _G.C_Spell.IsSpellKnown) or _G.IsSpellKnown
 local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentRenownLevel
 local GetPlayerAuraBySpellID = _G.C_UnitAuras and _G.C_UnitAuras.GetPlayerAuraBySpellID
+local InCombatLockdown = _G.InCombatLockdown
+local C_GossipInfo = _G.C_GossipInfo
 
 -- Addon APIs
 local DebugCache = Rarity.Utils.DebugCache
@@ -86,7 +88,10 @@ function EventHandlers:Register()
 	self:RegisterEvent("ISLAND_COMPLETED", "OnIslandCompleted")
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "OnSpellcastSucceeded")
 	self:RegisterEvent("QUEST_TURNED_IN", "OnQuestTurnedIn")
-	self:RegisterEvent("UNIT_AURA", "OnUnitAura")
+
+	-- Used for Haunted Brazier gossip-based Ral'kala offering detection; see OnGossipShow et al.
+	self:RegisterEvent("GOSSIP_SHOW", "OnGossipShow")
+	self:RegisterEvent("GOSSIP_CLOSED", "OnGossipClosed")
 
 	if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_MISTS_OF_PANDARIA then
 		self:RegisterEvent("SHOW_LOOT_TOAST", "OnShowLootToast")
@@ -449,39 +454,123 @@ end
 -- 	self.Profiling:EndTimer("EventHandlers.OnCombat")
 -- end
 
+-- Ral'kala shenanigans start here --
 local RALKALA_CONTRIBUTION_AURA_ID = 1305910
-local ralkalaAttemptTimer
+local RALKALA_COOLDOWN_DURATION = 60 * 60
+local RALKALA_BUFF_BUFFCHECK_INTERVAL = 15
+local HAUNTED_BRAZIER_TEXT_MATCH = "Ossified Relics"
 local ralkalaDrops = {
 	{ name = "Pale Hexscale", category = "pets" },
 	{ name = "Hexflame Reaver", category = "mounts" },
 	{ name = "Preyhunter's Masquerade", category = "toys" },
 }
 
+local ralkalaCooldownActive = false
+local ralkalaCooldownTimerHandle
+local ralkalaBuffPollTimerHandle
+
+local function isRalkalaBuffPresentOrUnknown()
+	if
+		CONSTANTS.WOW_INTERFACE_VER >= CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.CURSE_OF_ULATEK
+		and GetPlayerAuraBySpellID
+	then
+		local auraInfo = GetPlayerAuraBySpellID(RALKALA_CONTRIBUTION_AURA_ID)
+		if issecretvalue and issecretvalue(auraInfo) then
+			return true
+		end
+		return auraInfo ~= nil
+	end
+
+	local found = false
+	AuraUtil.ForEachAura("player", "HELPFUL", nil, function(_, _, _, _, _, _, _, _, _, spellID)
+		if spellID == RALKALA_CONTRIBUTION_AURA_ID then
+			return true
+		end
+	end)
+	return false
+end
+
+local function stopRalkalaBuffPolling(self)
+	if ralkalaBuffPollTimerHandle then
+		self:CancelTimer(ralkalaBuffPollTimerHandle, true)
+		ralkalaBuffPollTimerHandle = nil
+	end
+	if ralkalaCooldownTimerHandle then
+		self:CancelTimer(ralkalaCooldownTimerHandle, true)
+		ralkalaCooldownTimerHandle = nil
+	end
+end
+
+local function resetRalkalaCooldown(self, reason)
+	if not ralkalaCooldownActive then
+		return
+	end
+	ralkalaCooldownActive = false
+	stopRalkalaBuffPolling(self)
+	self:Debug("Ral'kala offering cooldown reset (" .. reason .. ") - next gossip interaction will add an attempt")
+end
+
+local function pollRalkalaBuff(self)
+	if not ralkalaCooldownActive then
+		stopRalkalaBuffPolling(self)
+		return
+	end
+
+	if InCombatLockdown() then
+		return
+	end
+
+	if isRalkalaBuffPresentOrUnknown() then
+		return
+	end
+
+	resetRalkalaCooldown(self, "contribution buff no longer present")
+end
+
+local function startRalkalaCooldown(self)
+	ralkalaCooldownActive = true
+	stopRalkalaBuffPolling(self)
+
+	ralkalaBuffPollTimerHandle = self:ScheduleRepeatingTimer(function()
+		pollRalkalaBuff(self)
+	end, RALKALA_BUFF_BUFFCHECK_INTERVAL)
+
+	ralkalaCooldownTimerHandle = self:ScheduleTimer(function()
+		resetRalkalaCooldown(self, "60 minute safety timeout")
+	end, RALKALA_COOLDOWN_DURATION)
+end
+
 local function addRalkalaAttempts(self)
-	self:Debug("Detected personal attack on Ral'kala (Prey hunt) - adding attempts for its drops")
+	if ralkalaCooldownActive then
+		self:Debug("Skipping Ral'kala offering attempt (cooldown active - waiting on buff to clear or 60 min timeout)")
+		return
+	end
+
+	self:Debug("Detected offering at Haunted Brazier for Ral'kala (Prey hunt) - adding attempts for its drops")
 	for _, drop in ipairs(ralkalaDrops) do
 		addAttemptForItem(drop.name, drop.category)
 	end
+
+	startRalkalaCooldown(self)
 end
 
-function R:OnUnitAura(_, unit, updateInfo)
-	if unit ~= "player" or not updateInfo or not updateInfo.addedAuras then
-		return
+local isHauntedBrazierGossipOpen = false
+
+function R:OnGossipShow()
+	local text = C_GossipInfo and C_GossipInfo.GetText and C_GossipInfo.GetText()
+	local isHauntedBrazier = text ~= nil and text:find(HAUNTED_BRAZIER_TEXT_MATCH, 1, true) ~= nil
+
+	if isHauntedBrazier and isHauntedBrazierGossipOpen then
+		addRalkalaAttempts(self)
 	end
 
-	if issecretvalue and issecretvalue(updateInfo.addedAuras) then
-		return
-	end
-
-	for _, aura in ipairs(updateInfo.addedAuras) do
-		if aura and aura.spellId and not (issecretvalue and issecretvalue(aura.spellId)) then
-			if aura.spellId == RALKALA_CONTRIBUTION_AURA_ID then
-				addRalkalaAttempts(self)
-				return
-			end
-		end
-	end
+	isHauntedBrazierGossipOpen = isHauntedBrazier
 end
+
+function R:OnGossipClosed()
+	isHauntedBrazierGossipOpen = false
+end
+-- Ral'kala shenanigans end here --
 
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)
