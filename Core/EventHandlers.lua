@@ -484,10 +484,10 @@ local function isRalkalaBuffPresentOrUnknown()
 	local found = false
 	AuraUtil.ForEachAura("player", "HELPFUL", nil, function(_, _, _, _, _, _, _, _, _, spellID)
 		if spellID == RALKALA_CONTRIBUTION_AURA_ID then
-			found = true
+			return true
 		end
 	end)
-	return found
+	return false
 end
 
 local function stopRalkalaBuffPolling(self)
