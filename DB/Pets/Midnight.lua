@@ -166,6 +166,42 @@ midnightPets["Cauldron Concoction"] = {
 	sourceText = L["This pet is a rare drop from any of Ofi the Sly's mysterious concoctions."],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
+midnightPets["Vibrant Venomfang"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.PET,
+	method = CONSTANTS.DETECTION_METHODS.USE,
+	name = L["Vibrant Venomfang"],
+	creatureId = 267689,
+	itemId = 276234,
+	items = { 275899, 277137 },
+	spellId = 1299089,
+	chance = 50,
+	sourceText = L["Drops from the Wiggling version of the Venom-Soaked Satchel, a rare alternative drop from completing Curse Surges."],
+	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
+}
+midnightPets["Soulcoil Remnant"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.PET,
+	method = CONSTANTS.DETECTION_METHODS.BOSS,
+	name = L["Soulcoil Remnant"],
+	creatureId = 269501,
+	itemId = 280305,
+	spellId = 1304581,
+	chance = 25,
+	npcs = { 99999 },
+	tooltipNpcs = { 259927 },
+	lockBossName = "Nek'zali the Soulcoiler",
+	statisticId = { 63533, 63534, 63535, 63536 },
+	instanceDifficulties = {
+		[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true,
+	},
+	coords = { { i = true, m = CONSTANTS.UIMAPIDS.VENOMOUS_ABYSS } },
+	groupSize = 25,
+	equalOdds = true,
+}
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, midnightPets)
 return midnightPets
