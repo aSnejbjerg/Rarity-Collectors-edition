@@ -458,7 +458,7 @@ end
 local RALKALA_CONTRIBUTION_AURA_ID = 1305910
 local RALKALA_COOLDOWN_DURATION = 60 * 60
 local RALKALA_BUFF_BUFFCHECK_INTERVAL = 15
-local HAUNTED_BRAZIER_TEXT_MATCH = "Ossified Relics"
+local HAUNTED_BRAZIER_TEXT_MATCH = L["Ossified Relics"]
 local ralkalaDrops = {
 	{ name = "Pale Hexscale", category = "pets" },
 	{ name = "Hexflame Reaver", category = "mounts" },

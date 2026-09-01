@@ -38,6 +38,7 @@ L["Idol of Blue Water and Blue Sky"] = true
 L["Looted from a treasure named Abandoned Amani Privateer's Cache"] = true
 L["Reins of the Celestial Riding Crane"] = true
 L["Reins of the Black Riding Yak"] = true
+L["Ossified Relics"] = true
 L["Reins of the Brown Riding Yak"] = true
 L["Reins of the White Riding Yak"] = true
 L["Reins of the Orange Water Strider"] = true
