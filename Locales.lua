@@ -113,7 +113,6 @@ L["Ominous Domanus"] = true
 L["Princess Bloodshed"] = true
 L["Sanguine Harrower"] = true
 L["Augmented Stormray"] = true
-L["Lost Nether Drake"] = true
 L["Amani Sharptalon"] = true
 L["Escaped Witherbark Pango"] = true
 L["Cerulean Hawkstrider"] = true

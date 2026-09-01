@@ -47,12 +47,7 @@ local midnightPets = {
 			{ m = CONSTANTS.UIMAPIDS.VOIDSTORM },
 			{ m = CONSTANTS.UIMAPIDS.HARANDAR },
 		},
-		zones = {
-			tostring(CONSTANTS.UIMAPIDS.EVERSONG_WOODS_MIDNIGHT),
-			tostring(CONSTANTS.UIMAPIDS.ZUL_AMAN_MIDNIGHT),
-			tostring(CONSTANTS.UIMAPIDS.VOIDSTORM),
-			tostring(CONSTANTS.UIMAPIDS.HARANDAR),
-		},
+		zones = { "2395", "2437", "2405", "2413" }
 	},
 	["Ominous Dominus"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -65,7 +60,7 @@ local midnightPets = {
 		items = { 618495 },
 		spellId = 1268687,
 		sourceText = L["This pet drops from the spawned or summoned versions of Nullaeus in regular delve runs. NOT from the Nemesis delve."],
-		coords = { { 0, 0 } },
+		coords = { { 0, 0, 0 } },
 	},
 	["Wriggling Capybara"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,

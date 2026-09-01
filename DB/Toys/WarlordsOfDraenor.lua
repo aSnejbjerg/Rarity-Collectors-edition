@@ -122,6 +122,7 @@ local wodToys = {
 		itemId = 119178,
 		npcs = { 85026 },
 		chance = 10,
+		coords = { { m = CONSTANTS.UIMAPIDS.SPIRES_OF_ARAK } },
 	},
 }
 
