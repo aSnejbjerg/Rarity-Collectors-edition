@@ -106,6 +106,21 @@ function EventHandlers:Register()
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "OnPlayerInteractionFrameShow")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", "OnPlayerInteractionFrameHide")
 	self:StartInitialBagSync()
+	-- TODO: Currently greatly unclear to me if this is something that Blizzard needs to fix or something we'll just have to deal with. Revisit later.
+	self:ApplyMawBuffsTaintWorkaround()
+end
+
+function R:ApplyMawBuffsTaintWorkaround()
+	-- NOTE: These lines are directly copied and adjusted from the WarpDeplete addon.
+	-- The objective tracker checks ShouldShowMawBuffs before interacting with "MAW" auras (aka torghast powers)
+	-- When the tracker is tainted, this results in the tracker crashing mid-update, often leaving the tracker in a "frozen" state
+	-- Returning false when auras are secret, prevents the crash, with limited or no side-effects
+	local orig = ShouldShowMawBuffs
+	ShouldShowMawBuffs = function()
+		if C_Secrets.ShouldAurasBeSecret() then return false end
+
+		return orig()
+	end
 end
 
 function R:StartInitialBagSync(delay)
