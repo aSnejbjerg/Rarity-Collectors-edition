@@ -60,7 +60,7 @@ local midnightPets = {
 		items = { 618495 },
 		spellId = 1268687,
 		sourceText = L["This pet drops from the spawned or summoned versions of Nullaeus in regular delve runs. NOT from the Nemesis delve."],
-		coords = { { 0, 0, 0 } },
+		coords = { { m = 0 } },
 	},
 	["Wriggling Capybara"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
