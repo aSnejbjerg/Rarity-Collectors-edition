@@ -38,6 +38,7 @@ local midnightPets = {
 		method = CONSTANTS.DETECTION_METHODS.FISHING,
 		name = L["Bubbly Snapling"],
 		itemId = 260942,
+		creatureId = 256201,
 		npcs = { 256201 },
 		spellId = 1267090,
 		chance = 500,
