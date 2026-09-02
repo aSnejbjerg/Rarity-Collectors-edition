@@ -47,7 +47,7 @@ local midnightPets = {
 			{ m = CONSTANTS.UIMAPIDS.VOIDSTORM },
 			{ m = CONSTANTS.UIMAPIDS.HARANDAR },
 		},
-		zones = { "2395", "2437", "2405", "2413" }
+		zones = { "2395", "2437", "2405", "2413" },
 	},
 	["Ominous Dominus"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
