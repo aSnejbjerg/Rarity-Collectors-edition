@@ -674,7 +674,7 @@ local bfaMounts = {
 			"1161", -- Boralus
 			"1352", -- Battle for Dazar'alor (Raid)
 			"1462", -- Mechagon Island
-			"1165" -- Dazar'alor
+			"1165", -- Dazar'alor
 		},
 		coords = {
 			{ m = CONSTANTS.UIMAPIDS.DRUSTVAR },
