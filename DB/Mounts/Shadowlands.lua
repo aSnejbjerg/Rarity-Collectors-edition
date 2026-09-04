@@ -407,19 +407,24 @@ local shadowlandsMounts = {
 	["Cartel Master's Gearglider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.SHADOWLANDS,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.NPC,
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			2442, -- So'leah
+		},
 		name = L["Cartel Master's Gearglider"],
-		spellId = 353263,
+		chance = 50,
 		itemId = 186638,
 		npcs = { 180863 },
-		chance = 50,
-		statisticId = { 15168 },
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+		spellId = 353263,
+		instanceDifficulties = {
+			[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+			[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+		},
 		lockoutDetails = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "So'leah",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
+				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true },
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.TAZAVESH_THE_VEILED_MARKET, i = true } },
