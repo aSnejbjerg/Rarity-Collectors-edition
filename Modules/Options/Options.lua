@@ -362,7 +362,20 @@ function R:PrepareOptions()
 									end
 									self:Update("OPTIONS")
 								end,
-							}, -- minimap
+							}, -- minimapIconTexture
+							minimapIconTrackedItem = {
+								type = "toggle",
+								order = newOrder(),
+								name = L["Show currently tracked item as minimap icon"],
+								desc = L["When on, the minimap icon (and LDB feed icon) will display the icon of the currently tracked item instead of the Rarity addon icon."],
+								get = function()
+									return self.db.profile.showTrackedItemAsMinimapIcon
+								end,
+								set = function(info, val)
+									self.db.profile.showTrackedItemAsMinimapIcon = val
+									Rarity.GUI:UpdateText()
+								end,
+							}, -- minimapIconTrackedItem
 							progressBar = {
 								type = "toggle",
 								order = newOrder(),

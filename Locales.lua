@@ -755,6 +755,9 @@ L["#%d: %d attempts (%.2f%%)"] = true
 L["Already known"] = true
 L["General"] = true
 L["Show minimap icon"] = true
+L["Show currently tracked item as minimap icon"] = true
+L["When on, the minimap icon (and LDB feed icon) will display the icon of the currently tracked item instead of the Rarity addon icon."] =
+	true
 L["Turns on a minimap icon for Rarity. Use this option if you don't have an LDB display add-on."] = true
 L["Announcements"] = true
 L["Enable announcements"] = true

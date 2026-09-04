@@ -71,7 +71,7 @@ function R:PrepareDefaults()
 	self.defaults = {
 		profile = {
 			minimap = { hide = false },
-
+			showTrackedItemAsMinimapIcon = false,
 			enableAnnouncements = true,
 			feedText = CONSTANTS.LDB_TEXT_STYLES.FEED_NORMAL,
 			statusTip = CONSTANTS.TOOLTIP_POSITIONS.TIP_LEFT,
