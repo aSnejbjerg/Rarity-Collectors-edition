@@ -175,7 +175,7 @@ midnightPets["Vibrant Venomfang"] = {
 	itemId = 276234,
 	items = { 275899, 277137 },
 	spellId = 1299089,
-	chance = 50,
+	chance = 500,
 	sourceText = L["Drops from the Wiggling version of the Venom-Soaked Satchel, a rare alternative drop from completing Curse Surges."],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
