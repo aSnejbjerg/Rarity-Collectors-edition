@@ -584,13 +584,17 @@ end
 -- this therefore adds attempt when the player enters the ritual zone and doesn't leave within a minute --
 -- reason for the minute "cooldown" is sometimes players could forget to set tier / challenges correctly etc. --
 
-local RITUAL_SITE_MAP_ID = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT
+-- Two distinct mapIDs have been observed for the Ritual Site instances, so both need to be recognized
+local RITUAL_SITE_MAP_IDS = {
+	[CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW] = true,
+	[CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA] = true,
+}
 local RITUAL_SITE_MIN_ATTEMPT_DURATION = 60
 local wasInRitualSite = false
 local ritualSiteEnteredAt = nil
 
 local function checkRitualSiteState(self)
-	local isInRitualSite = GetBestMapForUnit("player") == RITUAL_SITE_MAP_ID
+	local isInRitualSite = RITUAL_SITE_MAP_IDS[GetBestMapForUnit("player")] == true
 
 	if isInRitualSite and not wasInRitualSite then
 		self:Debug("Entered a Ritual Site instance")

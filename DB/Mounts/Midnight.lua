@@ -269,7 +269,7 @@ local midnightMounts = {
 		},
 		chance = 1,
 		sourceText = L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW }, { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA } },
 	},
 	["Void-Corrupted Eagle Talon"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -283,7 +283,7 @@ local midnightMounts = {
 		},
 		chance = 1,
 		sourceText = L["This mount is a guaranteed drop from completing a summoning ritual in the Broken Throne Ritual Site."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW }, { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA } },
 	},
 	["Void-Touched Snapdragon"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -296,7 +296,7 @@ local midnightMounts = {
 		tooltipNpcs = { 263617 },
 		chance = 100,
 		sourceText = L["This mount is obtained by interacting with Washed Up Kelp in the Daggerspine Point Ritual Site."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW }, { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA } },
 	},
 	["Lucent Hawkstrider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -382,7 +382,7 @@ local midnightMounts = {
 		spellId = 1287359,
 		chance = 300,
 		sourceText = L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW }, { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA } },
 	},
 	["Arcanovoid Construct"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
