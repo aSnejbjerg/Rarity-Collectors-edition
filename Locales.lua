@@ -684,6 +684,12 @@ L["(running in debug mode)"] = true
 L["Grow Up"] = true
 L["Debug mode OFF"] = true
 L["Debug mode ON"] = true
+L["Multifarm"] = true
+L["If you're farming the same items on multiple accounts at once, set this to the number of accounts to add that many attempts per detected event instead of just one. Can also be set via /rarity multifarm <number>. Resets to 1 whenever you log in."] =
+	true
+L["Multifarm is currently set to %d. Usage: /rarity multifarm <number>"] = true
+L["Multifarm set to %d. Each detected attempt will now count as %d attempt(s)."] = true
+L["You must enter a number larger than or equal to 1."] = true
 L["None"] = true
 L["Tooltip can't be shown in combat"] = true
 L["Rarity is loading..."] = true

@@ -20,6 +20,10 @@ local lbb = LibStub("LibBabble-Boss-3.0"):GetUnstrictLookupTable()
 local bit_band = _G.bit.band
 local strlower = _G.strlower
 local format = _G.format
+local strsplit = _G.strsplit
+local strtrim = _G.strtrim
+local floor = math.floor
+local tonumber = _G.tonumber
 
 -- WOW APIs
 local GetCurrencyInfo = _G.C_CurrencyInfo.GetCurrencyInfo
@@ -941,6 +945,34 @@ function R:OnChatCommand(input)
 		end
 	elseif strlower(input) == "tinspect" then --  TODO Document it?
 		Rarity.Profiling:InspectAccumulatedTimes()
+	elseif strlower(strtrim(input)):find("^multifarm") then
+		local _, amountString = strsplit(" ", strtrim(input), 2)
+		amountString = amountString and strtrim(amountString)
+
+		if not amountString or amountString == "" then
+			self:Print(
+				format(
+					L["Multifarm is currently set to %d. Usage: /rarity multifarm <number>"],
+					self:GetAttemptMultiplier()
+				)
+			)
+		elseif tonumber(amountString) == nil then
+			self:Print(L["You must enter a valid number."])
+		else
+			local amount = tonumber(amountString)
+			if amount < 1 then
+				self:Print(L["You must enter a number larger than or equal to 1."])
+			else
+				self.multiFarmMultiplier = floor(amount)
+				self:Print(
+					format(
+						L["Multifarm set to %d. Each detected attempt will now count as %d attempt(s)."],
+						self.multiFarmMultiplier,
+						self.multiFarmMultiplier
+					)
+				)
+			end
+		end
 	else
 		Rarity:TryShowOptionsUI()
 	end
