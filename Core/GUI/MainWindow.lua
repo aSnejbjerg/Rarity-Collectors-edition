@@ -30,6 +30,8 @@ local lbb = LibStub("LibBabble-Boss-3.0"):GetUnstrictLookupTable()
 
 -- Settings
 local STATUS_TOOLTIP_MAX_WIDTH = 200
+local STANDALONE_MIN_WIDTH = 300
+local STANDALONE_MIN_HEIGHT = 120
 
 -- Locals
 local tooltip, tooltip2, quicktip
@@ -71,6 +73,8 @@ end
 local function configureStandaloneTooltip()
 	tooltip:SetClampedToScreen(true)
 	tooltip:SetMovable(true)
+	tooltip:SetResizable(true)
+	tooltip:SetResizeBounds(STANDALONE_MIN_WIDTH, STANDALONE_MIN_HEIGHT)
 	tooltip:EnableMouse(true)
 	tooltip:RegisterForDrag("LeftButton")
 	tooltip:SetScript("OnDragStart", function(frame)
@@ -80,6 +84,33 @@ local function configureStandaloneTooltip()
 		frame:StopMovingOrSizing()
 		saveStandalonePosition()
 	end)
+	if not tooltip.standaloneResizeHandle then
+		local resizeHandle = CreateFrame("Button", nil, tooltip)
+		resizeHandle:SetSize(16, 16)
+		resizeHandle:SetPoint("BOTTOMRIGHT", tooltip, "BOTTOMRIGHT", 0, 0)
+		resizeHandle:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+		resizeHandle:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+		resizeHandle:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+		resizeHandle:SetScript("OnMouseDown", function()
+			tooltip:StartSizing("BOTTOMRIGHT")
+		end)
+		resizeHandle:SetScript("OnMouseUp", function()
+			tooltip:StopMovingOrSizing()
+			local dimensions = Rarity.db.profile.standaloneWindow
+			dimensions.width = tooltip:GetWidth()
+			dimensions.height = tooltip:GetHeight()
+			tooltip:UpdateScrolling()
+			tooltip:SetSize(dimensions.width, dimensions.height)
+		end)
+		tooltip.standaloneResizeHandle = resizeHandle
+	end
+	tooltip.standaloneResizeHandle:Show()
+	local dimensions = Rarity.db.profile.standaloneWindow
+	if not dimensions then
+		dimensions = { width = 600, height = 200 }
+		Rarity.db.profile.standaloneWindow = dimensions
+	end
+	tooltip:SetSize(dimensions.width, dimensions.height)
 
 	if not tooltip.standaloneCloseButton then
 		local closeButton = CreateFrame("Button", nil, tooltip, "UIPanelCloseButton")
@@ -113,6 +144,9 @@ local function disableStandaloneTooltip()
 	tooltip:SetScript("OnDragStop", nil)
 	if tooltip.standaloneCloseButton then
 		tooltip.standaloneCloseButton:Hide()
+	end
+	if tooltip.standaloneResizeHandle then
+		tooltip.standaloneResizeHandle:Hide()
 	end
 end
 
