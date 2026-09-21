@@ -105,7 +105,7 @@ local midnightPets = {
 		spellId = 1287339,
 		coords = {
 			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW },
-			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA }
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA },
 		},
 	},
 }
