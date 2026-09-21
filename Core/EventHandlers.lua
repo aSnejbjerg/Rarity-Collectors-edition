@@ -950,7 +950,12 @@ function R:OnChatCommand(input)
 		amountString = amountString and strtrim(amountString)
 
 		if not amountString or amountString == "" then
-			self:Print(format(L["Multifarm is currently set to %d. Usage: /rarity multifarm <number>"], self:GetAttemptMultiplier()))
+			self:Print(
+				format(
+					L["Multifarm is currently set to %d. Usage: /rarity multifarm <number>"],
+					self:GetAttemptMultiplier()
+				)
+			)
 		elseif tonumber(amountString) == nil then
 			self:Print(L["You must enter a valid number."])
 		else
