@@ -68,7 +68,7 @@ L["Ominous Dominus"] = true
 L["ToDebugString"] = true
 L["Madcap Redcap"] = true
 L["Mycomancer's Hearthspore"] = true
-L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"] =
+L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount."] =
 	true
 L["Broken Lynx Leash"] = true
 L["Ashes of Belo'ren"] = true

@@ -55,6 +55,7 @@ local GetCurrentRenownLevel = C_MajorFactions and C_MajorFactions.GetCurrentReno
 local GetPlayerAuraBySpellID = _G.C_UnitAuras and _G.C_UnitAuras.GetPlayerAuraBySpellID
 local InCombatLockdown = _G.InCombatLockdown
 local C_GossipInfo = _G.C_GossipInfo
+local GetTime = _G.GetTime
 
 -- Addon APIs
 local DebugCache = Rarity.Utils.DebugCache
@@ -92,6 +93,10 @@ function EventHandlers:Register()
 	-- Used for Haunted Brazier gossip-based Ral'kala offering detection; see OnGossipShow et al.
 	self:RegisterEvent("GOSSIP_SHOW", "OnGossipShow")
 	self:RegisterEvent("GOSSIP_CLOSED", "OnGossipClosed")
+
+	-- Used for Ritual Site (Broken Lynx Leash) entry/exit detection via UiMapID; see OnRitualSiteZoneChanged
+	self:RegisterEvent("ZONE_CHANGED_NEW_AREA", "OnRitualSiteZoneChanged")
+	self:RegisterEvent("PLAYER_ENTERING_WORLD", "OnRitualSiteZoneChanged")
 
 	if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_MISTS_OF_PANDARIA then
 		self:RegisterEvent("SHOW_LOOT_TOAST", "OnShowLootToast")
@@ -571,6 +576,49 @@ function R:OnGossipClosed()
 	isHauntedBrazierGossipOpen = false
 end
 -- Ral'kala shenanigans end here --
+
+-- Void-Corrupted Lynx start here --
+-- little explanation here because someone will eventually look at this and think.. why the heck did he do it this way --
+-- ritual site tracking hides every possible value you can get from the game apart from stuff like zone ID --
+-- therefore you can't reliably see if the player is opening the end chest --
+-- this therefore adds attempt when the player enters the ritual zone and doesn't leave within a minute --
+-- reason for the minute "cooldown" is sometimes players could forget to set tier / challenges correctly etc. --
+
+-- Two distinct mapIDs have been observed for the Ritual Site instances, so both need to be recognized
+local RITUAL_SITE_MAP_IDS = {
+	[CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW] = true,
+	[CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA] = true,
+}
+local RITUAL_SITE_MIN_ATTEMPT_DURATION = 60
+local wasInRitualSite = false
+local ritualSiteEnteredAt = nil
+
+local function checkRitualSiteState(self)
+	local isInRitualSite = RITUAL_SITE_MAP_IDS[GetBestMapForUnit("player")] == true
+
+	if isInRitualSite and not wasInRitualSite then
+		self:Debug("Entered a Ritual Site instance")
+		ritualSiteEnteredAt = GetTime()
+	elseif not isInRitualSite and wasInRitualSite then
+		local timeSpent = ritualSiteEnteredAt and (GetTime() - ritualSiteEnteredAt) or 0
+		if timeSpent >= RITUAL_SITE_MIN_ATTEMPT_DURATION then
+			self:Debug("Left the Ritual Site instance - adding attempt for Broken Lynx Leash")
+			addAttemptForItem("Broken Lynx Leash", "mounts")
+		else
+			self:Debug(
+				format("Left the Ritual Site instance after only %.1f second(s) - not counting an attempt", timeSpent)
+			)
+		end
+		ritualSiteEnteredAt = nil
+	end
+
+	wasInRitualSite = isInRitualSite
+end
+
+function R:OnRitualSiteZoneChanged(event)
+	checkRitualSiteState(self)
+end
+-- Void-Corrupted Lynx ends here (╯°□°）╯︵ ┻━┻ --
 
 local worldEventQuests = {
 	[52196] = "Slightly Damp Pile of Fur", -- Dunegorger Kraulok (TODO: Use encounter also?)
