@@ -362,7 +362,20 @@ function R:PrepareOptions()
 									end
 									self:Update("OPTIONS")
 								end,
-							}, -- minimap
+							}, -- minimapIconTexture
+							minimapIconTrackedItem = {
+								type = "toggle",
+								order = newOrder(),
+								name = L["Show currently tracked item as minimap icon"],
+								desc = L["When on, the minimap icon (and LDB feed icon) will display the icon of the currently tracked item instead of the Rarity addon icon."],
+								get = function()
+									return self.db.profile.showTrackedItemAsMinimapIcon
+								end,
+								set = function(info, val)
+									self.db.profile.showTrackedItemAsMinimapIcon = val
+									Rarity.GUI:UpdateText()
+								end,
+							}, -- minimapIconTrackedItem
 							progressBar = {
 								type = "toggle",
 								order = newOrder(),
@@ -467,6 +480,26 @@ function R:PrepareOptions()
 									end
 								end,
 							}, -- enableProfiling
+							multiFarmMultiplier = {
+								type = "input",
+								order = newOrder(),
+								width = "half",
+								name = L["Multifarm"],
+								desc = L["If you're farming the same items on multiple accounts at once, set this to the number of accounts to add that many attempts per detected event instead of just one. Can also be set via /rarity multifarm <number>. Resets to 1 whenever you log in."],
+								get = function()
+									return tostring(self:GetAttemptMultiplier())
+								end,
+								set = function(info, val)
+									if strtrim(val) == "" or tonumber(val) == nil then
+										alert(L["You must enter a valid number."])
+									elseif tonumber(val) < 1 then
+										alert(L["You must enter a number larger than or equal to 1."])
+									else
+										self.multiFarmMultiplier = math.floor(tonumber(val))
+									end
+									self:Update("OPTIONS")
+								end,
+							}, -- multifarm
 							tooltipActivation = {
 								type = "select",
 								name = L["Tooltip activation"],

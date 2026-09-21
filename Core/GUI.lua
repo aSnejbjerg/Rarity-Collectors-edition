@@ -97,6 +97,10 @@ function R:OutputAttempts(item, isForcedUpdate)
 	end
 
 	if not isForcedUpdate then
+		local extraAttempts = self:GetAttemptMultiplier() - 1
+		if extraAttempts > 0 then
+			item.attempts = item.attempts + extraAttempts
+		end
 		self:AddDailyAttempt(item)
 		self:AddSessionAttempt(item)
 		self:UpdateSessionAttempts(item)
@@ -144,7 +148,7 @@ function Rarity:AddDailyAttempt(item)
 	if not item.dates[dt].attempts then
 		item.dates[dt].attempts = 0
 	end
-	item.dates[dt].attempts = item.dates[dt].attempts + 1
+	item.dates[dt].attempts = item.dates[dt].attempts + self:GetAttemptMultiplier()
 end
 
 function Rarity:AddSessionAttempt(item)
@@ -154,7 +158,17 @@ function Rarity:AddSessionAttempt(item)
 	if not item.session.attempts then
 		item.session.attempts = 0
 	end
-	item.session.attempts = item.session.attempts + 1
+	item.session.attempts = item.session.attempts + self:GetAttemptMultiplier()
+end
+
+-- Returns the number of attempts that should be added per detected event (for players multi-farming on several accounts)
+-- Not saved between sessions: it's expected to be re-enabled each time you log in
+function Rarity:GetAttemptMultiplier()
+	local multiplier = self.multiFarmMultiplier
+	if type(multiplier) ~= "number" or multiplier < 1 then
+		return 1
+	end
+	return multiplier
 end
 
 -- Handle time tracking (No idea what this does TBH)

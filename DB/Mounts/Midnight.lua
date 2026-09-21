@@ -269,7 +269,10 @@ local midnightMounts = {
 		},
 		chance = 1,
 		sourceText = L["This mount is a guaranteed drop from a rare spawned using the Chubs battle pet in the Broken Throne Ritual Site."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW },
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA },
+		},
 	},
 	["Void-Corrupted Eagle Talon"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -283,7 +286,10 @@ local midnightMounts = {
 		},
 		chance = 1,
 		sourceText = L["This mount is a guaranteed drop from completing a summoning ritual in the Broken Throne Ritual Site."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW },
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA },
+		},
 	},
 	["Void-Touched Snapdragon"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -296,7 +302,10 @@ local midnightMounts = {
 		tooltipNpcs = { 263617 },
 		chance = 100,
 		sourceText = L["This mount is obtained by interacting with Washed Up Kelp in the Daggerspine Point Ritual Site."],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW },
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA },
+		},
 	},
 	["Lucent Hawkstrider"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
@@ -376,14 +385,16 @@ local midnightMounts = {
 	["Broken Lynx Leash"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.USE,
+		method = CONSTANTS.DETECTION_METHODS.SPECIAL,
 		name = L["Broken Lynx Leash"],
 		itemId = 272392,
 		spellId = 1287359,
-		items = { 602746, 650051 },
-		chance = 500,
-		sourceText = L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"],
-		coords = { { m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT } },
+		chance = 300,
+		sourceText = L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount."],
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_EW },
+			{ m = CONSTANTS.UIMAPIDS.RITUAL_SITES_MIDNIGHT_ZA },
+		},
 	},
 	["Arcanovoid Construct"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
