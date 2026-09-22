@@ -987,8 +987,12 @@ L["Rarity Tooltip Options"] = true
 L["World Tooltip Options"] = true
 L["General Options"] = true
 L["Tooltip activation"] = true
+L["Window activation"] = true
 L["On hover"] = true
 L["On click"] = true
+L["Standalone"] = true
+L["Choose whether the Rarity window opens while hovering over the minimap icon or as a standalone window when clicked."] = true
+L["Toggle Rarity window"] = true
 L['If "On click" is selected, activating the tracker is done via CTRL + SHIFT + Click, otherwise it\'s activated with a simple click.'] =
 	true
 L["Left click"] = true

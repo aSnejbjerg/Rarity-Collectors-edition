@@ -87,6 +87,7 @@ function EventHandlers:Register()
 	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", "OnMouseOver")
 	self:RegisterEvent("CRITERIA_COMPLETE", "OnCriteriaComplete")
 	self:RegisterEvent("ENCOUNTER_END", "OnEncounterEnd")
+	self:RegisterEvent("PLAYER_REGEN_DISABLED", "OnCombatStarted")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "OnCombatEnded")
 	self:RegisterEvent("PET_BATTLE_OPENING_START", "OnPetBattleStart")
 	self:RegisterEvent("PET_BATTLE_CLOSE", "OnPetBattleEnd")
@@ -378,6 +379,12 @@ end
 -------------------------------------------------------------------------------------
 do
 	local timer1, timer2, timer3, timer4, timer5, timer6
+	local standaloneWasOpen = false
+
+	function R:OnCombatStarted()
+		standaloneWasOpen = Rarity.GUI:CloseStandaloneTooltipForCombat()
+	end
+
 	function R:OnCombatEnded(event)
 		-- if R:InTooltip() then Rarity:ShowTooltip() end
 
@@ -389,6 +396,10 @@ do
 		self:CancelTimer(timer6, true)
 
 		self:ScanStatistics(event)
+		if standaloneWasOpen then
+			Rarity.GUI:ReopenStandaloneTooltipAfterCombat()
+			standaloneWasOpen = false
+		end
 
 		timer1 = self:ScheduleTimer(function()
 			Rarity:ScanStatistics(event .. " 1")
