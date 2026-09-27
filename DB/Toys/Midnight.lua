@@ -188,6 +188,50 @@ midnightToys["Preyhunter's Masquerade"] = {
 	sourceText = L["Dropped by the prey boss named Ral'kala"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
-
+if CONSTANTS.WOW_INTERFACE_VER < CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.THE_PROMISE_OF_TOMORROW then
+	Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
+	return midnightToys
+end
+midnightToys["Shadeweaver's Hearthstone"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.ITEM,
+	isToy = true,
+	method = CONSTANTS.DETECTION_METHODS.BOSS,
+	name = L["Shadeweaver's Hearthstone"],
+	itemId = 281615,
+	chance = 25,
+	npcs = { 99999 },
+	tooltipNpcs = { 267861 },
+	lockBossName = "Kith'ix",
+	statisticId = { 63839, 63840, 63841, 63842 },
+	instanceDifficulties = {
+		[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true,
+	},
+	coords = { { i = true, m = CONSTANTS.UIMAPIDS.UNBINDING_OF_KITHIX } },
+	groupSize = 25,
+	equalOdds = true,
+}
+midnightToys["Libram of the Matriarch"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.ITEM,
+	isToy = true,
+	method = CONSTANTS.DETECTION_METHODS.BOSS,
+	name = L["Libram of the Matriarch"],
+	itemId = 284159,
+	chance = 25,
+	npcs = { 99999 },
+	tooltipNpcs = { 267861 },
+	lockBossName = "Kith'ix",
+	statisticId = { 63842 },
+	instanceDifficulties = {
+		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
+	},
+	coords = { { i = true, m = CONSTANTS.UIMAPIDS.UNBINDING_OF_KITHIX } },
+	groupSize = 25,
+	equalOdds = true,
+}
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
 return midnightToys

@@ -2,6 +2,8 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Libram of the Matriarch"] = true
+L["Shadeweaver's Hearthstone"] = true
 L["Vibrant Venomfang"] = true
 L["Soulcoil Remnant"] = true
 L["Drops from the Wiggling version of the Venom-Soaked Satchel, a rare alternative drop from completing Curse Surges."] =
