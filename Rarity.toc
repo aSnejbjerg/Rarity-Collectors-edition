@@ -149,6 +149,11 @@ DB\Toys\Dragonflight.lua
 DB\Toys\TheWarWithin.lua
 DB\Toys\Midnight.lua
 
+## manuscripts
+DB\Manuscripts\Dragonflight.lua
+DB\Manuscripts\TheWarWithin.lua
+DB\Manuscripts\HolidayEvents_Dragonflight.lua
+
 # Utility/Helpers
 Utils\DebugCache.lua
 Utils\PrettyPrint.lua
