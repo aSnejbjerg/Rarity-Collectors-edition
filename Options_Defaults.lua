@@ -12,6 +12,7 @@ R.string_types = {
 	[CONSTANTS.ITEM_TYPES.MOUNT] = L["Mount"],
 	[CONSTANTS.ITEM_TYPES.PET] = L["Battle Pet"],
 	[CONSTANTS.ITEM_TYPES.ITEM] = L["Toy or Item"],
+	[CONSTANTS.ITEM_TYPES.MANUSCRIPT] = L["Manuscripts"],
 }
 
 R.string_methods = {
@@ -147,6 +148,7 @@ function R:PrepareDefaults()
 				[CONSTANTS.ITEM_TYPES.MOUNT] = true,
 				[CONSTANTS.ITEM_TYPES.PET] = true,
 				[CONSTANTS.ITEM_TYPES.ITEM] = true,
+				[CONSTANTS.ITEM_TYPES.MANUSCRIPT] = true,
 			},
 			-- These are inventory items that may result in another CONSTANTS.ITEM_TYPES.ITEM that Rarity would like to make you aware of
 			extraTooltips = {
@@ -462,6 +464,7 @@ function R:PrepareDefaults()
 				mounts = Rarity.ItemDB.mounts,
 				pets = Rarity.ItemDB.pets,
 				items = Rarity.ItemDB.toys,
+				manuscripts = Rarity.ItemDB.manuscripts,
 				user = {
 					name = L["Custom"],
 					-- ["Test 1"] =      { type = CONSTANTS.ITEM_TYPES.PET, method = CONSTANTS.DETECTION_METHODS.NPC, name = "Test 1", spellId = 10682, itemId = 25467, npcs = { 16520, 16516 }, chance = 100,  },
