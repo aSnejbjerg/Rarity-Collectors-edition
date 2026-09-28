@@ -1520,7 +1520,7 @@ local somethingAdded = false
 		end
 	end
 	local group3end = debugprofilestop()
-	
+
 	local group4start = debugprofilestop()
 	if R.db.profile.collectionType[MANUSCRIPT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.manuscripts)
@@ -1532,7 +1532,7 @@ local somethingAdded = false
 		end
 	end
 	local group4end = debugprofilestop()
-	
+
 	local group5start = debugprofilestop()
 	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
 	local group5end = debugprofilestop()
@@ -1542,7 +1542,7 @@ local somethingAdded = false
 	if itemsExistInThisGroup then
 		somethingAdded = true
 	end
-	
+
 	local group6start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.mounts, true)
