@@ -166,7 +166,6 @@ L["Renewed Proto-Drake: Visage of the Infinite"] = true
 L["Renewed Proto-Drake: Embodiment of the Storm-Eater"] = true
 L["Highland Drake: Embodiment of the Hellforged"] = true
 L["Renewed Proto-Drake: Embodiment of the Blazing"] = true
------------------------------ 
 L["Search for Manuscripts"] = true
 L["Manuscripts"] = true
 -------Manuscripts end-------
