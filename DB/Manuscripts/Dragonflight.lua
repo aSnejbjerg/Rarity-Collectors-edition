@@ -1065,7 +1065,7 @@ local dragonflightManuscripts = {
 		chance = 50,
 		questId = { 69173 },
 		coords = {
-			{ m = CONSTANTS.UIMAPIDS.OHN_AHRAN_PLAINS },			
+			{ m = CONSTANTS.UIMAPIDS.OHN_AHRAN_PLAINS },
 			{ m = CONSTANTS.UIMAPIDS.THE_AZURE_SPAN },
 		},
 	},
@@ -1109,7 +1109,7 @@ local dragonflightManuscripts = {
 		chance = 50,
 		questId = { 69186 },
 		coords = {
-			{ m = CONSTANTS.UIMAPIDS.OHN_AHRAN_PLAINS },			
+			{ m = CONSTANTS.UIMAPIDS.OHN_AHRAN_PLAINS },
 			{ m = CONSTANTS.UIMAPIDS.THE_AZURE_SPAN },
 		},
 	},
@@ -1768,9 +1768,9 @@ local dragonflightManuscripts = {
 		questId = { 69598 },
 		chance = 10,
 		instanceDifficulties = {
-		 	[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_DUNGEON] = true,
-		 	[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
-		 	[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+			[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_DUNGEON] = true,
+			[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+			[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
 		 },
         coords = { { m = CONSTANTS.UIMAPIDS.NELTHARUS, i = true } },
 	},
