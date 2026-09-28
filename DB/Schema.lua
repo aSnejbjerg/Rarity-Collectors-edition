@@ -113,6 +113,11 @@ function DatabaseSchema:IsValidMount(entry)
 
 	return true
 end
-
+function DatabaseSchema:IsValidManuscripts(entry)
+	if not Item:IsManuscript(entry) then
+		Rarity:print("item is not a manuscript")
+		return false
+	end
+end
 Rarity.DatabaseSchema = DatabaseSchema
 return DatabaseSchema
