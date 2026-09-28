@@ -7,6 +7,7 @@ local ItemDB = {}
 ItemDB.mounts = { name = L["Mounts"] }
 ItemDB.pets = { name = L["Battle Pets"] }
 ItemDB.toys = { name = L["Toys & Items"] }
+ItemDB.manuscripts = { name = L["Manuscripts"]}
 
 -- Add any item that doesn't yet exist, which in our case means ALL items since there shouldn't be duplicate entries
 -- The database is split to make it more easily maintainable, but the individual partitions have no overlap
