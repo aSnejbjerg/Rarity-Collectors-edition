@@ -23,6 +23,7 @@ function Validation:ValidateItemDB()
 	local numInvalidPets = self:ValidatePets()
 	local numInvalidMounts = self:ValidateMounts()
 	local numInvalidCustomItems = self:ValidateCustomItems()
+	local numInvalidManuscripts = self:ValidateManuscripts()
 
 	numErrors = numErrors + numInvalidItemsAndToys + numInvalidPets + numInvalidMounts + numInvalidCustomItems
 
@@ -34,6 +35,7 @@ function Validation:ValidateItemDB()
 		Rarity:Debug(format("Pets: %d errors", numInvalidPets))
 		Rarity:Debug(format("Mounts: %d errors", numInvalidMounts))
 		Rarity:Debug(format("Custom: %d errors", numInvalidCustomItems))
+		Rarity:Debug(format("Manuscripts %d errors", numInvalidManuscripts))
 	end
 end
 
@@ -55,6 +57,10 @@ end
 function Validation:ValidateCustomItems()
 	Rarity:Debug("Validating custom items")
 	return self:ValidateGroup(Rarity.db.profile.groups.user)
+end
+function Validation:ValidateManuscripts()
+	Rarity:Debug("Validating Manuscripts")
+	return self:ValidateGroup(Rarity.db.profile.groups.manuscripts)
 end
 
 function Validation:ValidateGroup(group)
@@ -84,11 +90,15 @@ function Validation:IsValidItem(entry)
 	local isMount = (entry.type == CONSTANTS.ITEM_TYPES.MOUNT)
 
 	if isPet and not self:IsValidPet(entry) then
-		return false
+		if isPet and not self:IsValidManuscripts(entry) then
+			return false
+		end
 	end
 
 	if isMount and not self:IsValidMount(entry) then
-		return false
+		if isMount and not self:IsValidManuscripts(entry) then
+			return false
+		end
 	end
 
 	return isValidItem
@@ -100,6 +110,9 @@ end
 
 function Validation:IsValidMount(entry)
 	return Rarity.DatabaseSchema:IsValidMount(entry)
+end
+function Validation:IsValidManuscripts(entry)
+	return Rarity.DatabaseSchema:IsValidManuscripts(entry)
 end
 
 Rarity.Validation = Validation
