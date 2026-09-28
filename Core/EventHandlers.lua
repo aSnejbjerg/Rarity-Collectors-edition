@@ -666,6 +666,7 @@ function R:OnQuestTurnedIn(event, questID, experience, money)
 		local v = self.db.profile.groups.items[itemName]
 			or self.db.profile.groups.pets[itemName]
 			or self.db.profile.groups.mounts[itemName]
+			or self.db.profile.groups.manuscripts[itemName]
 		if v and type(v) == "table" and v.enabled ~= false and self:IsAttemptAllowed(v) then
 			if v.attempts == nil then
 				v.attempts = 1
@@ -787,6 +788,7 @@ function R:OnIslandCompleted(event, mapID, winner)
 			local v = self.db.profile.groups.items[name]
 				or self.db.profile.groups.pets[name]
 				or self.db.profile.groups.mounts[name]
+				or self.db.profile.groups.manuscripts[name]
 			if v and type(v) == "table" and v.enabled ~= false then
 				if v.attempts == nil then
 					v.attempts = 1
