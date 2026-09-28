@@ -22,6 +22,7 @@ local C = R.CONSTANTS
 local MOUNT = "MOUNT"
 local PET = "PET"
 local ITEM = "ITEM"
+local MANUSCRIPT = "MANUSCRIPT"
 
 -- Categories of origin
 local BASE = "BASE"
@@ -187,6 +188,7 @@ local SEARCH_FILTER_CONFIG = {
 	mounts = { label = L["Search Mounts"] },
 	pets = { label = L["Search Battle Pets"] },
 	items = { label = L["Search Toys & Items"] },
+	manuscripts = { label = L["Search for Manuscripts"] },
 }
 
 local function itemMatchesSearch(item, searchText)
@@ -266,6 +268,11 @@ local function allitems()
 		end
 	end
 	for k, v in pairs(R.db.profile.groups.items) do
+		if type(v) == "table" then
+			t[k] = v
+		end
+	end
+	for k, v in pairs(R.db.profile.groups.manuscripts) do
 		if type(v) == "table" then
 			t[k] = v
 		end
@@ -1070,6 +1077,18 @@ function R:PrepareOptions()
 									Rarity.GUI:UpdateText()
 								end,
 							},
+							manuscripts = {
+								type = "toggle",
+								order = newOrder(),
+								name = L["Manuscripts"],
+								get = function()
+									return self.db.profile.collectionType[MANUSCRIPT]
+								end,
+								set = function(info, val)
+									self.db.profile.collectionType[MANUSCRIPT] = val
+									Rarity.GUI:UpdateText()
+								end,
+							},
 						}, -- args
 					}, -- collectionType
 					bar = {
@@ -1308,6 +1327,14 @@ function R:PrepareOptions()
 				childGroups = "tree",
 				args = {}, -- args
 			}, -- items
+			-- Manuscripts ----------------------------------------------------------------------------------------------------------------------------------------
+			manuscripts = {
+				type = "group",
+				name = L["Manuscripts"],
+				order = newOrder(),
+				childGroups = "tree",
+				args = {},
+			}, -- Manuscripts
 			-- Custom ---------------------------------------------------------------------------------------------------------------------------------------
 
 			custom = {
@@ -1650,6 +1677,7 @@ function R:PrepareOptions()
 	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false, "mounts")
 	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false, "pets")
 	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false, "items")
+	self:CreateGroup(self.options.args.manuscripts, self.db.profile.groups.manuscripts, false, "manuscripts")
 	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
 
 	self.advancedSettings = {
