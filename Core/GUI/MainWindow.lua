@@ -1534,14 +1534,14 @@ local somethingAdded = false
 	local group4end = debugprofilestop()
 	
 	local group5start = debugprofilestop()
-		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
+	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
 	local group5end = debugprofilestop()
-		if addedLast then
-			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
-		end
-		if itemsExistInThisGroup then
-			somethingAdded = true
-		end
+	if addedLast then
+		tooltip:AddSeparator(1, 1, 1, 1, 1.0)
+	end
+	if itemsExistInThisGroup then
+		somethingAdded = true
+	end
 	
 	local group6start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
