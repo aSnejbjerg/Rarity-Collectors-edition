@@ -397,7 +397,7 @@ local function showSubTooltip(cell, item)
 		item.type == CONSTANTS.ITEM_TYPES.MANUSCRIPT then
 		tooltip2:AddSeparator(1, 1, 1, 1, 1)
 		tooltip2AddLine(item.sourceText)
-		headSource = true
+		hadSource = true
 	end
 	if
 		item.type == CONSTANTS.ITEM_TYPES.PET
@@ -1524,7 +1524,7 @@ local somethingAdded = false
 	local group4start = debugprofilestop()
 	if R.db.profile.collectionType[MANUSCRIPT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.manuscripts)
-		if addedlast then
+		if addedLast then
 			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
 		end
 		if itemsExistInThisGroup then
@@ -1534,15 +1534,15 @@ local somethingAdded = false
 	local group4end = debugprofilestop()
 	
 	local group5start = debugprofilestop()
-	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
+		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
 	local group5end = debugprofilestop()
-	if addedLast then
-		tooltip:AddSeparator(1, 1, 1, 1, 1.0)
+		if addedLast then
+			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
+		end
+		if itemsExistInThisGroup then
+			somethingAdded = true
+		end
 	end
-	if itemsExistInThisGroup then
-		somethingAdded = true
-	end
-
 	local group6start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.mounts, true)
