@@ -50,7 +50,6 @@ local TheWarWithinManuscripts = {
 		chance = 50,
 		coords = { { m = CONSTANTS.UIMAPIDS.VOIDRAZOR_SANCTUARY, i = true } }, -- Add to sharedconstants, 2484
 	},
-	
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.manuscripts, TheWarWithinManuscripts)
