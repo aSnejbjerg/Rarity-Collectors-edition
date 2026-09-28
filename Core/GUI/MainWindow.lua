@@ -57,6 +57,7 @@ local HOLIDAY = "HOLIDAY"
 local MOUNT = "MOUNT"
 local PET = "PET"
 local ITEM = "ITEM"
+local MANUSCRIPT = "MANUSCRIPT"
 -- Color codes
 local red = Rarity.Enum.Colors.Red
 local blue = Rarity.Enum.Colors.Blue
@@ -391,6 +392,12 @@ local function showSubTooltip(cell, item)
 		tooltip2:AddSeparator(1, 1, 1, 1, 1)
 		tooltip2AddLine(Rarity.mount_sources[item.spellId])
 		hadSource = true
+	end
+	if
+		item.type == CONSTANTS.ITEM_TYPES.MANUSCRIPT then
+		tooltip2:AddSeparator(1, 1, 1, 1, 1)
+		tooltip2AddLine(item.sourceText)
+		headSource = true
 	end
 	if
 		item.type == CONSTANTS.ITEM_TYPES.PET
@@ -1476,12 +1483,11 @@ function R:ShowTooltip(hidden)
 
 	-- Item groups
 
-	local somethingAdded = false
+local somethingAdded = false
 
 	local group1start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.mounts)
-
 		if addedLast then
 			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
 		end
@@ -1514,10 +1520,22 @@ function R:ShowTooltip(hidden)
 		end
 	end
 	local group3end = debugprofilestop()
-
+	
 	local group4start = debugprofilestop()
-	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
+	if R.db.profile.collectionType[MANUSCRIPT] then
+		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.manuscripts)
+		if addedlast then
+			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
+		end
+		if itemsExistInThisGroup then
+			somethingAdded = true
+		end
+	end
 	local group4end = debugprofilestop()
+	
+	local group5start = debugprofilestop()
+	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user)
+	local group5end = debugprofilestop()
 	if addedLast then
 		tooltip:AddSeparator(1, 1, 1, 1, 1.0)
 	end
@@ -1525,21 +1543,9 @@ function R:ShowTooltip(hidden)
 		somethingAdded = true
 	end
 
-	local group5start = debugprofilestop()
+	local group6start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.mounts, true)
-		if addedLast then
-			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
-		end
-		if itemsExistInThisGroup then
-			somethingAdded = true
-		end
-	end
-	local group5end = debugprofilestop()
-
-	local group6start = debugprofilestop()
-	if R.db.profile.collectionType[PET] then
-		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.pets, true)
 		if addedLast then
 			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
 		end
@@ -1550,8 +1556,8 @@ function R:ShowTooltip(hidden)
 	local group6end = debugprofilestop()
 
 	local group7start = debugprofilestop()
-	if R.db.profile.collectionType[ITEM] then
-		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.items, true)
+	if R.db.profile.collectionType[PET] then
+		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.pets, true)
 		if addedLast then
 			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
 		end
@@ -1562,8 +1568,20 @@ function R:ShowTooltip(hidden)
 	local group7end = debugprofilestop()
 
 	local group8start = debugprofilestop()
-	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user, true)
+	if R.db.profile.collectionType[ITEM] then
+		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.items, true)
+		if addedLast then
+			tooltip:AddSeparator(1, 1, 1, 1, 1.0)
+		end
+		if itemsExistInThisGroup then
+			somethingAdded = true
+		end
+	end
 	local group8end = debugprofilestop()
+
+	local group9start = debugprofilestop()
+	addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.user, true)
+	local group9end = debugprofilestop()
 	if addedLast then
 		tooltip:AddSeparator(1, 1, 1, 1, 1.0)
 	end
