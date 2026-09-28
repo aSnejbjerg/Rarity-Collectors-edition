@@ -1542,7 +1542,7 @@ local somethingAdded = false
 		if itemsExistInThisGroup then
 			somethingAdded = true
 		end
-	end
+	
 	local group6start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
 		addedLast, itemsExistInThisGroup = addGroup(self.db.profile.groups.mounts, true)
