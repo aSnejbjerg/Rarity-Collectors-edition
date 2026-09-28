@@ -221,7 +221,7 @@ C.UIMAPIDS = {
 }
 
 -- Types of items
-C.ITEM_TYPES = { MOUNT = "MOUNT", PET = "PET", ITEM = "ITEM" }
+C.ITEM_TYPES = { MOUNT = "MOUNT", PET = "PET", ITEM = "ITEM", MANUSCRIPT = "MANUSCRIPT" }
 
 -- Types of different detection methods
 C.DETECTION_METHODS = {
