@@ -155,6 +155,10 @@ function Item:IsMount(entry)
 	return entry.type == CONSTANTS.ITEM_TYPES.MOUNT
 end
 
+function Item:IsManuscript(entry)
+	return entry.type == CONSTANTS.ITEM_TYPES.Manuscript
+end
+
 function Item:IsCollectionItem(entry)
 	return entry.method == CONSTANTS.DETECTION_METHODS.COLLECTION
 end
