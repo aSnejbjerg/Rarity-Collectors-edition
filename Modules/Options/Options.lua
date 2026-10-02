@@ -1516,7 +1516,13 @@ function R:PrepareOptions()
 								end
 							end
 
-							self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom", "custom")
+							self:CreateGroup(
+									self.options.args.custom,
+									self.db.profile.groups.user,
+									true,
+									"custom",
+									"custom"
+  							)
 							self:Update("IMPORT")
 							self.db.profile.lastImportString = ""
 						end,
@@ -2020,7 +2026,13 @@ function R:CreateGroup(options, group, isUser, searchFilterKey, sortKey)
 					confirmText = L["Are you sure you want to delete this item?"],
 					func = function(info)
 						self.db.profile.groups.user[item.name] = nil
-						self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom", "custom")
+						self:CreateGroup(
+								self.options.args.custom, 
+								self.db.profile.groups.user, 
+								true, 
+								"custom", 
+								"custom"
+						)
 						self:Update("OPTIONS")
 					end,
 					order = newOrder(),
