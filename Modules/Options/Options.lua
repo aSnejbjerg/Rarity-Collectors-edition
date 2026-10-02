@@ -502,17 +502,18 @@ function R:PrepareOptions()
 							}, -- multifarm
 							tooltipActivation = {
 								type = "select",
-								name = L["Tooltip activation"],
-								desc = L['If "On click" is selected, activating the tracker is done via CTRL + SHIFT + Click, otherwise it\'s activated with a simple click.'],
+								name = L["Window activation"],
+								desc = L["Choose whether the Rarity window opens while hovering over the minimap icon or as a standalone window when clicked."],
 								values = {
 									[C.TOOLTIP.ACTIVATION_METHOD_HOVER] = L["On hover"],
-									[C.TOOLTIP.ACTIVATION_METHOD_CLICK] = L["On click"],
+									[C.TOOLTIP.ACTIVATION_METHOD_CLICK] = L["Standalone"],
 								},
 								get = function()
 									return self.db.profile.tooltipActivation
 								end,
 								set = function(info, val)
 									self.db.profile.tooltipActivation = val
+									Rarity:HideTooltip()
 									self:Update("OPTIONS")
 								end,
 								order = newOrder(),

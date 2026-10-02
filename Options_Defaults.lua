@@ -71,6 +71,10 @@ function R:PrepareDefaults()
 	self.defaults = {
 		profile = {
 			minimap = { hide = false },
+			standaloneWindow = {
+				width = 600,
+				height = 200,
+			},
 			showTrackedItemAsMinimapIcon = false,
 			enableAnnouncements = true,
 			feedText = CONSTANTS.LDB_TEXT_STYLES.FEED_NORMAL,
