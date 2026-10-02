@@ -161,7 +161,27 @@ local function compareName(a, b)
 	return (a.name or "") < (b.name or "")
 end
 
-local function sort(t)
+local function compareNameDesc(a, b)
+	if not a or not b then
+		return 0
+	end
+	if type(a) ~= "table" or type(b) ~= "table" then
+		return 0
+	end
+	return (b.name or "") < (a.name or "")
+end
+
+-- Sort modes selectable via the "Sort by" dropdown on item lists
+local SORT_MODE_AZ = "AZ"
+local SORT_MODE_ZA = "ZA"
+
+local SORT_COMPARATORS = {
+	[SORT_MODE_AZ] = compareName,
+	[SORT_MODE_ZA] = compareNameDesc,
+}
+
+local function sort(t, sortMode)
+	local compareFn = SORT_COMPARATORS[sortMode] or compareName
 	local nt = {}
 	local n = 0
 	local min
@@ -174,7 +194,7 @@ local function sort(t)
 	for i = 1, n, 1 do
 		min = i
 		for j = i + 1, n, 1 do
-			if compareName(nt[j], nt[min]) then
+			if compareFn(nt[j], nt[min]) then
 				min = j
 			end
 		end
@@ -187,6 +207,7 @@ local SEARCH_FILTER_CONFIG = {
 	mounts = { label = L["Search Mounts"] },
 	pets = { label = L["Search Battle Pets"] },
 	items = { label = L["Search Toys & Items"] },
+	custom = { label = L["Search Custom"] },
 }
 
 local function itemMatchesSearch(item, searchText)
@@ -1495,7 +1516,13 @@ function R:PrepareOptions()
 								end
 							end
 
-							self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+							self:CreateGroup(
+								self.options.args.custom,
+								self.db.profile.groups.user,
+								true,
+								"custom",
+								"custom"
+							)
 							self:Update("IMPORT")
 							self.db.profile.lastImportString = ""
 						end,
@@ -1647,10 +1674,10 @@ function R:PrepareOptions()
 	} -- self.options
 
 	-- Create the options for each group of items
-	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false, "mounts")
-	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false, "pets")
-	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false, "items")
-	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false, "mounts", "mounts")
+	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false, "pets", "pets")
+	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false, "items", "items")
+	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom", "custom")
 
 	self.advancedSettings = {
 		name = L["Advanced"],
@@ -1844,7 +1871,7 @@ end -- function R:PrepareOptions()
 -- ITEM GROUPS
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-function R:CreateGroup(options, group, isUser, searchFilterKey)
+function R:CreateGroup(options, group, isUser, searchFilterKey, sortKey)
 	options.args = {
 		name = {
 			-- type = "execute", -- Why?
@@ -1874,12 +1901,39 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 					end
 					self.db.profile.groups.user[val] = { name = val }
 					self:Update("OPTIONS")
-					self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+					self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom", "custom")
+					-- Jump straight to the new entry instead of leaving the player to scroll/search for it
+					LibStub("AceConfigDialog-3.0"):SelectGroup("Rarity", "custom", "entry_" .. val)
 				end
 			end,
 			hidden = not isUser,
 		},
 	}
+
+	if sortKey then
+		self.optionsSortModes = self.optionsSortModes or {}
+		options.args.sortMode = {
+			type = "select",
+			style = "dropdown",
+			order = 2,
+			width = "double",
+			name = L["Sort by"],
+			desc = L["Choose how items in this list are sorted."],
+			values = {
+				[SORT_MODE_AZ] = L["Name (A-Z)"],
+				[SORT_MODE_ZA] = L["Name (Z-A)"],
+			},
+			sorting = { SORT_MODE_AZ, SORT_MODE_ZA },
+			get = function()
+				return self.optionsSortModes[sortKey] or SORT_MODE_AZ
+			end,
+			set = function(info, val)
+				self.optionsSortModes[sortKey] = val
+				self:CreateGroup(options, group, isUser, searchFilterKey, sortKey)
+				LibStub("AceConfigRegistry-3.0"):NotifyChange("Rarity")
+			end,
+		}
+	end
 
 	if searchFilterKey then
 		self.optionsSearchFilters = self.optionsSearchFilters or {}
@@ -1914,9 +1968,10 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 		}
 	end
 
-	local g = sort(group)
-	for itemkey, item in pairs(g) do
-		local optionkey = tostring(newOrder())
+	local g = sort(group, sortKey and self.optionsSortModes and self.optionsSortModes[sortKey])
+	for _, item in pairs(g) do
+		-- Keyed by item name (not position) so the path stays stable across re-sorts, letting us navigate straight to it
+		local optionkey = "entry_" .. tostring(item.name)
 		options.args[optionkey] = {
 			type = "group",
 			order = newOrder(),
@@ -1971,7 +2026,13 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 					confirmText = L["Are you sure you want to delete this item?"],
 					func = function(info)
 						self.db.profile.groups.user[item.name] = nil
-						self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+						self:CreateGroup(
+							self.options.args.custom,
+							self.db.profile.groups.user,
+							true,
+							"custom",
+							"custom"
+						)
 						self:Update("OPTIONS")
 					end,
 					order = newOrder(),

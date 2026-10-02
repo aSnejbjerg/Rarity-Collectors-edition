@@ -52,12 +52,17 @@ L["Search"] = true
 L["Search Mounts"] = true
 L["Search Battle Pets"] = true
 L["Search Toys & Items"] = true
+L["Search Custom"] = true
 L["Search mounts"] = true
 L["Search battle pets"] = true
 L["Search toys & items"] = true
 L["Clear"] = true
 L["Clear the search filter."] = true
 L["Filter the list by name or item ID."] = true
+L["Sort by"] = true
+L["Choose how items in this list are sorted."] = true
+L["Name (A-Z)"] = true
+L["Name (Z-A)"] = true
 L["Due to Blizzard API changes in Midnight, this item can no longer be tracked."] = true
 L["This pet drops from the spawned or summoned versions of Nullaeus in regular delve runs. NOT from the Nemesis delve."] =
 	true
