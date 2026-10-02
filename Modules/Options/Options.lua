@@ -1523,7 +1523,6 @@ function R:PrepareOptions()
 								"custom",
 								"custom"
 							)
-							
 							self:Update("IMPORT")
 							self.db.profile.lastImportString = ""
 						end,
@@ -2034,7 +2033,6 @@ function R:CreateGroup(options, group, isUser, searchFilterKey, sortKey)
 							"custom",
 							"custom"
 						)
-						
 						self:Update("OPTIONS")
 					end,
 					order = newOrder(),
