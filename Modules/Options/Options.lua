@@ -1517,11 +1517,11 @@ function R:PrepareOptions()
 							end
 
 							self:CreateGroup(
-									self.options.args.custom,
-									self.db.profile.groups.user,
-									true,
-									"custom",
-									"custom"
+								self.options.args.custom,
+								self.db.profile.groups.user,
+								true,
+								"custom",
+								"custom"
   							)
 							self:Update("IMPORT")
 							self.db.profile.lastImportString = ""
@@ -2027,11 +2027,11 @@ function R:CreateGroup(options, group, isUser, searchFilterKey, sortKey)
 					func = function(info)
 						self.db.profile.groups.user[item.name] = nil
 						self:CreateGroup(
-								self.options.args.custom, 
-								self.db.profile.groups.user, 
-								true, 
-								"custom", 
-								"custom"
+							self.options.args.custom,
+							self.db.profile.groups.user,
+							true,
+							"custom",
+							"custom"
 						)
 						self:Update("OPTIONS")
 					end,
