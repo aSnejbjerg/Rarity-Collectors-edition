@@ -187,7 +187,7 @@ local SEARCH_FILTER_CONFIG = {
 	mounts = { label = L["Search Mounts"] },
 	pets = { label = L["Search Battle Pets"] },
 	items = { label = L["Search Toys & Items"] },
-	custom = { label = L["Search Custom"] }
+	custom = { label = L["Search Custom"] },
 }
 
 local function itemMatchesSearch(item, searchText)
