@@ -1522,7 +1522,7 @@ function R:PrepareOptions()
 								true,
 								"custom",
 								"custom"
-  							)
+							)
 							
 							self:Update("IMPORT")
 							self.db.profile.lastImportString = ""
