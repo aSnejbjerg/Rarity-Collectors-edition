@@ -62,6 +62,7 @@ local holidayEventMountsTWW = {
 		chance = 25,
 		groupSize = 5,
 		equalOdds = true,
+		isfirstattemptonly = true,
 		sourceText = L["Can be contained in Keg-Shaped Treasure Chest, rewarded for defeating the World Event Dungeon during Brewfest."]
 			.. " "
 			.. L["Only available on the first attempt each day."],

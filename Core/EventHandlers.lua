@@ -1211,6 +1211,39 @@ function R:BackUpInventoryItemAmounts()
 	end
 end
 
+-- isfirstattemptonly for a few holiday mounts e.g. Brewfest Bomber
+function R:ShouldCountFirstAttemptDaily(item, triggerItemId)
+	if not item.isfirstattemptonly then
+		return true
+	end
+
+	local now = GetServerTime()
+	local lastResetTime = now + C_DateAndTime.GetSecondsUntilDailyReset() - 24 * 60 * 60
+
+	self.db.profile.firstAttemptDaily = self.db.profile.firstAttemptDaily or {}
+	local record = self.db.profile.firstAttemptDaily[item.name]
+	local shouldCount = record == nil or record.lastAttemptTime < lastResetTime
+
+	if record == nil then
+		self.db.profile.firstAttemptDaily[item.name] = { triggerItemId = triggerItemId, lastAttemptTime = now }
+		self:Debug(format("%s: first trigger seen (item %s at %d), counting attempt", item.name, triggerItemId, now))
+	else
+		self:Debug(
+			format(
+				"%s: trigger item %s, last attempt %d, last reset %d, %s",
+				item.name,
+				triggerItemId,
+				record.lastAttemptTime,
+				lastResetTime,
+				shouldCount and "counting attempt" or "skipping attempt"
+			)
+		)
+		record.lastAttemptTime = now
+	end
+
+	return shouldCount
+end
+
 function R:ProcessContainerItems()
 	for k, v in pairs(Rarity.tempbagitems) do
 		if (Rarity.bagitems[k] or 0) < (Rarity.tempbagitems[k] or 0) then -- An inventory item went down in count or disappeared
@@ -1234,12 +1267,14 @@ function R:ProcessContainerItems()
 											for kkk, vvv in pairs(vv.items) do
 												if vvv == k then
 													local i = vv
-													if i.attempts == nil then
-														i.attempts = 1
-													else
-														i.attempts = i.attempts + 1
+													if self:ShouldCountFirstAttemptDaily(i, k) then
+														if i.attempts == nil then
+															i.attempts = 1
+														else
+															i.attempts = i.attempts + 1
+														end
+														self:OutputAttempts(i)
 													end
-													self:OutputAttempts(i)
 												end
 											end
 										end
