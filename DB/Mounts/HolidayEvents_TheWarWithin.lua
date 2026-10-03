@@ -81,7 +81,7 @@ local holidayEventMountsTWW = {
 		chance = 666,
 		groupSize = 5,
 		equalOdds = true,
-		isfirstattemptonly = true,		
+		isfirstattemptonly = true,
 		holidayEvents = CONSTANTS.HolidayEvents["Love is in the Air"],
 		sourceText = L["Can be contained in Heart-Shaped Box, rewarded for defeating the World Event Dungeon during Love is in the Air."]
 			.. " "
