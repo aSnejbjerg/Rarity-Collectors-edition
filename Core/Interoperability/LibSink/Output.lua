@@ -3,8 +3,10 @@ local Output = {}
 local pendingMessages = {}
 local SendChatMessage = _G.SendChatMessage
 local isModernProject = _G.WOW_PROJECT_ID ~= nil
-	and ((_G.WOW_PROJECT_MAINLINE ~= nil and _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE)
-		or (_G.WOW_PROJECT_CAMELOT ~= nil and _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CAMELOT))
+	and (
+		(_G.WOW_PROJECT_MAINLINE ~= nil and _G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE)
+		or (_G.WOW_PROJECT_CAMELOT ~= nil and _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CAMELOT)
+	)
 
 local modernSinks = {
 	Emote = { name = "Emote", channel = "EMOTE" },
@@ -21,9 +23,7 @@ end
 
 local function EnforceAllowedOutput()
 	local selectedOutput = Rarity.db.profile.sink20OutputSink
-	if (isModernProject and selectedOutput == "Channel")
-		or (not isModernProject and modernSinks[selectedOutput])
-	then
+	if (isModernProject and selectedOutput == "Channel") or (not isModernProject and modernSinks[selectedOutput]) then
 		Rarity.db.profile.sink20OutputSink = "ChatFrame"
 	end
 end
@@ -71,7 +71,7 @@ function Output:GetOptionsTable()
 	filteredOptions.args = {}
 	for key, value in pairs(options.args) do
 		local isVersionSpecificOutput = key == "Channel" or modernSinks[key] ~= nil
-		local shouldShowOption = (not isVersionSpecificOutput)
+		local shouldShowOption = not isVersionSpecificOutput
 			or (isModernProject and modernSinks[key])
 			or (not isModernProject and key == "Channel")
 		if isModernProject and key == "ScrollArea" then
