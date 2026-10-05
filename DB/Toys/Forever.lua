@@ -11,7 +11,7 @@ end
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
-local classicToys = {
+local foreverToys = {
 	["Piccolo of the Flaming Fire"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
@@ -44,5 +44,5 @@ local classicToys = {
 	},
 }
 
-Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, classicToys)
-return classicToys
+Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, foreverToys)
+return foreverToys
