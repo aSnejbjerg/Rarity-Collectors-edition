@@ -46,5 +46,3 @@ local foreverToys = {
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, foreverToys)
 return foreverToys
-Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, foreverToys)
-return foreverToys
