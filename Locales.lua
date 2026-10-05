@@ -10,7 +10,8 @@ L["This pet drops from the Sewer Beast in Stormwind."] = true
 L["Tallstrider Hatchling"] = true
 L["This pet drops from the Tallstrider Matriarch in Darkshore."] = true
 L["Truesilver Shafted Arrow"] = true
-L["Available once an hour from Gifts/Pledges by interacting with city guards wearing either perfume or cologne and handing them a Love Token."] = true
+L["Available once an hour from Gifts/Pledges by interacting with city guards wearing either perfume or cologne and handing them a Love Token."] =
+	true
 L["Can drop from any Lvl 58+ Enemy. Cannot be tracked by Rarity inside instances."] = true
 L["Cat Carrier (Siamese)"] = true
 L["Vibrant Venomfang"] = true
