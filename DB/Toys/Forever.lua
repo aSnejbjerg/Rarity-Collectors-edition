@@ -12,7 +12,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
 local classicToys = {
-	["Piccolo of the Flaming Fire"] = {
+	["Piccolo of the Flaming Fire"] = { -- TODO Get the correct MapID
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		isToy = true,

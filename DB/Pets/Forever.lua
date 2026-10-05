@@ -114,7 +114,7 @@ local foreverPets = {
 		chance = 10000,
 		creatureId = 7544,
 		blackMarket = true,
-		coords = { { m = 56, x = 62.6, y = 41.6  } },
+		coords = { { m = CONSTANTS.UIMAPIDS.WETLANDS, x = 62.6, y = 41.6  } },
 	},
 	["Emerald Whelpling"] = { -- NOTE: ADJUSTED
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -127,7 +127,7 @@ local foreverPets = {
 		chance = 1000,
 		creatureId = 7545,
 		blackMarket = true,
-		coords = { { m = 51, x = 14.6, y = 62.6 } },
+		coords = { { m = CONSTANTS.UIMAPIDS.SWAMP_OF_SORROWS, x = 14.6, y = 62.6 } },
 	},
 	["Cat Carrier (Siamese)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -157,7 +157,7 @@ local foreverPets = {
 		creatureId = 274334,
 		blackMarket = true,
 		sourceText = L["This pet drops from the Tallstrider Matriarch in Darkshore."],
-		coords = { { m = 62, x = 37.6, y = 90.6 } },
+		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_DARKSHORE, x = 37.6, y = 90.6 } },
 	},
 	["Baby Crocolisk"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.FOREVER,
@@ -171,7 +171,7 @@ local foreverPets = {
 		creatureId = 273391,
 		blackMarket = true,
 		sourceText = L["This pet drops from the Sewer Beast in Stormwind."],
-		coords = { { m = 84, x = 48.6, y = 61.6 } },
+		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_STORMWIND_CITY, x = 48.6, y = 61.6 } },
 	},
 	["Musical Gustjumper"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.FOREVER,
@@ -184,7 +184,7 @@ local foreverPets = {
 		chance = 1,
 		creatureId = 259842,
 		sourceText = L["This pet requires you to /sing to a circle of frogs."],
-		coords = { { m = 2521, x = 51.6, y = 72.6 } }, -- Zephras Isle!
+		coords = { { m = CONSTANTS.UIMAPIDS.ZEPHRAS_ISLE, x = 51.6, y = 72.6 } },
 	},
 }
 

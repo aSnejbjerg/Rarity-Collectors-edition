@@ -12,7 +12,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
 local foreverMounts = {
-	["Deathcharger's Reins"] = {
+	["Deathcharger's Reins"] = { -- TODO Get the correct MapID
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
