@@ -24,7 +24,7 @@ local foreverPets = {
 		chance = 10000,
 		creatureId = 7383,
 		blackMarket = true,
-		coords = { { m = 1416, x = 20.6, y = 82.8  } },
+		coords = { { m = 1416, x = 20.6, y = 82.8 } },
 	},
 	["Dark Whelpling"] = { -- NOTE: ADJUSTED
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -102,7 +102,7 @@ local foreverPets = {
 		chance = 10000,
 		creatureId = 7391,
 		blackMarket = true,
-		coords = { { m = 1434, x = 29.6, y = 81.6  } },
+		coords = { { m = 1434, x = 29.6, y = 81.6 } },
 	},
 	["Tiny Crimson Whelpling"] = { -- NOTE: ADJUSTED
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -115,7 +115,7 @@ local foreverPets = {
 		chance = 10000,
 		creatureId = 7544,
 		blackMarket = true,
-		coords = { { m = CONSTANTS.UIMAPIDS.WETLANDS, x = 62.6, y = 41.6  } },
+		coords = { { m = CONSTANTS.UIMAPIDS.WETLANDS, x = 62.6, y = 41.6 } },
 	},
 	["Emerald Whelpling"] = { -- NOTE: ADJUSTED
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
