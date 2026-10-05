@@ -89,6 +89,7 @@ DB\Mounts\HolidayEvents_Dragonflight.lua
 DB\Mounts\HolidayEvents_TheWarWithin.lua
 DB\Mounts\HolidayEvents_Midnight.lua
 DB\Mounts\Classic.lua
+DB\Mounts\Forever.lua
 DB\Mounts\Flavour_ClassicEra.lua
 DB\Mounts\TheBurningCrusade.lua
 DB\Mounts\TbcEra.lua
@@ -106,6 +107,7 @@ DB\Mounts\Midnight.lua
 
 ## Pets
 DB\Pets\HolidayEvents_Classic.lua
+DB\Pets\HolidayEvents_Forever.lua
 DB\Pets\HolidayEvents_TheBurningCrusade.lua
 DB\Pets\HolidayEvents_WrathOfTheLichKing.lua
 DB\Pets\HolidayEvents_Cataclysm.lua
@@ -114,6 +116,7 @@ DB\Pets\HolidayEvents_WarlordsOfDraenor.lua
 DB\Pets\HolidayEvents_Dragonflight.lua
 DB\Pets\HolidayEvents_TheWarWithin.lua
 DB\Pets\Classic.lua
+DB\Pets\Forever.lua
 DB\Pets\TheBurningCrusade.lua
 DB\Pets\WrathOfTheLichKing.lua
 DB\Pets\Cataclysm.lua
@@ -137,6 +140,7 @@ DB\Toys\HolidayEvents_BattleForAzeroth.lua
 DB\Toys\HolidayEvents_Shadowlands.lua
 DB\Toys\HolidayEvents_Dragonflight.lua
 DB\Toys\Classic.lua
+DB\Toys\Forever.lua
 DB\Toys\TheBurningCrusade.lua
 DB\Toys\WrathOfTheLichKing.lua
 DB\Toys\Cataclysm.lua
