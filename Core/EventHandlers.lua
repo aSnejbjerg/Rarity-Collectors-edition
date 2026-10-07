@@ -126,7 +126,9 @@ function R:ApplyMawBuffsTaintWorkaround()
 	-- Returning false when auras are secret, prevents the crash, with limited or no side-effects
 	local orig = ShouldShowMawBuffs
 	ShouldShowMawBuffs = function()
-		if C_Secrets.ShouldAurasBeSecret() then return false end
+		if C_Secrets.ShouldAurasBeSecret() then
+			return false
+		end
 
 		return orig()
 	end
