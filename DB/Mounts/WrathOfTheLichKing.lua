@@ -9,6 +9,18 @@ end
 
 local wotlkMounts = {
 	-- 3.x
+	["Reins of the Time-Lost Proto-Drake"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.WOTLK,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Reins of the Time-Lost Proto-Drake"],
+		itemId = 44168,
+		spellId = 60002,
+		npcs = { 32491, 32630 }, -- TLPD, Vyragosa
+		chance = 10, -- Estimated amount of usual spawns needed to get Time-Lost to appear. Can vary.
+		sourceText = L["Drop chance is 100%. Tracking both Vyragosa and TLPD kills."],
+		coords = { { m = CONSTANTS.UIMAPIDS.THE_STORM_PEAKS } },
+	},
 	["Invincible's Reins"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.WOTLK,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
