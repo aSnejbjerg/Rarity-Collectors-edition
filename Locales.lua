@@ -14,6 +14,8 @@ L["Available once an hour from Gifts/Pledges by interacting with city guards wea
 	true
 L["Can drop from any Lvl 58+ Enemy. Cannot be tracked by Rarity inside instances."] = true
 L["Cat Carrier (Siamese)"] = true
+L["Libram of the Matriarch"] = true
+L["Shadeweaver's Hearthstone"] = true
 L["Vibrant Venomfang"] = true
 L["Soulcoil Remnant"] = true
 L["Drops from the Wiggling version of the Venom-Soaked Satchel, a rare alternative drop from completing Curse Surges."] =
@@ -80,7 +82,7 @@ L["Ominous Dominus"] = true
 L["ToDebugString"] = true
 L["Madcap Redcap"] = true
 L["Mycomancer's Hearthspore"] = true
-L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount. It is not possible to automatically add attempts, so please do so manually!"] =
+L["This item drops from the final cache in either Ritual Site, and is required to craft the Void-Corrupted Lynx Mount."] =
 	true
 L["Broken Lynx Leash"] = true
 L["Ashes of Belo'ren"] = true
@@ -125,7 +127,6 @@ L["Ominous Domanus"] = true
 L["Princess Bloodshed"] = true
 L["Sanguine Harrower"] = true
 L["Augmented Stormray"] = true
-L["Lost Nether Drake"] = true
 L["Amani Sharptalon"] = true
 L["Escaped Witherbark Pango"] = true
 L["Cerulean Hawkstrider"] = true
@@ -697,6 +698,12 @@ L["(running in debug mode)"] = true
 L["Grow Up"] = true
 L["Debug mode OFF"] = true
 L["Debug mode ON"] = true
+L["Multifarm"] = true
+L["If you're farming the same items on multiple accounts at once, set this to the number of accounts to add that many attempts per detected event instead of just one. Can also be set via /rarity multifarm <number>. Resets to 1 whenever you log in."] =
+	true
+L["Multifarm is currently set to %d. Usage: /rarity multifarm <number>"] = true
+L["Multifarm set to %d. Each detected attempt will now count as %d attempt(s)."] = true
+L["You must enter a number larger than or equal to 1."] = true
 L["None"] = true
 L["Tooltip can't be shown in combat"] = true
 L["Rarity is loading..."] = true
@@ -767,6 +774,9 @@ L["#%d: %d attempts (%.2f%%)"] = true
 L["Already known"] = true
 L["General"] = true
 L["Show minimap icon"] = true
+L["Show currently tracked item as minimap icon"] = true
+L["When on, the minimap icon (and LDB feed icon) will display the icon of the currently tracked item instead of the Rarity addon icon."] =
+	true
 L["Turns on a minimap icon for Rarity. Use this option if you don't have an LDB display add-on."] = true
 L["Announcements"] = true
 L["Enable announcements"] = true

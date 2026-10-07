@@ -98,7 +98,7 @@ midnightToys["Jaktu's Cursed Blade"] = {
 	method = CONSTANTS.DETECTION_METHODS.USE,
 	name = L["Jaktu's Cursed Blade"],
 	itemId = 277954,
-	items = 642071,
+	items = { 642071 },
 	chance = 1,
 	sourceText = L["This item drops from the treasure Jaktu's Cursed Blade!"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
@@ -134,7 +134,7 @@ midnightToys["Pearl of Jubilation"] = {
 	method = CONSTANTS.DETECTION_METHODS.USE,
 	name = L["Pearl of Jubilation"],
 	itemId = 274921,
-	item = 649085,
+	items = { 649085 },
 	chance = 1,
 	sourceText = L["Looted from a treasure named Brine-Crusted Chest"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
@@ -146,7 +146,7 @@ midnightToys["Forgotten Memento"] = {
 	method = CONSTANTS.DETECTION_METHODS.USE,
 	name = L["Forgotten Memento"],
 	itemId = 279021,
-	item = 645549,
+	items = { 645549 },
 	chance = 1,
 	sourceText = L["Looted from a treasure named Grave of Someone Forgotten"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
@@ -158,7 +158,7 @@ midnightToys["Malfunctioning Staff"] = {
 	method = CONSTANTS.DETECTION_METHODS.USE,
 	name = L["Malfunctioning Staff"],
 	itemId = 268504,
-	item = 645550,
+	items = { 645550 },
 	chance = 1,
 	sourceText = L["Looted from a treasure named Malfunctioning Staff"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
@@ -170,7 +170,7 @@ midnightToys["Idol of Blue Water and Blue Sky"] = {
 	method = CONSTANTS.DETECTION_METHODS.USE,
 	name = L["Idol of Blue Water and Blue Sky"],
 	itemId = 279054,
-	item = 619906,
+	items = { 619906 },
 	chance = 1,
 	sourceText = L["Looted from a treasure named Abandoned Amani Privateer's Cache"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
@@ -188,6 +188,50 @@ midnightToys["Preyhunter's Masquerade"] = {
 	sourceText = L["Dropped by the prey boss named Ral'kala"],
 	coords = { { m = CONSTANTS.UIMAPIDS.COILED_ISLES } },
 }
-
+if CONSTANTS.WOW_INTERFACE_VER < CONSTANTS.PATCH_INTERFACE_VERSIONS.MIDNIGHT.THE_PROMISE_OF_TOMORROW then
+	Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
+	return midnightToys
+end
+midnightToys["Shadeweaver's Hearthstone"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.ITEM,
+	isToy = true,
+	method = CONSTANTS.DETECTION_METHODS.BOSS,
+	name = L["Shadeweaver's Hearthstone"],
+	itemId = 281615,
+	chance = 25,
+	npcs = { 99999 },
+	tooltipNpcs = { 267861 },
+	lockBossName = "Kith'ix",
+	statisticId = { 63839, 63840, 63841, 63842 },
+	instanceDifficulties = {
+		[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
+		[CONSTANTS.INSTANCE_DIFFICULTIES.LFR] = true,
+	},
+	coords = { { i = true, m = CONSTANTS.UIMAPIDS.UNBINDING_OF_KITHIX } },
+	groupSize = 25,
+	equalOdds = true,
+}
+midnightToys["Libram of the Matriarch"] = {
+	cat = CONSTANTS.ITEM_CATEGORIES.MIDNIGHT,
+	type = CONSTANTS.ITEM_TYPES.ITEM,
+	isToy = true,
+	method = CONSTANTS.DETECTION_METHODS.BOSS,
+	name = L["Libram of the Matriarch"],
+	itemId = 284159,
+	chance = 25,
+	npcs = { 99999 },
+	tooltipNpcs = { 267861 },
+	lockBossName = "Kith'ix",
+	statisticId = { 63842 },
+	instanceDifficulties = {
+		[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_RAID] = true,
+	},
+	coords = { { i = true, m = CONSTANTS.UIMAPIDS.UNBINDING_OF_KITHIX } },
+	groupSize = 25,
+	equalOdds = true,
+}
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, midnightToys)
 return midnightToys

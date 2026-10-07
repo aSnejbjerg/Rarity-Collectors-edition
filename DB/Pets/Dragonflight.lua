@@ -54,8 +54,6 @@ local dragonflightPets = {
 		spellId = 375085,
 		chance = 20,
 		creatureId = 189118,
-		groupSize = 5,
-		equalOdds = true,
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_FORBIDDEN_REACH, x = 43.6, y = 61.0, n = L["Bonesifter Marwak"] } },
 	},
 	["Gilded Mechafrog"] = {
@@ -135,7 +133,6 @@ local dragonflightPets = {
 		spellId = 375047,
 		chance = 25,
 		creatureId = 189115,
-		equalOdds = true,
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_FORBIDDEN_REACH, x = 58.6, y = 48.8, n = L["Vraken the Hunter"] } },
 	},
 	["Wakyn"] = {
@@ -148,8 +145,6 @@ local dragonflightPets = {
 		spellId = 371594,
 		chance = 20,
 		creatureId = 188821,
-		groupSize = 5,
-		equalOdds = true,
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_FORBIDDEN_REACH, x = 45.9, y = 79.7, n = L["Warden Entrix"] } },
 	},
 	["Luvvy"] = {
@@ -162,7 +157,6 @@ local dragonflightPets = {
 		spellId = 374895,
 		chance = 25,
 		creatureId = 189106,
-		equalOdds = true,
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_FORBIDDEN_REACH, x = 55.8, y = 51.6, n = L["Luttrok"] } },
 	},
 	["Doomrubble"] = {
@@ -1227,6 +1221,7 @@ local dragonflightPets = {
 		zones = { "2151" },
 		spellId = 375511,
 		itemId = 193853,
+		chance = 50,
 		creatureId = 189694,
 		questId = 75488,
 		sourceText = L["Fished from Disgusting Vat located within the Zskera Vaults"],

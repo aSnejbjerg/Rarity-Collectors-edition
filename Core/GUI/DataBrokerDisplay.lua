@@ -100,12 +100,20 @@ function GUI:UpdateText()
 	local trackedItem = Rarity.Tracking:GetTrackedItem(1)
 	if not trackedItem or (trackedItem and not trackedItem.itemId) then
 		dataobj.text = L["None"]
+		dataobj.icon = iconTexture
 		return
 	end
 
 	-- Feed text
 	local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice =
 		GetItemInfo(trackedItem.itemId)
+
+	if self.db.profile.showTrackedItemAsMinimapIcon and itemTexture then
+		dataobj.icon = itemTexture
+	else
+		dataobj.icon = iconTexture
+	end
+
 	attempts = 0
 	if trackedItem.attempts then
 		attempts = trackedItem.attempts

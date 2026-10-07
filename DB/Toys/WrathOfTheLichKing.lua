@@ -86,8 +86,8 @@ local wotlkToys = {
 	},
 	["Super Simian Sphere"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.WOTLK,
-		type = CONSTANTS.ITEM_TYPES_ITEM,
-		istoy = true,
+		type = CONSTANTS.ITEM_TYPES.ITEM,
+		isToy = true,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
 		name = L["Super Simian Sphere"],
 		itemId = 37254,

@@ -36,6 +36,10 @@ local twwPets = {
 		spellId = 446059,
 		chance = 1000,
 		creatureId = 222359,
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.DORNOGAL },
+			{ m = CONSTANTS.UIMAPIDS.SILVERMOON_CITY_MIDNIGHT },
+		},
 	},
 	-- 11.0.7 pets
 	["Crackleroar"] = {
@@ -67,7 +71,7 @@ local twwPets = {
 		cat = CONSTANTS.ITEM_CATEGORIES.TWW,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
-		encounter = {
+		encounters = {
 			3053, -- Swampface
 		},
 		name = L["Craboom"],
