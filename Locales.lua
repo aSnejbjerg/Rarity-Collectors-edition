@@ -2,6 +2,18 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Orb of Deception"] = true
+L["Musical Gustjumper"] = true
+L["This pet requires you to /sing to a circle of frogs."] = true
+L["Baby Crocolisk"] = true
+L["This pet drops from the Sewer Beast in Stormwind."] = true
+L["Tallstrider Hatchling"] = true
+L["This pet drops from the Tallstrider Matriarch in Darkshore."] = true
+L["Truesilver Shafted Arrow"] = true
+L["Available once an hour from Gifts/Pledges by interacting with city guards wearing either perfume or cologne and handing them a Love Token."] =
+	true
+L["Can drop from any Lvl 58+ Enemy. Cannot be tracked by Rarity inside instances."] = true
+L["Cat Carrier (Siamese)"] = true
 L["Libram of the Matriarch"] = true
 L["Shadeweaver's Hearthstone"] = true
 L["Vibrant Venomfang"] = true
