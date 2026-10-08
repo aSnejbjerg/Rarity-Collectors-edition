@@ -51,6 +51,8 @@ globals = {
 
 	-- Builtins (Blizzard extensions)
 	"issecretvalue",
+	"C_Secrets",
+	"ShouldShowMawBuffs",
 
 	-- Shared constants (Blizzard interface)
 	"UIERRORS_HOLD_TIME",
