@@ -1230,9 +1230,9 @@ function R:BackUpInventoryItemAmounts()
 	end
 end
 
--- isfirstattemptonly for a few holiday mounts e.g. Brewfest Bomber
+-- isFirstAttemptOnly for a few holiday mounts e.g. Brewfest Bomber
 function R:ShouldCountFirstAttemptDaily(item, triggerItemId)
-	if not item.isfirstattemptonly then
+	if not item.isFirstAttemptOnly then
 		return true
 	end
 
