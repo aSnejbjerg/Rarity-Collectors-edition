@@ -379,6 +379,8 @@ end
 do
 	local timer1, timer2, timer3, timer4, timer5, timer6
 	function R:OnCombatEnded(event)
+		Rarity.Output:FlushPendingMessages()
+
 		-- if R:InTooltip() then Rarity:ShowTooltip() end
 
 		self:CancelTimer(timer1, true)

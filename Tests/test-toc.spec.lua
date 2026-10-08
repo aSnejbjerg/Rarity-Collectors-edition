@@ -29,7 +29,7 @@ local EXAMPLE_PRODUCT_INFO = {
 	VersionsName = "11.0.5.57212",
 }
 
-local NUM_SUPPORTED_PRODUCT_LINES = 5
+local NUM_SUPPORTED_PRODUCT_LINES = 6
 
 describe("TOC", function()
 	describe("BlizzardTOC", function()

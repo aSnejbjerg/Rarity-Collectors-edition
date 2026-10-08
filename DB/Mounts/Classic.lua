@@ -1,5 +1,9 @@
 local addonName, addonTable = ...
 
+if WOW_PROJECT_ID == WOW_PROJECT_CAMELOT then
+	return {}
+end
+
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 

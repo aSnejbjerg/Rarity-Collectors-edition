@@ -187,6 +187,7 @@ local SEARCH_FILTER_CONFIG = {
 	mounts = { label = L["Search Mounts"] },
 	pets = { label = L["Search Battle Pets"] },
 	items = { label = L["Search Toys & Items"] },
+	custom = { label = L["Search Custom"] },
 }
 
 local function itemMatchesSearch(item, searchText)
@@ -1650,7 +1651,7 @@ function R:PrepareOptions()
 	self:CreateGroup(self.options.args.mounts, self.db.profile.groups.mounts, false, "mounts")
 	self:CreateGroup(self.options.args.companions, self.db.profile.groups.pets, false, "pets")
 	self:CreateGroup(self.options.args.items, self.db.profile.groups.items, false, "items")
-	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+	self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom")
 
 	self.advancedSettings = {
 		name = L["Advanced"],
@@ -1849,7 +1850,8 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 		name = {
 			-- type = "execute", -- Why?
 			type = "input",
-			width = "double",
+			order = 1,
+			width = searchFilterKey == "custom" and 1.3 or "double",
 			name = L["Create a new item to track"],
 			desc = L["To create a new item, enter a unique name for the item, and click Okay. The name will be used if the server does not return the item link or if the item is invalid.\n\nYou can't change this name after you create the item, so choose it well."],
 			set = function(info, val)
@@ -1874,7 +1876,7 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 					end
 					self.db.profile.groups.user[val] = { name = val }
 					self:Update("OPTIONS")
-					self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+					self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom")
 				end
 			end,
 			hidden = not isUser,
@@ -1887,7 +1889,7 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 		options.args.searchFilter = {
 			type = "input",
 			order = 0,
-			width = "double",
+			width = searchFilterKey == "custom" and 1.7 or "double",
 			name = searchConfig and searchConfig.label or L["Search"],
 			desc = L["Filter the list by name or item ID."],
 			get = function()
@@ -1908,6 +1910,7 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 				self.optionsSearchFilters[searchFilterKey] = ""
 				LibStub("AceConfigRegistry-3.0"):NotifyChange("Rarity")
 			end,
+			hidden = searchFilterKey == "custom",
 			disabled = function()
 				return strtrim(self.optionsSearchFilters[searchFilterKey] or "") == ""
 			end,
@@ -1971,7 +1974,7 @@ function R:CreateGroup(options, group, isUser, searchFilterKey)
 					confirmText = L["Are you sure you want to delete this item?"],
 					func = function(info)
 						self.db.profile.groups.user[item.name] = nil
-						self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true)
+						self:CreateGroup(self.options.args.custom, self.db.profile.groups.user, true, "custom")
 						self:Update("OPTIONS")
 					end,
 					order = newOrder(),
