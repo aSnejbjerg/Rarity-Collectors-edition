@@ -62,7 +62,7 @@ local holidayEventMountsTWW = {
 		chance = 25,
 		groupSize = 5,
 		equalOdds = true,
-		isfirstattemptonly = true,
+		isFirstAttemptOnly = true,
 		sourceText = L["Can be contained in Keg-Shaped Treasure Chest, rewarded for defeating the World Event Dungeon during Brewfest."]
 			.. " "
 			.. L["Only available on the first attempt each day."],
@@ -81,7 +81,7 @@ local holidayEventMountsTWW = {
 		chance = 666,
 		groupSize = 5,
 		equalOdds = true,
-		isfirstattemptonly = true,
+		isFirstAttemptOnly = true,
 		holidayEvents = CONSTANTS.HolidayEvents["Love is in the Air"],
 		sourceText = L["Can be contained in Heart-Shaped Box, rewarded for defeating the World Event Dungeon during Love is in the Air."]
 			.. " "
@@ -100,7 +100,7 @@ local holidayEventMountsTWW = {
 		chance = 25,
 		groupSize = 5,
 		equalOdds = true,
-		isfirstattemptonly = true,
+		isFirstAttemptOnly = true,
 		sourceText = L["Can be contained in Loot-Filled Pumpkin, rewarded for defeating the World Event Dungeon during Hallow's End."]
 			.. " "
 			.. L["Only available on the first attempt each day."],
@@ -119,7 +119,7 @@ local holidayEventMountsTWW = {
 		chance = 666,
 		groupSize = 5,
 		equalOdds = true,
-		isfirstattemptonly = true,
+		isFirstAttemptOnly = true,
 		holidayEvents = CONSTANTS.HolidayEvents["Love is in the Air"],
 		sourceText = L["Can be contained in Heart-Shaped Box, rewarded for defeating the World Event Dungeon during Love is in the Air."]
 			.. " "
