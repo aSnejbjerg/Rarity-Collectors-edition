@@ -42,6 +42,7 @@ function dataobj.OnEnter(self)
 			end
 		)
 	else
+		Rarity.tooltipOpenDelay = false
 		Rarity:ShowQuicktip()
 	end
 end
@@ -72,12 +73,7 @@ function dataobj:OnClick(button)
 	then
 		Rarity.GUI:ToggleProgressBar()
 	elseif self.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK and isLeftButton then
-		if Rarity.Tooltips:IsTooltipAcquired("RarityTooltip") then
-			Rarity:HideTooltip()
-		else
-			Rarity:HideQuicktip()
-			Rarity:ShowTooltip()
-		end
+		Rarity.GUI:ToggleStandaloneTooltip()
 	end
 end
 
