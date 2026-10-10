@@ -70,7 +70,7 @@ externals:
         tag: latest
     Libs/LibCompress:
         url: https://repos.wowace.com/wow/libcompress/trunk
-        tag: latest
+        tag: r87-release
     Libs/AceSerializer-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceSerializer-3.0
         tag: latest
