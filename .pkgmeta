@@ -69,8 +69,8 @@ externals:
         url: https://repos.wowace.com/wow/libbabble-boss-3-0/trunk
         tag: latest
     Libs/LibCompress:
-        url: https://repos.wowace.com/wow/libcompress/trunk
-        tag: r87-release
+        url: https://github.com/galmok/LibCompress.git
+        tag: latest
     Libs/AceSerializer-3.0:
         url: https://repos.wowace.com/wow/ace3/trunk/AceSerializer-3.0
         tag: latest
