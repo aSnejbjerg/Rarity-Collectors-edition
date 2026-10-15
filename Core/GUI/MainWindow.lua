@@ -30,6 +30,8 @@ local lbb = LibStub("LibBabble-Boss-3.0"):GetUnstrictLookupTable()
 
 -- Settings
 local STATUS_TOOLTIP_MAX_WIDTH = 200
+local STANDALONE_MIN_WIDTH = 300
+local STANDALONE_MIN_HEIGHT = 120
 
 -- Locals
 local tooltip, tooltip2, quicktip
@@ -38,6 +40,115 @@ local numHolidayReminders = 0
 local showedHolidayReminderOverflow = false
 local renderingTip = false
 local headers = {}
+local standalonePosition
+local standaloneTooltipOpen = false
+
+local function saveStandalonePosition()
+	if not tooltip or not tooltip.GetLeft or not tooltip:IsShown() then
+		return
+	end
+
+	local left = tooltip:GetLeft()
+	local top = tooltip:GetTop()
+	if left and top then
+		standalonePosition = { left = left, top = top }
+	end
+end
+
+local function restoreStandalonePosition()
+	if not standalonePosition then
+		return
+	end
+
+	tooltip:ClearAllPoints()
+	tooltip:SetPoint(
+		"TOPLEFT",
+		UIParent,
+		"TOPLEFT",
+		standalonePosition.left,
+		standalonePosition.top - UIParent:GetHeight()
+	)
+end
+
+local function configureStandaloneTooltip()
+	tooltip:SetClampedToScreen(true)
+	tooltip:SetMovable(true)
+	tooltip:SetResizable(true)
+	tooltip:SetResizeBounds(STANDALONE_MIN_WIDTH, STANDALONE_MIN_HEIGHT)
+	tooltip:EnableMouse(true)
+	tooltip:RegisterForDrag("LeftButton")
+	tooltip:SetScript("OnDragStart", function(frame)
+		frame:StartMoving()
+	end)
+	tooltip:SetScript("OnDragStop", function(frame)
+		frame:StopMovingOrSizing()
+		saveStandalonePosition()
+	end)
+	if not tooltip.standaloneResizeHandle then
+		local resizeHandle = CreateFrame("Button", nil, tooltip)
+		resizeHandle:SetSize(16, 16)
+		resizeHandle:SetPoint("BOTTOMRIGHT", tooltip, "BOTTOMRIGHT", 0, 0)
+		resizeHandle:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
+		resizeHandle:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
+		resizeHandle:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+		resizeHandle:SetScript("OnMouseDown", function()
+			tooltip:StartSizing("BOTTOMRIGHT")
+		end)
+		resizeHandle:SetScript("OnMouseUp", function()
+			tooltip:StopMovingOrSizing()
+			local dimensions = Rarity.db.profile.standaloneWindow
+			dimensions.width = tooltip:GetWidth()
+			dimensions.height = tooltip:GetHeight()
+			tooltip:UpdateScrolling()
+			tooltip:SetSize(dimensions.width, dimensions.height)
+		end)
+		tooltip.standaloneResizeHandle = resizeHandle
+	end
+	tooltip.standaloneResizeHandle:Show()
+	local dimensions = Rarity.db.profile.standaloneWindow
+	if not dimensions then
+		dimensions = { width = 600, height = 200 }
+		Rarity.db.profile.standaloneWindow = dimensions
+	end
+	tooltip:SetSize(dimensions.width, dimensions.height)
+
+	if not tooltip.standaloneCloseButton then
+		local closeButton = CreateFrame("Button", nil, tooltip, "UIPanelCloseButton")
+		closeButton:SetPoint("TOPRIGHT", tooltip, "TOPRIGHT", 2, 2)
+		closeButton:SetScript("OnClick", function()
+			Rarity:HideTooltip()
+		end)
+		tooltip.standaloneCloseButton = closeButton
+	end
+	tooltip.standaloneCloseButton:Show()
+	restoreStandalonePosition()
+end
+
+local function clearStandaloneTooltip()
+	if tooltip then
+		saveStandalonePosition()
+		if tooltip.standaloneCloseButton then
+			tooltip.standaloneCloseButton:Hide()
+		end
+	end
+	standaloneTooltipOpen = false
+end
+
+local function disableStandaloneTooltip()
+	if not tooltip then
+		return
+	end
+
+	tooltip:SetMovable(false)
+	tooltip:SetScript("OnDragStart", nil)
+	tooltip:SetScript("OnDragStop", nil)
+	if tooltip.standaloneCloseButton then
+		tooltip.standaloneCloseButton:Hide()
+	end
+	if tooltip.standaloneResizeHandle then
+		tooltip.standaloneResizeHandle:Hide()
+	end
+end
 
 -- Constants
 -- Sort parameters
@@ -97,7 +208,7 @@ function R:ShowQuicktip(hidden)
 
 	quicktip:AddHeader(L["Rarity"])
 	quicktip:AddSeparator(1, 1, 1, 1, 1)
-	quicktip:AddLine(L["Left click"], L["Open Rarity window"])
+	quicktip:AddLine(L["Left click"], L["Toggle Rarity window"])
 	quicktip:AddLine(L["Right click"], L["Toggle tracker"])
 	quicktip:AddLine(L["Shift + Left click"], L["Open settings"])
 	quicktip:AddLine(L["Ctrl + Left click"], L["Change sorting"])
@@ -115,8 +226,40 @@ function R:ShowQuicktip(hidden)
 end
 
 function R:HideTooltip()
-	if tooltip:IsVisible() then
+	clearStandaloneTooltip()
+	if tooltip and tooltip:IsVisible() then
 		tooltip:Release()
+	end
+end
+
+function GUI:ToggleStandaloneTooltip()
+	if Rarity.db.profile.tooltipActivation ~= CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK then
+		return
+	end
+	if InCombatLockdown() then
+		return
+	end
+	if standaloneTooltipOpen and tooltip and tooltip:IsVisible() then
+		Rarity:HideTooltip()
+	else
+		Rarity:HideQuicktip()
+		Rarity:ShowTooltip()
+	end
+end
+
+function GUI:CloseStandaloneTooltipForCombat()
+	if standaloneTooltipOpen then
+		standaloneTooltipOpen = false
+		Rarity:HideTooltip()
+		return true
+	end
+	return false
+end
+
+function GUI:ReopenStandaloneTooltipAfterCombat()
+	if Rarity.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK then
+		standaloneTooltipOpen = true
+		Rarity:ShowTooltip()
 	end
 end
 
@@ -1407,16 +1550,22 @@ function R:ShowTooltip(hidden)
 	numHolidayReminders = 0
 	showedHolidayReminderOverflow = false
 	local delay
-	if self.db.profile.tooltipHideDelay <= 0 then
+	local isStandalone = self.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK
+	if isStandalone then
+		tooltip:SetAutoHideDelay(nil)
+	elseif self.db.profile.tooltipHideDelay <= 0 then
 		local hideOnClick = (Rarity.db.profile.tooltipActivation == CONSTANTS.TOOLTIP.ACTIVATION_METHOD_CLICK)
 		delay = hideOnClick and 0 or 0.01 -- Hiding manually is only possible when not in hover mode
 	else
 		delay = self.db.profile.tooltipHideDelay or 0.6
 	end
-	tooltip:SetAutoHideDelay(delay, Rarity.frame, function()
-		tooltip = nil
-		Rarity.Tooltips:ReleaseTooltip("RarityTooltip")
-	end)
+	if not isStandalone then
+		disableStandaloneTooltip()
+		tooltip:SetAutoHideDelay(delay, Rarity.frame, function()
+			tooltip = nil
+			Rarity.Tooltips:ReleaseTooltip("RarityTooltip")
+		end)
+	end
 
 	-- The tooltip can't be built in combat; it takes too long and the script will receive a "script ran too long" error
 	if InCombatLockdown() then
@@ -1427,6 +1576,10 @@ function R:ShowTooltip(hidden)
 			return
 		end
 		tooltip:SmartAnchorTo(Rarity.frame)
+		if isStandalone then
+			configureStandaloneTooltip()
+			standaloneTooltipOpen = true
+		end
 		tooltip:UpdateScrolling()
 		tooltip:Show()
 		renderingTip = false
@@ -1442,6 +1595,10 @@ function R:ShowTooltip(hidden)
 			return
 		end
 		tooltip:SmartAnchorTo(Rarity.frame)
+		if isStandalone then
+			configureStandaloneTooltip()
+			standaloneTooltipOpen = true
+		end
 		tooltip:UpdateScrolling()
 		tooltip:Show()
 		renderingTip = false
@@ -1615,6 +1772,10 @@ function R:ShowTooltip(hidden)
 
 	tooltip:SmartAnchorTo(Rarity.frame)
 	tooltip:UpdateScrolling()
+	if isStandalone then
+		configureStandaloneTooltip()
+		standaloneTooltipOpen = true
+	end
 	tooltip:Show()
 
 	renderingTip = false
