@@ -258,7 +258,7 @@ local function onTooltipSetUnit(tooltip, data)
 		GameTooltip:AddLine("Type: " .. tostring(unitType), 255, 255, 255)
 	end
 
-	if unitType ~= UNIT_TYPES.CREATURE and unitType ~= UNIT_TYPES.PET then
+	if unitType ~= UNIT_TYPES.CREATURE and unitType ~= UNIT_TYPES.PET and unitType ~= UNIT_TYPES.VEHICLE then -- Added vehicle here as certain mobs like Lion's Roar and Malbog are considered vehicles.
 		Rarity:Debug(format("Not showing GameTooltip info since the hovered unit is of type %s", unitType))
 		return
 	end

@@ -60,6 +60,9 @@ local GetPlayerAuraBySpellID = _G.C_UnitAuras and _G.C_UnitAuras.GetPlayerAuraBy
 local InCombatLockdown = _G.InCombatLockdown
 local C_GossipInfo = _G.C_GossipInfo
 local GetTime = _G.GetTime
+local COMBATLOG_OBJECT_AFFILIATION_MINE = _G.COMBATLOG_OBJECT_AFFILIATION_MINE
+local COMBATLOG_OBJECT_AFFILIATION_PARTY = _G.COMBATLOG_OBJECT_AFFILIATION_PARTY
+local COMBATLOG_OBJECT_AFFILIATION_RAID = _G.COMBATLOG_OBJECT_AFFILIATION_RAID
 
 -- Addon APIs
 local DebugCache = Rarity.Utils.DebugCache
@@ -85,6 +88,7 @@ function EventHandlers:Register()
 	self:RegisterEvent("TRADE_SKILL_SHOW", "OnEvent")
 	self:RegisterEvent("TRADE_SKILL_CLOSE", "OnEvent")
 	self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", "OnMouseOver")
+	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED", "OnCombatLogEvent") -- Malbog tracking atm, can use for more
 	self:RegisterEvent("CRITERIA_COMPLETE", "OnCriteriaComplete")
 	self:RegisterEvent("ENCOUNTER_END", "OnEncounterEnd")
 	self:RegisterEvent("PLAYER_REGEN_ENABLED", "OnCombatEnded")
@@ -907,6 +911,52 @@ function R:OnMouseOver(event)
 	end
 
 	self.Profiling:EndTimer("EventHandlers.OnMouseOver")
+end
+
+function R:OnCombatLogEvent() -- Malbog tracking, can be used for other things too
+	local _, eventType, _, _, _, sourceFlags, _, destGUID = CombatLogGetCurrentEventInfo()
+	if issecretvalue and issecretvalue(eventType) then
+		return
+	end
+	if eventType ~= "UNIT_DIED" then
+		return
+	end
+
+	if
+		issecretvalue
+		and (issecretvalue(sourceFlags) or issecretvalue(destGUID))
+	then
+		return
+	end
+
+	if
+		bit_band(sourceFlags or 0, COMBATLOG_OBJECT_AFFILIATION_MINE) == 0
+		and bit_band(sourceFlags or 0, COMBATLOG_OBJECT_AFFILIATION_PARTY) == 0
+		and bit_band(sourceFlags or 0, COMBATLOG_OBJECT_AFFILIATION_RAID) == 0
+	then
+		return
+	end
+
+	local npcID = self:GetNPCIDFromGUID(destGUID)
+	if not npcID then
+		return
+	end
+
+	local unitType = destGUID and strsplit("-", destGUID)
+	if unitType ~= "Creature" and unitType ~= "Vehicle" then
+		return
+	end
+
+	local item = Rarity.npcs[npcID]
+	if not item or not item.attemptOnKill then
+		return
+	end
+
+	local zone = GetRealZoneText()
+	local subzone = GetSubZoneText()
+	local zone_t = LibStub("LibBabble-Zone-3.0"):GetReverseLookupTable()[zone]
+	local subzone_t = LibStub("LibBabble-SubZone-3.0"):GetReverseLookupTable()[subzone]
+	self:CheckNpcInterest(destGUID, zone, subzone, zone_t, subzone_t, nil, false)
 end
 
 function R:OnProfileChanged(event, database, newProfileKey)
