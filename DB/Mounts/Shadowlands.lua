@@ -425,7 +425,6 @@ local shadowlandsMounts = {
 			{
 				encounterName = "So'leah",
 				instanceDifficulties = {
-					[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
 					[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
 				},
 			},
