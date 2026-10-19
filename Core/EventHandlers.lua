@@ -922,10 +922,7 @@ function R:OnCombatLogEvent() -- Malbog tracking, can be used for other things t
 		return
 	end
 
-	if
-		issecretvalue
-		and (issecretvalue(sourceFlags) or issecretvalue(destGUID))
-	then
+	if issecretvalue and (issecretvalue(sourceFlags) or issecretvalue(destGUID)) then
 		return
 	end
 
