@@ -390,6 +390,7 @@ local shadowlandsMounts = {
 		spellId = 354357,
 		npcs = { 179684 },
 		questId = { 64233 },
+		attemptOnKill = true, -- Tracking Combat log for UNIT_DIED, since NPC ID tracking is not functioning here.
 		chance = 100, -- Estimate,
 		coords = { { m = CONSTANTS.UIMAPIDS.KORTHIA, x = 45.35, y = 30.34, n = L["Malbog"] } },
 	},
