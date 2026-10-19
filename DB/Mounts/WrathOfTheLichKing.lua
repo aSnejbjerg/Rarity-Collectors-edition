@@ -42,14 +42,15 @@ local wotlkMounts = {
 	["Mimiron's Head"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.WOTLK,
 		type = CONSTANTS.ITEM_TYPES.MOUNT,
-		method = CONSTANTS.DETECTION_METHODS.BOSS, -- TBD change it to NPC/ENCOUNTER/STATISTICS?
+		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
+		encounters = {
+			1143, -- Yogg-Saron
+		},
 		name = L["Mimiron's Head"],
 		spellId = 63796,
 		itemId = 45693,
 		npcs = { 33288 },
-		statisticId = { 2869, 2883 },
 		chance = 100,
-		instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_RAID] = true },
 		sourceText = L["Dropped by Yogg-Saron in Ulduar with no Keepers assisting"],
 		wasGuaranteed = true,
 		blackMarket = true,
