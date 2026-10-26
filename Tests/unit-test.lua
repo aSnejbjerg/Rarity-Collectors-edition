@@ -12,6 +12,7 @@ local specFiles = {
 	"Tests/test-items.spec.lua",
 	"Tests/test-database.spec.lua",
 	"Tests/test-holiday-events.spec.lua",
+	"Tests/test-kill-detection.spec.lua",
 	"Tests/test-serialization.spec.lua",
 	"Tests/test-toc.spec.lua",
 }

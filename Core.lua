@@ -793,8 +793,44 @@ function R:IsAttemptAllowed(item)
 	return false
 end
 
+-- Adds an attempt for every NPC-based item that this NPC can drop
+function R:AddNpcAttempts(npcid, requiresPickpocket)
+	if not Rarity.npcs_to_items[npcid] or type(Rarity.npcs_to_items[npcid]) ~= "table" then
+		return
+	end
+
+	for k, v in pairs(Rarity.npcs_to_items[npcid]) do
+		if v.enabled ~= false and (v.method == NPC or v.method == ZONE) then
+			if self:IsAttemptAllowed(v) then
+				-- Don't increment attempts if this NPC also has a statistic defined. This would result in two attempts counting instead of one.
+				if not v.statisticId or type(v.statisticId) ~= "table" or #v.statisticId <= 0 then
+					-- Don't increment attempts for unique items if you already have the item in your bags
+					if not (v.unique == true and (Rarity.bagitems[v.itemId] or 0) > 0) then
+						-- Don't increment attempts for non-pickpocketed items if this item isn't being pickpocketed
+						if
+							(requiresPickpocket and v.pickpocket)
+							or (requiresPickpocket == false and not v.pickpocket)
+						then
+							if v.attempts == nil then
+								v.attempts = 1
+							else
+								v.attempts = v.attempts + 1
+							end
+							self:OutputAttempts(v)
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
 function R:CheckNpcInterest(guid, zone, subzone, zone_t, subzone_t, curSpell, requiresPickpocket)
 	if guid == nil then
+		return
+	end
+	-- A secret GUID can't be used as a table key (inside instances, loot sources may be hidden)
+	if issecretvalue and issecretvalue(guid) then
 		return
 	end
 	if type(guid) ~= "string" then
@@ -847,31 +883,9 @@ function R:CheckNpcInterest(guid, zone, subzone, zone_t, subzone_t, curSpell, re
 	Rarity.guids[guid] = true
 
 	-- Increment attempt counter(s). One NPC might drop multiple things we want, so scan for them all.
-	if Rarity.npcs_to_items[npcid] and type(Rarity.npcs_to_items[npcid]) == "table" then
-		for k, v in pairs(Rarity.npcs_to_items[npcid]) do
-			if v.enabled ~= false and (v.method == NPC or v.method == ZONE) then
-				if self:IsAttemptAllowed(v) then
-					-- Don't increment attempts if this NPC also has a statistic defined. This would result in two attempts counting instead of one.
-					if not v.statisticId or type(v.statisticId) ~= "table" or #v.statisticId <= 0 then
-						-- Don't increment attempts for unique items if you already have the item in your bags
-						if not (v.unique == true and (Rarity.bagitems[v.itemId] or 0) > 0) then
-							-- Don't increment attempts for non-pickpocketed items if this item isn't being pickpocketed
-							if
-								(requiresPickpocket and v.pickpocket)
-								or (requiresPickpocket == false and not v.pickpocket)
-							then
-								if v.attempts == nil then
-									v.attempts = 1
-								else
-									v.attempts = v.attempts + 1
-								end
-								self:OutputAttempts(v)
-							end
-						end
-					end
-				end
-			end
-		end
+	-- A kill that was already detected through events has been counted (zone-wide items below still need the loot)
+	if not (requiresPickpocket == false and Rarity.KillDetection:WasKillCounted(guid)) then
+		self:AddNpcAttempts(npcid, requiresPickpocket)
 	end
 
 	-- Check for zone-wide items and increment them if needed
