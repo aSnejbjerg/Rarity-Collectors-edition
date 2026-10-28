@@ -3049,6 +3049,7 @@ globals = {
 	"ListChannelByName",
 	"ListChannels",
 	"LoadAddOn",
+	"LoadAddOnWithErrorHandling",
 	"LoadBindings",
 	"LoadURLIndex",
 	"LoggingChat",

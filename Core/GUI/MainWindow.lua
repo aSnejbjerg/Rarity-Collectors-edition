@@ -1153,10 +1153,18 @@ local function addGroup(group, requiresGroup)
 											)
 										end
 										Rarity:Print(text)
-										if CVarCallbackRegistry:GetCVarValueBool("enableFloatingCombatText") then
-											if type(CombatText_AddMessage) == "nil" then
-												UIParentLoadAddOn("Blizzard_CombatText")
+										local useCombatText =
+											CVarCallbackRegistry:GetCVarValueBool("enableFloatingCombatText")
+										if useCombatText and type(CombatText_AddMessage) == "nil" then
+											-- UIParentLoadAddOn was replaced by LoadAddOnWithErrorHandling in 12.1.0
+											local loadAddOn = LoadAddOnWithErrorHandling
+												or UIParentLoadAddOn
+												or C_AddOns.LoadAddOn
+											if type(loadAddOn) == "function" then
+												loadAddOn("Blizzard_CombatText")
 											end
+										end
+										if useCombatText and type(CombatText_AddMessage) == "function" then
 											CombatText_AddMessage(text, CombatText_StandardScroll, 1, 1, 1, true, false)
 										else
 											UIErrorsFrame:AddMessage(text, 1, 1, 1, 1.0)
