@@ -72,8 +72,11 @@ end
 
 describe("KillDetection", function()
 	local originalRarityFields = {}
+	for _, field in ipairs({ "npcs", "guids", "AddNpcAttempts", "Debug" }) do
+		originalRarityFields[field] = Rarity[field]
+	end
 
-	before(function()
+	local function setup()
 		state = {
 			now = 1000,
 			instanceType = "none",
@@ -86,18 +89,28 @@ describe("KillDetection", function()
 			attempts = {},
 		}
 
-		for _, field in ipairs({ "npcs", "guids", "AddNpcAttempts", "Debug" }) do
-			originalRarityFields[field] = Rarity[field]
-		end
 		Rarity.npcs = { [TRACKED_NPC_ID] = {} }
 		Rarity.guids = {}
 		Rarity.Debug = function() end
 		Rarity.AddNpcAttempts = function(_, npcID, requiresPickpocket)
 			state.attempts[#state.attempts + 1] = { npcID = npcID, requiresPickpocket = requiresPickpocket }
 		end
-	end)
+	end
+
+	local function cleanup()
+		for field, value in pairs(originalRarityFields) do
+			Rarity[field] = value
+		end
+	end
+
+	local function registerTestHooks()
+		before(setup)
+		after(cleanup)
+	end
 
 	describe("IsSupported", function()
+		registerTestHooks()
+
 		it("should be true on clients that lack the combat log", function()
 			assertFalse(type(_G.CombatLogGetCurrentEventInfo) == "function") -- Not part of the test environment
 			assertTrue(KillDetection:IsSupported())
@@ -105,6 +118,8 @@ describe("KillDetection", function()
 	end)
 
 	describe("OnPartyKill", function()
+		registerTestHooks()
+
 		it("should count a tracked NPC killed by the player", function()
 			local guid = newGUID()
 			KillDetection:OnPartyKill(state.units.player, guid)
@@ -201,6 +216,8 @@ describe("KillDetection", function()
 	end)
 
 	describe("OnUnitDied", function()
+		registerTestHooks()
+
 		it("should count a tracked NPC that the player's pet was fighting", function()
 			local guid = newGUID()
 			state.units.pettarget = guid
@@ -279,6 +296,8 @@ describe("KillDetection", function()
 	end)
 
 	describe("IsIdentityRestricted", function()
+		registerTestHooks()
+
 		it("should be false outside of instances", function()
 			assertFalse(KillDetection:IsIdentityRestricted())
 		end)
@@ -290,6 +309,8 @@ describe("KillDetection", function()
 	end)
 
 	describe("WasKillCounted", function()
+		registerTestHooks()
+
 		it("should be false for corpses that weren't seen", function()
 			assertFalse(KillDetection:WasKillCounted(newGUID()))
 			assertFalse(KillDetection:WasKillCounted(nil))
