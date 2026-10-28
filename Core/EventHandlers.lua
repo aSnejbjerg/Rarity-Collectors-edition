@@ -115,6 +115,9 @@ function EventHandlers:Register()
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_SHOW", "OnPlayerInteractionFrameShow")
 	self:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE", "OnPlayerInteractionFrameHide")
 	self:StartInitialBagSync()
+
+	-- Retail/Forever have no combat log; this has its own event frame, so UnregisterAllEvents (above) can't affect it
+	Rarity.KillDetection:Initialize()
 end
 
 function R:StartInitialBagSync(delay)
@@ -2286,24 +2289,28 @@ function R:OnLootReady(event, ...)
 		-- Legacy support for pre-5.0 single-target looting
 		local guid = Rarity:GetUnitGUID("target")
 		local name = Rarity:GetUnitName("target")
-		if not name or not guid then
-			return
-		end -- No target when looting
-		if not UnitCanAttack("player", "target") then
-			return
-		end -- You targeted something you can't attack
-		if UnitIsPlayer("target") then
-			return
-		end -- You targetted a player
+		-- Inside instances the target is hidden, but the loot window still names the corpses it draws from
+		local isTargetHidden = (not name or not guid) and Rarity.KillDetection:IsIdentityRestricted()
+		if not isTargetHidden then
+			if not name or not guid then
+				return
+			end -- No target when looting
+			if not UnitCanAttack("player", "target") then
+				return
+			end -- You targeted something you can't attack
+			if UnitIsPlayer("target") then
+				return
+			end -- You targetted a player
+		end
 
 		-- You're looting something that's alive -- this is only done for pickpocketing
 		local requiresPickpocket = false
-		if not UnitIsDead("target") then
+		if not isTargetHidden and not UnitIsDead("target") then
 			requiresPickpocket = true
 		end
 
 		-- Disallow "minus" NPCs; nothing good drops from them
-		if UnitClassification(guid) == "minus" then
+		if guid and UnitClassification(guid) == "minus" then
 			return
 		end -- (This doesn't actually work currently; UnitClassification needs a unit, not a GUID)
 
@@ -2319,7 +2326,7 @@ function R:OnLootReady(event, ...)
 			local guidIndex
 			for k, v in pairs(guidlist) do -- Loop through all NPC Rarity.guids being looted (will be 1 for single-target looting pre-5.0)
 				guid = v
-				if guid and type(guid) == "string" then
+				if guid and not (issecretvalue and issecretvalue(guid)) and type(guid) == "string" then
 					self:Debug("Checking NPC guid (" .. (numChecked + 1) .. "): " .. guid)
 					self:CheckNpcInterest(
 						guid,
