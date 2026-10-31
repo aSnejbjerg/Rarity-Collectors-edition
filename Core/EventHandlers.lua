@@ -36,8 +36,6 @@ local UnitCanAttack = _G.UnitCanAttack
 local UnitIsPlayer = _G.UnitIsPlayer
 local UnitIsDead = _G.UnitIsDead
 local GetNumLootItems = _G.GetNumLootItems
-local GetLootSlotInfo = _G.GetLootSlotInfo
-local GetLootSlotLink = _G.GetLootSlotLink
 local GetItemInfo_Blizzard = _G.C_Item.GetItemInfo
 local GetItemInfo = function(id)
 	return R:GetItemInfo(id)
@@ -2308,7 +2306,6 @@ function R:OnLootReady(event, ...)
 		end -- (This doesn't actually work currently; UnitClassification needs a unit, not a GUID)
 
 		local numChecked = 0
-		self:Debug(numItems .. " slot(s) to loot")
 		for slotID = 1, numItems, 1 do -- Loop through all loot slots (for AoE looting)
 			local guidlist
 			if GetLootSourceInfo then
@@ -2340,24 +2337,6 @@ function R:OnLootReady(event, ...)
 		-- If we failed to scan anything, scan the current target
 		if numChecked <= 0 then
 			self:CheckNpcInterest(Rarity:GetUnitGUID("target"), zone, subzone, zone_t, subzone_t, Rarity.currentSpell)
-		end
-
-		-- Scan the loot to see if we found something we're looking for
-		for slotID = 1, numItems, 1 do
-			local _, _, qty = GetLootSlotInfo(slotID)
-			if (qty or 0) > 0 then -- Coins have quantity of 0, so skip those
-				local itemLink = GetLootSlotLink(slotID)
-				if itemLink then
-					local _, itemId = strsplit(":", itemLink)
-					itemId = tonumber(itemId)
-					if
-						Rarity.items[itemId] ~= nil
-						and Rarity.items[itemId].method ~= CONSTANTS.DETECTION_METHODS.COLLECTION
-					then
-						self:OnItemFound(itemId, Rarity.items[itemId])
-					end
-				end
-			end
 		end
 
 		if requiresPickpocket then
