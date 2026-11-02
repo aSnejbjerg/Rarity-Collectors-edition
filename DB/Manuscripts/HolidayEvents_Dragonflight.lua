@@ -8,7 +8,7 @@ if LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_DRAGONFLIGHT then
 end
 
 local holidayEventManuscriptsDragonflight = {
--- Love is in the Air
+	-- Love is in the Air
 	["Renewed Proto-Drake: Love Armor"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
@@ -25,7 +25,7 @@ local holidayEventManuscriptsDragonflight = {
 		lockDungeonId = 288,
 		coords = { { m = 310, x = 40.8, y = 52.6, i = true } },
 	},
--- Midsummer Fire Festival
+	-- Midsummer Fire Festival
 	["Cliffside Wylderdrake: Midsummer Fire Festival Armor"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
@@ -42,7 +42,7 @@ local holidayEventManuscriptsDragonflight = {
 		lockDungeonId = 286,
 		coords = { { m = 265, x = 31.2, y = 50.8, i = true, n = L["Ahune"] } },
 	},
--- Brewfest
+	-- Brewfest
 	["Renewed Proto-Drake: Brewfest Armor"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
@@ -59,7 +59,7 @@ local holidayEventManuscriptsDragonflight = {
 		lockDungeonId = 287,
 		coords = { { m = 242, x = 46.6, y = 60, i = true } },
 	},
--- Hallow's End
+	-- Hallow's End
 	["Windborne Velocidrake: Hallow's End Armor"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
@@ -76,7 +76,7 @@ local holidayEventManuscriptsDragonflight = {
 		lockDungeonId = 285,
 		coords = { { m = 435, i = true } },
 	},
--- Winter Veil
+	-- Winter Veil
 	["Highland Drake: Winter Veil Armor"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,

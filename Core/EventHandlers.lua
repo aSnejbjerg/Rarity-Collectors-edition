@@ -184,7 +184,7 @@ function R:OnSpellcastSucceeded(event, unitID, castGUID, spellID)
 		return
 	end
 
-local manuscriptScanTimer
+	local manuscriptScanTimer
 
 	-- Learning a manuscript is a spell cast; the quest flag updates shortly afterwards
 	if not manuscriptScanTimer then

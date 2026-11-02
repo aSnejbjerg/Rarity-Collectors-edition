@@ -8,7 +8,7 @@ if LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_DRAGONFLIGHT then
 end
 
 local dragonflightManuscripts = {
--- 10.0 Dragon Racer's Purse
+	-- 10.0 Dragon Racer's Purse
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Dual Horned Crest"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -173,7 +173,7 @@ local dragonflightManuscripts = {
 			{ m = CONSTANTS.UIMAPIDS.THALDRASZUS },
 		},
 	},
--- 10.0.7 Reach Racer's Purse
+	-- 10.0.7 Reach Racer's Purse
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Plated Brow"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -230,7 +230,7 @@ local dragonflightManuscripts = {
 			{ m = CONSTANTS.UIMAPIDS.THE_FORBIDDEN_REACH },
 		},
 	},
--- 10.1 Cavern Racer's Purse
+	-- 10.1 Cavern Racer's Purse
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Pronged Tail"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -337,7 +337,7 @@ local dragonflightManuscripts = {
 		questId = { 73853 },
 		coords = { { m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN } },
 	},
--- 10.2 Dream Racer's Purse
+	-- 10.2 Dream Racer's Purse
 	-- Winding Slitherdrake
 	["Winding Slitherdrake: Large Finned Tail"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -429,7 +429,7 @@ local dragonflightManuscripts = {
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
 	},
 
--- 10.0 Manuscripts from Rares / World Bosses / Treasures
+	-- 10.0 Manuscripts from Rares / World Bosses / Treasures
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Impaler Horns"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -591,7 +591,7 @@ local dragonflightManuscripts = {
 		method = CONSTANTS.DETECTION_METHODS.NPC,
 		name = L["Windborne Velocidrake: Club Tail"],
 		itemId = 197624,
-		npcs = { 187209, 187886, 189289, 190991},
+		npcs = { 187209, 187886, 189289, 190991 },
 		chance = 50,
 		questId = { 69828 },
 		coords = {
@@ -1179,30 +1179,30 @@ local dragonflightManuscripts = {
 			{ m = CONSTANTS.UIMAPIDS.FORBIDDEN_REACH },
 		},
 	},
--- 10.1 Manuscripts from Rares / World Bosses / Treasures
+	-- 10.1 Manuscripts from Rares / World Bosses / Treasures
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Plated Jaw"] = {
-        cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
-        type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
-        method = CONSTANTS.DETECTION_METHODS.USE,
-        name = L["Renewed Proto-Drake: Plated Jaw"],
-        itemId = 202275,
-        items = { 386091, 386090, 386089, 386088 }, -- Ritual Offerings
-        chance = 100,
-        questId = { 73059 },
-        coords = { { m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN } },
-    },
-    ["Renewed Proto-Drake: Short Spiked Crest"] = {
-        cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
-        type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
-        method = CONSTANTS.DETECTION_METHODS.NPC,
-        name = L["Renewed Proto-Drake: Short Spiked Crest"],
-        itemId = 197364,
-        npcs = { 204093 },
-        chance = 50,
-        questId = { 69565 },
-        coords = { { m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN } },
-    },
+		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
+		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		name = L["Renewed Proto-Drake: Plated Jaw"],
+		itemId = 202275,
+		items = { 386091, 386090, 386089, 386088 }, -- Ritual Offerings
+		chance = 100,
+		questId = { 73059 },
+		coords = { { m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN } },
+	},
+	["Renewed Proto-Drake: Short Spiked Crest"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
+		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Renewed Proto-Drake: Short Spiked Crest"],
+		itemId = 197364,
+		npcs = { 204093 },
+		chance = 50,
+		questId = { 69565 },
+		coords = { { m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN } },
+	},
 
 	-- Highland Drake
 	["Highland Drake: Spiked Head"] = {
@@ -1285,19 +1285,19 @@ local dragonflightManuscripts = {
 			{ m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN },
 		},
 	},
-    ["Winding Slitherdrake: Curled Horns"] = {
-        cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
-        type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
-        method = CONSTANTS.DETECTION_METHODS.NPC,
-        name = L["Winding Slitherdrake: Curled Horns"],
-        itemId = 203334,
-        npcs = { 203592 },
-        chance = 50,
-        questId = { 73824 },
-        coords = {
-            { m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN },
-        },
-    },
+	["Winding Slitherdrake: Curled Horns"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
+		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Winding Slitherdrake: Curled Horns"],
+		itemId = 203334,
+		npcs = { 203592 },
+		chance = 50,
+		questId = { 73824 },
+		coords = {
+			{ m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN },
+		},
+	},
 	["Winding Slitherdrake: Plated Brow"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
@@ -1428,7 +1428,7 @@ local dragonflightManuscripts = {
 			{ m = CONSTANTS.UIMAPIDS.ZARALEK_CAVERN },
 		},
 	},
--- 10.2 Manuscripts from Rares / World Bosses / Treasures
+	-- 10.2 Manuscripts from Rares / World Bosses / Treasures
 	-- Winding Slitherdrake
 	["Winding Slitherdrake: Small Spiked Crest"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -1512,7 +1512,7 @@ local dragonflightManuscripts = {
 		questId = { 77137 },
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
 	},
--- 10.1 Fyrakk Assaults
+	-- 10.1 Fyrakk Assaults
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Bruiser Horns"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -1616,7 +1616,7 @@ local dragonflightManuscripts = {
 			{ m = CONSTANTS.UIMAPIDS.THE_AZURE_SPAN },
 		},
 	},
--- 10.2 Superbloom
+	-- 10.2 Superbloom
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Green Hair"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -1708,7 +1708,7 @@ local dragonflightManuscripts = {
 		questId = { 77133 },
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
 	},
--- 10.2 Dreamseeds
+	-- 10.2 Dreamseeds
 	-- Grotto Netherwing Drake
 	["Grotto Netherwing Drake: Outcast Pattern"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -1716,7 +1716,23 @@ local dragonflightManuscripts = {
 		method = CONSTANTS.DETECTION_METHODS.USE,
 		name = L["Grotto Netherwing Drake: Outcast Pattern"],
 		itemId = 207769,
-		items = { 406119, 409225, 406956, 406143, 406143, 406139, 406148, 409848, 406121, 406135, 406355, 406124, 409228, 409221, 406119 }, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
+		items = {
+			406119,
+			409225,
+			406956,
+			406143,
+			406143,
+			406139,
+			406148,
+			409848,
+			406121,
+			406135,
+			406355,
+			406124,
+			409228,
+			409221,
+			406119,
+		}, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
 		chance = 100,
 		questId = { 77140 },
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
@@ -1727,7 +1743,23 @@ local dragonflightManuscripts = {
 		method = CONSTANTS.DETECTION_METHODS.USE,
 		name = L["Grotto Netherwing Drake: Long Horns"],
 		itemId = 207772,
-		items = { 406119, 409225, 406956, 406143, 406143, 406139, 406148, 409848, 406121, 406135, 406355, 406124, 409228, 409221, 406119 }, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
+		items = {
+			406119,
+			409225,
+			406956,
+			406143,
+			406143,
+			406139,
+			406148,
+			409848,
+			406121,
+			406135,
+			406355,
+			406124,
+			409228,
+			409221,
+			406119,
+		}, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
 		chance = 100,
 		questId = { 77143 },
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
@@ -1738,7 +1770,23 @@ local dragonflightManuscripts = {
 		method = CONSTANTS.DETECTION_METHODS.USE,
 		name = L["Grotto Netherwing Drake: Cluster Spiked Back"],
 		itemId = 207759,
-		items = { 406119, 409225, 406956, 406143, 406143, 406139, 406148, 409848, 406121, 406135, 406355, 406124, 409228, 409221, 406119 }, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
+		items = {
+			406119,
+			409225,
+			406956,
+			406143,
+			406143,
+			406139,
+			406148,
+			409848,
+			406121,
+			406135,
+			406355,
+			406124,
+			409228,
+			409221,
+			406119,
+		}, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
 		chance = 100,
 		questId = { 77130 },
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
@@ -1749,12 +1797,28 @@ local dragonflightManuscripts = {
 		method = CONSTANTS.DETECTION_METHODS.USE,
 		name = L["Grotto Netherwing Drake: Head Spike"],
 		itemId = 207764,
-		items = { 406119, 409225, 406956, 406143, 406143, 406139, 406148, 409848, 406121, 406135, 406355, 406124, 409228, 409221, 406119 }, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
+		items = {
+			406119,
+			409225,
+			406956,
+			406143,
+			406143,
+			406139,
+			406148,
+			409848,
+			406121,
+			406135,
+			406355,
+			406124,
+			409228,
+			409221,
+			406119,
+		}, --These are only the Purple colored Dreamseeds, I'm not adding 51 ids here
 		chance = 100,
 		questId = { 77135 },
 		coords = { { m = CONSTANTS.UIMAPIDS.THE_EMERALD_DREAM } },
 	},
--- Dragonflight Dungeons
+	-- Dragonflight Dungeons
 	-- Renewed Proto Drake
 	["Renewed Proto-Drake: Heavy Scales"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -1771,10 +1835,9 @@ local dragonflightManuscripts = {
 			[CONSTANTS.INSTANCE_DIFFICULTIES.NORMAL_DUNGEON] = true,
 			[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
 			[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
-		 },
-        coords = { { m = CONSTANTS.UIMAPIDS.NELTHARUS, i = true } },
+		},
+		coords = { { m = CONSTANTS.UIMAPIDS.NELTHARUS, i = true } },
 	},
-
 
 	["Renewed Proto-Drake: Ears"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -2013,7 +2076,7 @@ local dragonflightManuscripts = {
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.HALLS_OF_INFUSION, i = true } },
 	},
--- Dawn of the Infinite Dungeon
+	-- Dawn of the Infinite Dungeon
 	-- Visage of the Infinite Skins
 	["Renewed Proto-Drake: Visage of the Infinite"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,
@@ -2035,7 +2098,10 @@ local dragonflightManuscripts = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "Chrono-Lord Deios",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true, },
+				instanceDifficulties = {
+					[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+					[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+				},
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.CROSSROADS_OF_FATE, i = true } },
@@ -2060,7 +2126,10 @@ local dragonflightManuscripts = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "Chrono-Lord Deios",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true, },
+				instanceDifficulties = {
+					[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+					[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+				},
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.CROSSROADS_OF_FATE, i = true } },
@@ -2085,7 +2154,10 @@ local dragonflightManuscripts = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "Chrono-Lord Deios",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true, },
+				instanceDifficulties = {
+					[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+					[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+				},
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.CROSSROADS_OF_FATE, i = true } },
@@ -2110,7 +2182,10 @@ local dragonflightManuscripts = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "Chrono-Lord Deios",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true, },
+				instanceDifficulties = {
+					[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+					[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+				},
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.CROSSROADS_OF_FATE, i = true } },
@@ -2135,12 +2210,15 @@ local dragonflightManuscripts = {
 			mode = CONSTANTS.DEFEAT_DETECTION.MODE_AND,
 			{
 				encounterName = "Chrono-Lord Deios",
-				instanceDifficulties = { [CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true, [CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true, },
+				instanceDifficulties = {
+					[CONSTANTS.INSTANCE_DIFFICULTIES.HEROIC_DUNGEON] = true,
+					[CONSTANTS.INSTANCE_DIFFICULTIES.MYTHIC_DUNGEON] = true,
+				},
 			},
 		},
 		coords = { { m = CONSTANTS.UIMAPIDS.CROSSROADS_OF_FATE, i = true } },
 	},
--- Raid Drops
+	-- Raid Drops
 	-- Vault of the Incarnates
 	["Renewed Proto-Drake: Embodiment of the Storm-Eater"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.DRAGONFLIGHT,

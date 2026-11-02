@@ -393,8 +393,7 @@ local function showSubTooltip(cell, item)
 		tooltip2AddLine(Rarity.mount_sources[item.spellId])
 		hadSource = true
 	end
-	if
-		item.type == CONSTANTS.ITEM_TYPES.MANUSCRIPT then
+	if item.type == CONSTANTS.ITEM_TYPES.MANUSCRIPT then
 		tooltip2:AddSeparator(1, 1, 1, 1, 1)
 		tooltip2AddLine(item.sourceText)
 		hadSource = true
@@ -1483,7 +1482,7 @@ function R:ShowTooltip(hidden)
 
 	-- Item groups
 
-local somethingAdded = false
+	local somethingAdded = false
 
 	local group1start = debugprofilestop()
 	if R.db.profile.collectionType[MOUNT] then
@@ -1639,4 +1638,3 @@ local somethingAdded = false
 end
 
 -- Groups, sort order etc
-

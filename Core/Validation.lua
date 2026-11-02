@@ -25,7 +25,12 @@ function Validation:ValidateItemDB()
 	local numInvalidCustomItems = self:ValidateCustomItems()
 	local numInvalidManuscripts = self:ValidateManuscripts()
 
-	numErrors = numErrors + numInvalidItemsAndToys + numInvalidPets + numInvalidMounts + numInvalidCustomItems + numInvalidManuscripts
+	numErrors = numErrors
+		+ numInvalidItemsAndToys
+		+ numInvalidPets
+		+ numInvalidMounts
+		+ numInvalidCustomItems
+		+ numInvalidManuscripts
 
 	if numErrors == 0 then
 		Rarity:Print(L["We didn't find any errors in your database. Yay!"])

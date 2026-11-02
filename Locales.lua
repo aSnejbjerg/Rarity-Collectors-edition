@@ -4,14 +4,17 @@ L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
 -----Manuscript start-----
 L["Windborne Velocidrake: Hallow's End Armor"] = true
-L["Can be contained in the Satchel of Chilled Goods, rewarded for defeating the World Event Dungeon during the Midsummer Fire Festival."] = true
+L["Can be contained in the Satchel of Chilled Goods, rewarded for defeating the World Event Dungeon during the Midsummer Fire Festival."] =
+	true
 L["Renewed Proto-Drake: Brewfest Armor"] = true
-L["Can be contained in Keg-Shaped Treasure Chest, rewarded for defeating the World Event Dungeon during Brewfest."] = true
+L["Can be contained in Keg-Shaped Treasure Chest, rewarded for defeating the World Event Dungeon during Brewfest."] =
+	true
 L["Cliffside Wylderdrake: Midsummer Fire Festival Armor"] = true
 L["Can be contained in Loot-Filled Pumpkin, rewarded for defeating the World Event Dungeon during Hallow's End."] = true
 L["Highland Drake: Winter Veil Armor"] = true
 L["Renewed Proto-Drake: Love Armor"] = true
-L["Can be contained in Heart-Shaped Box, rewarded for defeating the World Event Dungeon during Love is in the Air."] = true
+L["Can be contained in Heart-Shaped Box, rewarded for defeating the World Event Dungeon during Love is in the Air."] =
+	true
 L["Delver's Dirigible Schematic: Void"] = true
 L["Delver's Gob-Trotter Schematic: Gold"] = true
 L["Delver's Mana-Skimmer Schematic: Hyperdrive"] = true

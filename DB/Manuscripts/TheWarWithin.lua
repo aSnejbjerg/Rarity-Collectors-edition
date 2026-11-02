@@ -13,7 +13,8 @@ local TheWarWithinManuscripts = {
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
 		encounter = {
-			2985, 2987, -- Zekvir, not sure which one is "??" difficulty
+			2985,
+			2987, -- Zekvir, not sure which one is "??" difficulty
 		},
 		name = L["Delver's Dirigible Schematic: Void"],
 		itemId = 225542,
@@ -27,7 +28,8 @@ local TheWarWithinManuscripts = {
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
 		encounter = {
-			3126, 3138, -- The Underpin, not sure which one is "??" difficulty
+			3126,
+			3138, -- The Underpin, not sure which one is "??" difficulty
 		},
 		name = L["Delver's Gob-Trotter Schematic: Gold"],
 		itemId = 233196,
@@ -41,7 +43,8 @@ local TheWarWithinManuscripts = {
 		type = CONSTANTS.ITEM_TYPES.MANUSCRIPT,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
 		encounter = {
-			3325, 3326, -- Nexus-Princess Kyveza, not sure which one is "??" difficulty
+			3325,
+			3326, -- Nexus-Princess Kyveza, not sure which one is "??" difficulty
 		},
 		name = L["Delver's Mana-Skimmer Schematic: Hyperdrive"],
 		itemId = 238182,
