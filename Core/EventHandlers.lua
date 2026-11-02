@@ -179,12 +179,12 @@ local function IsPlayerInHorrificVision()
 		or (GetBestMapForUnit("player") == CONSTANTS.UIMAPIDS.HORRIFIC_REVISION_OF_ORGRIMMAR)
 end
 
+local manuscriptScanTimer
+
 function R:OnSpellcastSucceeded(event, unitID, castGUID, spellID)
 	if unitID ~= "player" then
 		return
 	end
-
-	local manuscriptScanTimer
 
 	-- Learning a manuscript is a spell cast; the quest flag updates shortly afterwards
 	if not manuscriptScanTimer then
