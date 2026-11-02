@@ -184,6 +184,18 @@ function R:OnSpellcastSucceeded(event, unitID, castGUID, spellID)
 		return
 	end
 
+local manuscriptScanTimer
+
+	-- Learning a manuscript is a spell cast; the quest flag updates shortly afterwards
+	if not manuscriptScanTimer then
+		manuscriptScanTimer = self:ScheduleTimer(function()
+			manuscriptScanTimer = nil
+			Rarity.Collections:ScanManuscripts("SPELLCAST_SUCCEEDED")
+			Rarity.Tracking:FindTrackedItem()
+			Rarity.GUI:UpdateText()
+		end, 2)
+	end
+
 	if not Rarity.relevantSpells[spellID] then
 		return
 	end

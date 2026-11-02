@@ -31,6 +31,7 @@ end
 local GetNumArtifactsByRace = GetNumArtifactsByRace
 local GetArtifactInfoByRace = GetArtifactInfoByRace
 local IsQuestComplete = _G.C_QuestLog.IsComplete
+local IsQuestFlaggedCompleted = _G.C_QuestLog.IsQuestFlaggedCompleted
 local GetArchaeologyRaceInfo = GetArchaeologyRaceInfo
 local GetActiveArtifactByRace = GetActiveArtifactByRace
 
@@ -91,6 +92,32 @@ function Collections:ScanToys(reason)
 							vv.found = true
 						end
 					end
+				end
+			end
+		end
+	end
+end
+
+-- Manuscripts are learned when their questId is flagged completed (same method as the Manuscripts Journal addon)
+function Collections:ScanManuscripts(reason)
+	local manuscripts = R.db.profile.groups.manuscripts
+	if type(manuscripts) ~= "table" then
+		return
+	end
+
+	R:Debug("Scanning manuscripts (" .. (reason or "") .. ")")
+
+	for _, entry in pairs(manuscripts) do
+		if type(entry) == "table" and entry.questId and not entry.found then
+			local questIds = type(entry.questId) == "table" and entry.questId or { entry.questId }
+			for _, questId in pairs(questIds) do
+				if IsQuestFlaggedCompleted(questId) then
+					entry.known = true
+					if not entry.repeatable then
+						entry.enabled = false
+						entry.found = true
+					end
+					break
 				end
 			end
 		end
@@ -297,6 +324,10 @@ function Collections:ScanExistingItems(reason)
 	end
 
 	-- Other scans
+	self.Profiling:StartTimer("Collections.ScanManuscripts")
+	Rarity.Collections:ScanManuscripts(reason)
+	self.Profiling:EndTimer("Collections.ScanManuscripts")
+
 	self.Profiling:StartTimer("Collections.ScanStatistics")
 	self:ScanStatistics(reason)
 	self.Profiling:EndTimer("Collections.ScanStatistics")
