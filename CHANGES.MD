@@ -1,9 +1,8 @@
 ## What's Changed
-* TOC update 12.1.7 PTR by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/159
-* Amani War Bear Fix by @aSnejbjerg in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/158
-* Reverting Mawbuffs fix by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/160
-* Tazavesh HC lockout fix by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/161
-* Yoggsaron fix by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/162
+* Stop treating loot window items as acquired before distribution by @Shelinka in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/171
+* Updated sound file ID for item obtained popup by @Shelinka in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/175
+* Test of different kill detection for mainline / camelot by @Shelinka in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/170
+* Replaced Gustjumper NPC with placeholder by @Roguinaa in https://github.com/aSnejbjerg/Rarity-Collectors-edition/pull/173
 
 
-**Full Changelog**: https://github.com/aSnejbjerg/Rarity-Collectors-edition/compare/v0.3.0...v0.3.1
+**Full Changelog**: https://github.com/aSnejbjerg/Rarity-Collectors-edition/compare/v0.3.1...v0.4.0
