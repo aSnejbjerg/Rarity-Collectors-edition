@@ -9,6 +9,9 @@ local GetAchievementInfo = _G.GetAchievementInfo
 -- Rarity API
 local R = Rarity
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
+local projectId = _G.WOW_PROJECT_ID
+local isModernProject = projectId ~= nil
+	and (projectId == _G.WOW_PROJECT_MAINLINE or projectId == _G.WOW_PROJECT_CAMELOT)
 
 -- Fake achievement popup stuff
 local function RarityAchievementAlertFrame_SetUp(frame, itemId, attempts)
@@ -154,7 +157,11 @@ function R:ShowFoundAlert(itemId, attempts, item)
 	-- If option to generate achievement toast on item found is enabled, then generate the toast.
 	if Rarity.db.profile.showAchievementToast then
 		RarityAchievementAlertSystem:AddAlert(itemId, attempts)
-		PlaySound(12891) -- UI_Alert_AchievementGained
+		if isModernProject then
+			PlaySoundFile(569143)
+		else
+			PlaySound(12891) -- UI_Alert_AchievementGained
+		end
 	end
 
 	self:ScheduleTimer(function()
