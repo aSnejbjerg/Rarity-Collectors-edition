@@ -155,6 +155,30 @@ if elvUI and type(elvUI.GetModule) == "function" then
 	end
 end
 
+--EllesmereUI skin integration
+local ellesmereUI = _G.EllesmereUI
+if ellesmereUI and type(ellesmereUI.RegisterSkin) == "function" then
+	ellesmereUI.RegisterSkin(addonName, function(skin)
+		_G.hooksecurefunc(RarityAchievementAlertSystem, "setUpFunction", function(frame, itemId)
+			if not GetItemInfo(itemId) then
+				return
+			end
+
+			skin.Shell(frame, { noTopBar = true })
+			frame.Background:SetTexture(nil)
+			frame.glow:SetTexture(nil)
+			frame.shine:SetTexture(nil)
+			frame.Icon.Overlay:SetTexture(nil)
+			frame.Shield:SetAlpha(0)
+			frame.Icon.Texture:ClearAllPoints()
+			frame.Icon.Texture:SetPoint("LEFT", frame, "LEFT", 10, 0)
+			skin.SquareIcon(frame.Icon.Texture, frame.Icon)
+			skin.Font(frame.Unlocked)
+			skin.Font(frame.Name)
+		end)
+	end)
+end
+
 --LS: Toasts integration
 local function GetLSToastsSettings()
 	if
