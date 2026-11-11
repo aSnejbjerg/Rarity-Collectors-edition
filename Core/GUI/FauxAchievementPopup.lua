@@ -1,4 +1,4 @@
-local _, addonTable = ...
+local addonName, addonTable = ...
 local CONSTANTS = addonTable.constants
 
 -- WOW API
@@ -114,6 +114,156 @@ RarityAchievementAlertSystem:SetCanShowMoreConditionFunc(function()
 	return not IsInPetBattle()
 end)
 
+-- ElvUI skin integration
+local function SkinRarityAchievementAlert(frame, itemId)
+	if not GetItemInfo(itemId) then
+		return
+	end
+
+	if not frame.rarityElvUISkinned then
+		frame:CreateBackdrop("Transparent")
+		frame.backdrop:ClearAllPoints()
+		frame.backdrop:SetPoint("TOPLEFT", frame.Background, "TOPLEFT", -2, -6)
+		frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Background, "BOTTOMRIGHT", -2, 6)
+
+		frame.glow:Kill()
+		frame.shine:Kill()
+		frame.GuildBanner:Kill()
+		frame.GuildBorder:Kill()
+		frame.Icon.Overlay:Kill()
+		frame.Icon:CreateBackdrop()
+		frame.Icon.backdrop:SetOutside(frame.Icon.Texture)
+		frame.rarityElvUISkinned = true
+	end
+
+	frame.Background:SetTexture(nil)
+	frame.Unlocked:FontTemplate(nil, 12)
+	frame.Unlocked:SetTextColor(1, 1, 1)
+	frame.Name:FontTemplate(nil, 12)
+	frame.Icon.Texture:SetTexCoords()
+	frame.Icon.Texture:ClearAllPoints()
+	frame.Icon.Texture:SetPoint("LEFT", frame, "LEFT", 7, 0)
+end
+
+local elvUI = _G.ElvUI and _G.ElvUI[1]
+if elvUI and type(elvUI.GetModule) == "function" then
+	local skins = elvUI:GetModule("Skins", true)
+	if skins and type(skins.AddCallbackForAddon) == "function" then
+		skins:AddCallbackForAddon(addonName, "RarityAchievementAlert", function()
+			_G.hooksecurefunc(RarityAchievementAlertSystem, "setUpFunction", SkinRarityAchievementAlert)
+		end, nil, nil, nil, "alertframes")
+	end
+end
+
+--LS: Toasts integration
+local function GetLSToastsSettings()
+	if
+		not _G.C_AddOns
+		or type(_G.C_AddOns.IsAddOnLoaded) ~= "function"
+		or not _G.C_AddOns.IsAddOnLoaded("ls_Toasts")
+	then
+		return
+	end
+
+	local lsToasts = _G.ls_Toasts
+	local engine = lsToasts and lsToasts[1]
+	local config = lsToasts and lsToasts[2]
+	local profile = config and config.db and config.db.profile
+	if not (engine and type(engine.GetToast) == "function" and profile and profile.layouts and profile.types) then
+		return
+	end
+
+	local editMode = _G.C_EditMode
+	local layoutInfo = editMode and editMode.GetLayouts and editMode.GetLayouts()
+	local layoutName
+	if layoutInfo and layoutInfo.activeLayout then
+		local presetNames = {}
+		for _, preset in ipairs({
+			{ "EDIT_MODE_MODERN_SYSTEM_MAP", "Modern" },
+			{ "EDIT_MODE_CLASSIC_SYSTEM_MAP", "Classic" },
+			{ "EDIT_MODE_GAMEPAD_SYSTEM_MAP", "Gamepad" },
+		}) do
+			if _G[preset[1]] then
+				presetNames[#presetNames + 1] = preset[2]
+			end
+		end
+		local index = layoutInfo.activeLayout
+		local customLayout = layoutInfo.layouts and layoutInfo.layouts[index - #presetNames]
+		layoutName = presetNames[index] or (customLayout and customLayout.layoutName)
+	end
+	if not layoutName then
+		return
+	end
+
+	local layout = profile.layouts[layoutName]
+	local achievement = profile.types.achievement
+	local anchor = layout and layout.types and layout.types.achievement
+	if not (achievement and anchor and layout.anchors and layout.anchors[anchor]) then
+		return
+	end
+	return engine, achievement, anchor
+end
+
+local function ShowLSToast(itemName, itemTexture, attempts, item)
+	local engine, achievement, anchor = GetLSToastsSettings()
+	if not engine then
+		return false
+	end
+
+	local toast = engine:GetToast()
+	if item.method == CONSTANTS.DETECTION_METHODS.COLLECTION then
+		toast.Title:SetText(L["Collection Complete"])
+	elseif not attempts or attempts <= 1 then
+		toast.Title:SetText(L["Obtained On First Attempt!"])
+	else
+		toast.Title:SetText(format(L["Received: %d Attempts"], attempts))
+	end
+	toast.Text:SetText(itemName)
+	toast.Icon:SetTexture(itemTexture)
+	toast.IconBorder:Show()
+	toast._data.event = "RARITY_ITEM_FOUND"
+	toast._data.vfx = achievement.vfx
+	toast:Spawn(anchor, achievement.dnd)
+	return true
+end
+
+local pendingLSToasts = {}
+local petBattleFrame
+
+local function FlushPendingLSToasts()
+	if IsInPetBattle() then
+		_G.C_Timer.After(0.1, FlushPendingLSToasts)
+		return
+	end
+	petBattleFrame:UnregisterEvent("PET_BATTLE_CLOSE")
+	local pending = pendingLSToasts
+	pendingLSToasts = {}
+	for _, alert in ipairs(pending) do
+		if not ShowLSToast(alert[2], alert[3], alert[4], alert[5]) then
+			RarityAchievementAlertSystem:AddAlert(alert[1], alert[4])
+		end
+	end
+end
+
+local function QueueLSToast(itemId, itemName, itemTexture, attempts, item)
+	if not IsInPetBattle() then
+		return ShowLSToast(itemName, itemTexture, attempts, item)
+	end
+	if not GetLSToastsSettings() then
+		return false
+	end
+
+	pendingLSToasts[#pendingLSToasts + 1] = { itemId, itemName, itemTexture, attempts, item }
+	if not petBattleFrame then
+		petBattleFrame = _G.CreateFrame("Frame")
+		petBattleFrame:SetScript("OnEvent", function()
+			_G.C_Timer.After(0, FlushPendingLSToasts)
+		end)
+	end
+	petBattleFrame:RegisterEvent("PET_BATTLE_CLOSE")
+	return true
+end
+
 local Output = Rarity.Output
 
 -- test with: /run Rarity:ShowFoundAlert(32458, 5)
@@ -156,7 +306,9 @@ function R:ShowFoundAlert(itemId, attempts, item)
 
 	-- If option to generate achievement toast on item found is enabled, then generate the toast.
 	if Rarity.db.profile.showAchievementToast then
-		RarityAchievementAlertSystem:AddAlert(itemId, attempts)
+		if not QueueLSToast(itemId, itemName, itemTexture, attempts, item) then
+			RarityAchievementAlertSystem:AddAlert(itemId, attempts)
+		end
 		if isModernProject then
 			PlaySoundFile(569143)
 		else

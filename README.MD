@@ -29,6 +29,8 @@
 <li>Reminds you if you need to farm a holiday dungeon or daily quest, and hides holiday items that aren't available right now.</li>
 <li>Supports bonus coin rolls.</li>
 <li>Automatically screenshots when you obtain an item.</li>
+<li>Uses LS: Toasts for found-item popups when it is loaded; otherwise uses Rarity's achievement-style popup.</li>
+<li>Skins Rarity's achievement-style popup with ElvUI when its Blizzard and Alert Frames skins are enabled.</li>
 <li>You can add your own items to track.</li>
 <li>Lets you modify your attempt count manually without having to edit saved variables.</li>
 </ul>
