@@ -238,9 +238,9 @@ local function ShowLSToast(itemName, itemTexture, attempts, item)
 	if item.method == CONSTANTS.DETECTION_METHODS.COLLECTION then
 		toast.Title:SetText(L["Collection Complete"])
 	elseif not attempts or attempts <= 1 then
-		toast.Title:SetText(L["Obtained On First Attempt!"])
+		toast.Title:SetText(L["First Attempt!"])
 	else
-		toast.Title:SetText(format(L["Received: %d Attempts"], attempts))
+		toast.Title:SetText(format(L["Obtained:%d Attempts"], attempts))
 	end
 	toast.Text:SetText(itemName)
 	toast.Icon:SetTexture(itemTexture)
