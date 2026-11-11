@@ -173,8 +173,8 @@ if ellesmereUI and type(ellesmereUI.RegisterSkin) == "function" then
 			frame.Icon.Texture:ClearAllPoints()
 			frame.Icon.Texture:SetPoint("LEFT", frame, "LEFT", 10, 0)
 			skin.SquareIcon(frame.Icon.Texture, frame.Icon)
-			skin.Font(frame.Unlocked)
-			skin.Font(frame.Name)
+			skin.Font(frame.Unlocked, 1, 1, 1)
+			skin.Font(frame.Name,)
 		end)
 	end)
 end
