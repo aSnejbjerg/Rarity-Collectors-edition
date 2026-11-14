@@ -1,0 +1,14 @@
+## Interface: 120105, 120107, 16001, 16007
+## Title: Rarity [|cff9966ffCustom Popups|r]
+## IconTexture: Interface\AddOns\Rarity\Icons\rarity_icon.tga
+## Notes: Themed, Edit Mode movable popups (with effects) for Rarity: Collector's Edition finds.
+## Author: BraveToTheBone
+## Version: 0.1.0
+## Dependencies: Rarity
+## X-Part-Of: Rarity
+## SavedVariables: RarityCustomPopupsDB
+
+Libs\LibStub\LibStub.lua
+Libs\LibEditMode\embed.xml
+
+RarityCustomPopups.lua
