@@ -1,4 +1,5 @@
-## Interface: 120105, 120107, 16001, 16007
+## Interface: 120105, 120107, 50504, 20506, 11509, 16001
+## X-Min-Interface: 120105, 120107, 50504, 20506, 11509, 16001
 ## Title: Rarity [|cff9966ffCustom Popups|r]
 ## IconTexture: Interface\AddOns\Rarity\Icons\rarity_icon.tga
 ## Notes: Themed, Edit Mode movable popups (with effects) for Rarity: Collector's Edition finds.
