@@ -134,7 +134,7 @@ local foreverPets = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
-		encounter = {
+		encounters = {
 			165, -- Cookie
 		},
 		name = L["Cat Carrier (Siamese)"],
