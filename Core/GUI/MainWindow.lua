@@ -8,6 +8,7 @@ local CONSTANTS = addonTable.constants
 --- WoW API
 local GetItemInfo = _G.C_Item.GetItemInfo
 local GetBestMapForUnit = C_Map.GetBestMapForUnit
+local GetInstanceInfo = GetInstanceInfo
 local IsWorldQuestActive = C_TaskQuest.IsActive
 local IsQuestFlaggedCompleted = _G.C_QuestLog.IsQuestFlaggedCompleted
 local C_Covenants = _G.C_Covenants
@@ -452,23 +453,28 @@ local function showSubTooltip(cell, item)
 	-- Zone(s)
 	local zoneText = ""
 	local currentZone = GetBestMapForUnit("player")
+	local currentInstanceID = select(8, GetInstanceInfo())
 	if item.coords ~= nil and type(item.coords) == "table" then
 		local zoneList = {}
 		for _, zoneValue in pairs(item.coords) do
-			if type(zoneValue) == "table" and zoneValue.m ~= nil then
+			if type(zoneValue) == "table" and (zoneValue.m ~= nil or zoneValue.instanceID ~= nil) then
+				local zoneKey = zoneValue.m and ("map:" .. zoneValue.m) or ("instance:" .. zoneValue.instanceID)
 				local doThisZone = false
-				if zoneList[zoneValue.m] == nil then
-					zoneList[zoneValue.m] = true
+				if zoneList[zoneKey] == nil then
+					zoneList[zoneKey] = true
 					doThisZone = true
 				end
 				if doThisZone then
 					if zoneText ~= "" then
 						zoneText = zoneText .. ", "
 					end
-					if currentZone == zoneValue.m then
-						zoneText = zoneText .. colorize(GetMapNameByID(zoneValue.m) or "", green)
+					local isCurrentZone = (zoneValue.m ~= nil and currentZone == zoneValue.m)
+						or (zoneValue.instanceID ~= nil and currentInstanceID == zoneValue.instanceID)
+					local zoneName = R.Waypoints:GetZoneNameForWaypoint(zoneValue) or ""
+					if isCurrentZone then
+						zoneText = zoneText .. colorize(zoneName, green)
 					else
-						zoneText = zoneText .. colorize(GetMapNameByID(zoneValue.m) or "", gray)
+						zoneText = zoneText .. colorize(zoneName, gray)
 					end
 				end
 			end

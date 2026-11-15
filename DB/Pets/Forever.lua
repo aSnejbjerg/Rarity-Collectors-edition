@@ -89,7 +89,7 @@ local foreverPets = {
 		chance = 33,
 		creatureId = 7387,
 		blackMarket = true,
-		coords = { { m = 291, x = 55, y = 39.6, i = true } },
+		coords = { { instanceID = 36, zoneName = L["The Deadmines"] } },
 	},
 	["Parrot Cage (Hyacinth Macaw)"] = { -- NOTE: ADJUSTED
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -134,7 +134,7 @@ local foreverPets = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
-		encounter = {
+		encounters = {
 			165, -- Cookie
 		},
 		name = L["Cat Carrier (Siamese)"],
@@ -143,7 +143,7 @@ local foreverPets = {
 		itemId = 8490,
 		npcs = { 645 },
 		spellId = 10677,
-		coords = { { m = CONSTANTS.UIMAPIDS.DEADMINES } },
+		coords = { { instanceID = 36, zoneName = L["The Deadmines"] } },
 	},
 	-- WoW Forever exclusives start here
 	["Tallstrider Hatchling"] = {
@@ -158,7 +158,7 @@ local foreverPets = {
 		creatureId = 274334,
 		blackMarket = true,
 		sourceText = L["This pet drops from the Tallstrider Matriarch in Darkshore."],
-		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_DARKSHORE, x = 37.6, y = 90.6 } },
+		coords = { { m = CONSTANTS.UIMAPIDS.DARKSHORE, x = 37.6, y = 90.6 } },
 	},
 	["Baby Crocolisk"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.FOREVER,

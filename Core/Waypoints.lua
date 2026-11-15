@@ -3,6 +3,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 
 -- WOW API
 local GetBestMapForUnit = C_Map.GetBestMapForUnit
+local GetInstanceInfo = GetInstanceInfo
 
 -- Rarity API
 local Colorize = Rarity.Utils.String.Colorize
@@ -40,9 +41,12 @@ function Waypoints:GetZoneTextForItem(item)
 
 	local numZones = self:GetNumZonesForItem(item)
 	if numZones == 1 then
-		-- Convoluted much? Oh well, simplify later I guess (separate issue)
-		local mapID = self:GetFirstMapForItem(item)
-		return GetMapNameByID(mapID)
+		for _, waypointData in pairs(item.coords) do
+			if type(waypointData) == "table" and (waypointData.m ~= nil or waypointData.instanceID ~= nil) then
+				return self:GetZoneNameForWaypoint(waypointData) or ""
+			end
+		end
+		return ""
 	end
 
 	if not self:IsItemInCurrentZone(item) then
@@ -50,8 +54,33 @@ function Waypoints:GetZoneTextForItem(item)
 	end
 
 	local currentZone = GetBestMapForUnit("player")
+	local currentInstanceID = select(8, GetInstanceInfo())
+	if currentInstanceID then
+		for _, waypointData in pairs(item.coords) do
+			if type(waypointData) == "table" and waypointData.instanceID == currentInstanceID then
+				return (self:GetZoneNameForWaypoint(waypointData) or "")
+					.. " "
+					.. Colorize(format("+%d", numZones - 1), gray)
+			end
+		end
+	end
 	-- TBD: Why use gray if it'll be overridden with green due to being in the current zone?
 	return GetMapNameByID(currentZone) .. " " .. Colorize(format("+%d", numZones - 1), gray)
+end
+
+function Waypoints:GetZoneNameForWaypoint(waypointData)
+	if waypointData.zoneName ~= nil then
+		return waypointData.zoneName
+	end
+
+	if waypointData.m ~= nil then
+		return GetMapNameByID(waypointData.m)
+	end
+
+	local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+	if waypointData.instanceID == instanceID then
+		return instanceName
+	end
 end
 
 function Waypoints:IsItemInCurrentZone(item)
@@ -60,14 +89,15 @@ function Waypoints:IsItemInCurrentZone(item)
 	end -- We don't know for sure, but the effect is the same
 
 	local mapIDs = self:GetMapsForItem(item) or {}
-	-- DevTools_Dump(mapIDs)
 	local currentZone = GetBestMapForUnit("player")
-	return mapIDs[currentZone]
+	local currentInstanceID = select(8, GetInstanceInfo())
+	return mapIDs[currentZone] or self:GetInstanceIDsForItem(item)[currentInstanceID]
 end
 
 function Waypoints:GetNumZonesForItem(item)
 	local mapIDs = self:GetMapsForItem(item) or {}
-	return Count(mapIDs)
+	local instanceIDs = self:GetInstanceIDsForItem(item)
+	return Count(mapIDs) + Count(instanceIDs)
 end
 
 function Waypoints:HasItemWaypoints(item)
@@ -78,9 +108,12 @@ function Waypoints:HasItemWaypoints(item)
 		return false
 	end
 
-	-- Has at least one assigned map ID
+	-- Has at least one assigned map or instance ID
 	for waypointID, waypointData in pairs(item.coords) do
-		if type(waypointData) == "table" and waypointData.m ~= nil then
+		if
+			type(waypointData) == "table"
+			and (waypointData.m ~= nil or waypointData.instanceID ~= nil)
+		then
 			return true
 		end
 	end
@@ -108,13 +141,29 @@ function Waypoints:GetMapsForItem(item)
 
 	local waypointMapIDs = {}
 	for waypointID, waypointData in pairs(item.coords) do
-		local mapID = waypointData.m
+		local mapID = type(waypointData) == "table" and waypointData.m
 		if mapID then
 			waypointMapIDs[mapID] = true
 		end
 	end
 
 	return waypointMapIDs
+end
+
+function Waypoints:GetInstanceIDsForItem(item)
+	local waypointInstanceIDs = {}
+	if not self:HasItemWaypoints(item) then
+		return waypointInstanceIDs
+	end
+
+	for _, waypointData in pairs(item.coords) do
+		local instanceID = type(waypointData) == "table" and waypointData.instanceID
+		if instanceID then
+			waypointInstanceIDs[instanceID] = true
+		end
+	end
+
+	return waypointInstanceIDs
 end
 
 Rarity.Waypoints = Waypoints

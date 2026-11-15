@@ -26,7 +26,7 @@ local foreverMounts = {
 		statisticId = { 1097 },
 		bonusSatchel = true,
 		blackMarket = true,
-		coords = { { m = 317, x = 38.6, y = 20, i = true } },
+		coords = { { instanceID = 329, zoneName = L["Stratholme"] } },
 	},
 }
 

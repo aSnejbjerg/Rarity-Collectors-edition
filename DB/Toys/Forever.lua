@@ -25,7 +25,7 @@ local foreverToys = {
 		itemId = 13379,
 		npcs = { 10558 },
 		chance = 4,
-		coords = { { m = 317, i = true } },
+		coords = { { instanceID = 329, zoneName = L["Stratholme"] } },
 	},
 	["Orb of Deception"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
