@@ -85,7 +85,7 @@ local foreverPets = {
 		name = L["Parrot Cage (Green Wing Macaw)"],
 		spellId = 10683,
 		itemId = 8492,
-		npcs = { 48522 },
+		npcs = { 657 },
 		chance = 33,
 		creatureId = 7387,
 		blackMarket = true,
@@ -134,7 +134,7 @@ local foreverPets = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.ENCOUNTER,
-		encounter = {
+		encounters = {
 			165, -- Cookie
 		},
 		name = L["Cat Carrier (Siamese)"],
