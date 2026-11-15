@@ -559,7 +559,9 @@ local function DedupeKey(kind, itemId)
 			return "mount:" .. mountId
 		end
 	elseif kind == "pet" then
-		local speciesId = C_PetJournal and C_PetJournal.GetPetInfoByItemID and select(13, C_PetJournal.GetPetInfoByItemID(itemId))
+		local speciesId = C_PetJournal
+			and C_PetJournal.GetPetInfoByItemID
+			and select(13, C_PetJournal.GetPetInfoByItemID(itemId))
 		if speciesId then
 			return "pet:" .. speciesId
 		end
@@ -906,13 +908,17 @@ end
 local function PrintHelp()
 	print("|cff9966ffRarity|r commands (|cffffd100/rarity|r or |cffffd100/rare|r):")
 	print("  |cffffd100/rarity|r - open the options")
-	print("  |cffffd100/rarity test [mount-pet-toy] [first]|r - show a test popup (random attempts; 'first' = first attempt, gold confetti)")
+	print(
+		"  |cffffd100/rarity test [mount-pet-toy] [first]|r - show a test popup (random attempts; 'first' = first attempt, gold confetti)"
+	)
 	print("  |cffffd100/rarity popups reset|r - reset popup positions and settings")
 	print("  |cffffd100/rarity popups debug|r - print Edit Mode / popup diagnostics")
 	print("  Popup position, size, duration, sound and effects: Edit Mode, click a popup")
 	print("  |cffffd100/rarity progress|r - toggle the progress bar")
 	print("  |cffffd100/rarity multifarm <number>|r - count each detected attempt as <number> attempts")
-	print("  |cffffd100/rarity debug|r, |cffffd100dump|r, |cffffd100validate|r, |cffffd100mapinfo|r, |cffffd100purge|r, |cffffd100profiling|r, |cffffd100tinspect|r - debugging tools")
+	print(
+		"  |cffffd100/rarity debug|r, |cffffd100dump|r, |cffffd100validate|r, |cffffd100mapinfo|r, |cffffd100purge|r, |cffffd100profiling|r, |cffffd100tinspect|r - debugging tools"
+	)
 	print("  |cffffd100/rarity test integration|r - Rarity's own integration tests (needs WoWUnit)")
 end
 
@@ -1020,7 +1026,9 @@ local function Initialize()
 		end)
 		hooks.found = true
 	else
-		Print("this Rarity version has no ShowFoundAlert anymore, so finds won't show a popup (test popups still work). Please report this.")
+		Print(
+			"this Rarity version has no ShowFoundAlert anymore, so finds won't show a popup (test popups still work). Please report this."
+		)
 	end
 end
 
