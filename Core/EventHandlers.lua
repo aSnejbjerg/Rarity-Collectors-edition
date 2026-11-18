@@ -976,6 +976,16 @@ function R:OnChatCommand(input)
 				)
 			end
 		end
+	elseif strlower(input) == "window" then -- Test command for the new tabbed window
+		if Rarity.TabbedWindow then
+			Rarity.TabbedWindow:Toggle()
+			self:Print("Toggled tabbed window")
+		else
+			self:Print("Tabbed window not available")
+		end
+		self:Print(
+			"You can now choose between the new tabbed window and old tooltip system in the Options menu under 'Use new window display'."
+		)
 	else
 		Rarity:TryShowOptionsUI()
 	end
