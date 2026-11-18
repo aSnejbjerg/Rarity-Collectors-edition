@@ -24,6 +24,19 @@ local holidayEventMountsMidnight = {
 		holidayEvents = CONSTANTS.HolidayEvents["Midsummer Fire Festival"],
 		coords = { { m = 265, x = 31.2, y = 50.8, i = true, n = L["Ahune"] } },
 	},
+	["Winterrrgl's Pine-Powered Candy Cane Contraption"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.HOLIDAY,
+		type = CONSTANTS.ITEM_TYPES.MOUNT,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Winterrrgl's Pine-Powered Candy Cane Contraption"],
+		spellId = 1321944,
+		itemId = 287092,
+		npcs = { 54499 },
+		chance = 100,
+		sourceText = L["Drops from the Abominable Greench during the Feast of Winter Veil."],
+		holidayEvents = CONSTANTS.HolidayEvents["Feast of Winter Veil"],
+		coords = { { m = CONSTANTS.UIMAPIDS.HILLSBRAD_FOOTHILLS } },
+	},
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.mounts, holidayEventMountsMidnight)
