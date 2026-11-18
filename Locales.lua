@@ -2,6 +2,8 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Drops from the Abominable Greench during the Feast of Winter Veil."] = true
+L["Winterrrgl's Pine-Powered Candy Cane Contraption"] = true
 L["Reins of the Time-Lost Proto-Drake"] = true
 L["Drop chance is 100%. Tracking both Vyragosa and TLPD kills."] = true
 L["Orb of Deception"] = true
