@@ -1008,7 +1008,8 @@ L["Tooltip activation"] = true
 L["On hover"] = true
 L["On click"] = true
 L["Use new window display"] = true
-L["When enabled, Rarity will use the new tabbed window instead of the old tooltip system to display collection data."] = true
+L["When enabled, Rarity will use the new tabbed window instead of the old tooltip system to display collection data."] =
+	true
 
 -- Tabbed Window Interface
 L["Collection Tracking"] = true

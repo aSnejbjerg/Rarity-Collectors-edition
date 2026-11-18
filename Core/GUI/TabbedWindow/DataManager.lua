@@ -286,8 +286,7 @@ function DataManager:GetItemDisplayData(item)
 	}
 
 	if displayData.dropChance > 0 and displayData.dropChance < 1 then
-		displayData.medianLoots =
-			math.floor(math.log(1 - 0.5) / math.log(1 - displayData.dropChance) + 0.5)
+		displayData.medianLoots = math.floor(math.log(1 - 0.5) / math.log(1 - displayData.dropChance) + 0.5)
 	end
 
 	-- Calculate additional display properties
