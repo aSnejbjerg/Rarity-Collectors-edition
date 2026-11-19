@@ -13,7 +13,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
 local foreverToys = {
-	["Piccolo of the Flaming Fire"] = { -- TODO Get the correct MapID
+	["Piccolo of the Flaming Fire"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		isToy = true,
@@ -25,7 +25,7 @@ local foreverToys = {
 		itemId = 13379,
 		npcs = { 10558 },
 		chance = 4,
-		coords = { { m = 317, i = true } },
+		coords = { { m = 317, i = true } }, -- No UIMAPID in dungeons. Need to change to Instance ID.
 	},
 	["Orb of Deception"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -67,6 +67,7 @@ local foreverToys = {
 			1806, -- Vile Slime
 		},
 		chance = 33,
+		repeatable = true,
 		coords = {
 			{ m = 1448 }, -- Felwood
 			{ m = 1449 }, -- Ungoro

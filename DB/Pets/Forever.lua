@@ -89,7 +89,7 @@ local foreverPets = {
 		chance = 33,
 		creatureId = 7387,
 		blackMarket = true,
-		coords = { { m = 291, x = 55, y = 39.6, i = true } },
+		coords = { { m = 291, x = 55, y = 39.6, i = true } }, -- No UIMAPID in dungeons. Need to change to Instance ID.
 	},
 	["Parrot Cage (Hyacinth Macaw)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -143,7 +143,7 @@ local foreverPets = {
 		itemId = 8490,
 		npcs = { 645 },
 		spellId = 10677,
-		coords = { { m = CONSTANTS.UIMAPIDS.DEADMINES } },
+		coords = { { m = CONSTANTS.UIMAPIDS.DEADMINES } }, -- No UIMAPID in dungeons. Need to change to Instance ID.
 	},
 	-- WoW Forever exclusives start here
 	["Tallstrider Hatchling"] = {
