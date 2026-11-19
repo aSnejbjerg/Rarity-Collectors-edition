@@ -43,6 +43,37 @@ local foreverToys = {
 			{ m = 1451 },
 		},
 	},
+	["Oozing Bag"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
+		type = CONSTANTS.ITEM_TYPES.ITEM,
+		isToy = false,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Oozing Bag"],
+		itemId = 20768,
+		npcs = {
+			-- Felwood
+			7092, -- Tainted Ooze
+			7093, -- Vile Ooze
+			-- EP
+			8607, -- Rotting Sludge
+			8606, -- Living Decay
+			-- Ungoro
+			6557, -- Primal Ooze
+			9477, -- Cloned Ooze
+			6559, -- Glutinous Ooze
+			-- WP
+			12387, -- Large Vile Slime
+			1808, -- Devouring Ooze
+			1806, -- Vile Slime
+		},
+		chance = 33,
+		coords = {
+			{ m = 1448 }, -- Felwood
+			{ m = 1449 }, -- Ungoro
+			{ m = 1422 }, -- WP
+			{ m = 1423 }, -- EP
+		},
+	},
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.toys, foreverToys)
