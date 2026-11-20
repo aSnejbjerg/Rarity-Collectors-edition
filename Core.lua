@@ -134,6 +134,7 @@ do
 end
 
 local GetMapNameByID = Rarity.MapInfo.GetMapNameByID
+local IsItemAllowedInCurrentLocation = Rarity.MapInfo.IsItemAllowedInCurrentLocation
 
 --[[
       LIFECYCLE ----------------------------------------------------------------------------------------------------------------
@@ -706,6 +707,19 @@ function R:IsAttemptAllowed(item)
 	-- No item supplied; assume it's okay
 	if item == nil then
 		return true
+	end
+
+	if not IsItemAllowedInCurrentLocation(item) then
+		local locationID = Rarity.MapInfo.GetCurrentLocationID()
+		Rarity:Debug(
+			format(
+				"Attempts for item %s are disallowed (not in required instance: %d, current: %s)",
+				item.name,
+				item.instanceID,
+				tostring(locationID)
+			)
+		)
+		return false
 	end
 
 	-- Check disabled classes

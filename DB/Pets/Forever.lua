@@ -85,6 +85,7 @@ local foreverPets = {
 		name = L["Parrot Cage (Green Wing Macaw)"],
 		spellId = 10683,
 		itemId = 8492,
+		insteanceID = 36,
 		npcs = { 48522 },
 		chance = 33,
 		creatureId = 7387,

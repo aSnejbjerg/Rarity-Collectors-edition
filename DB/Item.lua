@@ -60,6 +60,7 @@ local Item = {
 		lockDungeonId = false,
 		lockBossName = false,
 		defeatSteps = false,
+		instanceID = false,
 		bonusSatchel = false,
 		wasGuaranteed = false,
 		requiresAlliance = false,
