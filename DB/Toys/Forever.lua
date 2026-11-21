@@ -65,6 +65,8 @@ local foreverToys = {
 			12387, -- Large Vile Slime
 			1808, -- Devouring Ooze
 			1806, -- Vile Slime
+			-- Hyjal
+			243509, -- Noxious Slime
 		},
 		chance = 33,
 		repeatable = true,
