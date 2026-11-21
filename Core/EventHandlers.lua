@@ -914,6 +914,59 @@ function R:OnProfileChanged(event, database, newProfileKey)
 	self.db.profile.lastRevision = R.MINOR_VERSION
 end
 
+local function GetMapInfoText()
+	local mapID = C_Map.GetBestMapForUnit("player")
+	local mapIDText, mapName
+	if mapID == nil then
+		mapIDText, mapName = "nil", "Unknown"
+	elseif issecretvalue and issecretvalue(mapID) then
+		mapIDText, mapName = "secret value", "secret value"
+	else
+		local mapInfo = C_Map.GetMapInfo(mapID)
+		mapIDText, mapName = tostring(mapID), mapInfo and mapInfo.name or "Unknown"
+	end
+
+	local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+	return format(
+		"Current map: %s ~ %s | current instance: %s ~ %s",
+		mapIDText,
+		mapName,
+		tostring(instanceID),
+		tostring(instanceName)
+	)
+end
+
+-- A dedicated frame is used because AceEvent only allows one handler per event, and these events are already registered
+local mapInfoFrame
+local lastMapInfoText
+
+local function ToggleConstantMapInfo()
+	if not mapInfoFrame then
+		mapInfoFrame = CreateFrame("Frame")
+		mapInfoFrame:SetScript("OnEvent", function()
+			local text = GetMapInfoText()
+			if text ~= lastMapInfoText then
+				lastMapInfoText = text
+				R:Print(text)
+			end
+		end)
+	end
+
+	if mapInfoFrame:IsEventRegistered("PLAYER_ENTERING_WORLD") then
+		mapInfoFrame:UnregisterAllEvents()
+		R:Print("Constant map info OFF")
+	else
+		lastMapInfoText = nil
+		mapInfoFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+		mapInfoFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
+		mapInfoFrame:RegisterEvent("ZONE_CHANGED")
+		mapInfoFrame:RegisterEvent("ZONE_CHANGED_INDOORS")
+		R:Print("Constant map info ON")
+		lastMapInfoText = GetMapInfoText()
+		R:Print(lastMapInfoText)
+	end
+end
+
 function R:OnChatCommand(input)
 	if strlower(input) == "debug" then
 		if self.db.profile.debugMode then
@@ -928,10 +981,9 @@ function R:OnChatCommand(input)
 	elseif strlower(input) == "validate" then -- Verify the ItemDB
 		self.Validation:ValidateItemDB()
 	elseif strlower(input) == "mapinfo" then
-		local mapID = C_Map.GetBestMapForUnit("player")
-		local mapInfo = C_Map.GetMapInfo(mapID)
-		local mapName = mapInfo and mapInfo.name or "Unknown"
-		self:Print("Current map: " .. mapID .. " ~ " .. mapName)
+		self:Print(GetMapInfoText())
+	elseif strlower(input) == "mapinfoc" then
+		ToggleConstantMapInfo()
 	elseif strlower(input) == "purge" then -- TODO: This should be done automatically, no?
 		self.Database:PurgeObsoleteEntries()
 	elseif strlower(input) == "progress" then
