@@ -39,8 +39,32 @@ local CONSTANTS = Rarity.CONSTANTS
 	}
 
 local MEDIA = "Interface\\AddOns\\" .. addonName .. "\\Media\\"
-local FALLBACK_ICON = [[Interface\Icons\INV_Misc_PheonixPet_01]] -- same fallback Rarity's own toast uses
-local ACHIEVEMENT_SOUND_FILE = 569143 -- the achievement sound file Rarity's own toast plays on retail
+local FALLBACK_ICON = MEDIA .. "icon_fallback.tga" -- bundled, so it exists on every client
+local ACHIEVEMENT_SOUND_FILE = 569143 -- achievement sound file Rarity's own toast plays (works on retail / Forever / MoP)
+local ACHIEVEMENT_SOUND_KIT = 12891 -- achievement alert SoundKit, second choice
+local FALLBACK_SOUND_KIT = 888 -- level-up: Era / TBC (no achievement sound there)
+
+local function PlayPopupSound()
+	-- Era / TBC have no achievement system (and no achievement sound), so play the built-in sound there.
+	-- Check the project ID and the feature: Forever is project 18 and has achievements.
+	local noAchievements = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+		or WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+		or type(GetAchievementInfo) ~= "function"
+	if noAchievements then
+		pcall(PlaySound, FALLBACK_SOUND_KIT)
+		return
+	end
+	-- Achievement sound file first, then the SoundKit, then the built-in fallback
+	local ok, willPlay = pcall(PlaySoundFile, ACHIEVEMENT_SOUND_FILE)
+	if ok and willPlay then
+		return
+	end
+	ok, willPlay = pcall(PlaySound, ACHIEVEMENT_SOUND_KIT)
+	if ok and willPlay then
+		return
+	end
+	pcall(PlaySound, FALLBACK_SOUND_KIT)
+end
 
 local TYPES = {
 	mount = { label = "Mount Collected", color = { 0.64, 0.21, 0.93 }, editName = "Rarity Popup: Mount" },
@@ -66,9 +90,9 @@ local DEFAULT_SETTINGS = {
 }
 
 local PREVIEW = {
-	mount = { "Preview Mount", 345787 },
-	pet = { "Preview Pet", 132834 },
-	toy = { "Preview Toy / Item", 5524923 },
+	mount = { "Preview Mount", MEDIA .. "icon_mount.tga" },
+	pet = { "Preview Pet", MEDIA .. "icon_pet.tga" },
+	toy = { "Preview Toy / Item", MEDIA .. "icon_toy.tga" },
 }
 
 local db
@@ -500,7 +524,7 @@ ShowNext = function(kind)
 	f:Show()
 	UIFrameFadeIn(f, 0.4, 0, 1)
 	if cfg.sound then
-		PlaySoundFile(ACHIEVEMENT_SOUND_FILE)
+		PlayPopupSound()
 	end
 	s.fading = false
 	s.hover = f:IsMouseOver() and true or false
@@ -886,7 +910,11 @@ local function RunTest(args)
 			first = true
 		end
 	end
-	local icons = { mount = 345787, pet = 132834, toy = 5524923 }
+	local icons = {
+		mount = MEDIA .. "icon_mount.tga",
+		pet = MEDIA .. "icon_pet.tga",
+		toy = MEDIA .. "icon_toy.tga",
+	}
 	local names = { mount = "Test Mount", pet = "Test Pet", toy = "Test Toy" }
 	for _, k in ipairs(one and { one } or ORDER) do
 		local attempts = first and 1 or math.random(1, 20000)
