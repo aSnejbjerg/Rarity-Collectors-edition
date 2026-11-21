@@ -4,6 +4,7 @@ exclude_files = {
 	".luacheckrc",
 	"Changes.lua",
 	"Libs",
+	"Modules/CustomPopups/Libs",
 	"Tests", -- Lots of warnings here thanks to LuaUnit, but we'll pretend they don't exist since it's run offline only
 	"Tools", -- Not part of the actual addon code, so warnings can be ignored (for now)
 }
@@ -48,6 +49,11 @@ globals = {
 	-- This addon
 	"Rarity",
 	"RarityDB",
+	"RarityCustomPopupsDB",
+	"SLASH_RARITYPOPUPS1",
+	"C_EditMode",
+	"EditModeManagerFrame",
+	"CreateColor",
 
 	-- Builtins (Blizzard extensions)
 	"issecretvalue",
