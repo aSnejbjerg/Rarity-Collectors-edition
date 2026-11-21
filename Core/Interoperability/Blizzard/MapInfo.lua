@@ -1,14 +1,22 @@
 -- WOW API
 local GetMapInfo = C_Map.GetMapInfo
+local GetInstanceInfo = GetInstanceInfo
 
 -- Streamlined interface for working with Blizzard's UI map system (world map, zone queries, etc.)
 local MapInfo = {}
 
 -- Helper function (to look up map names more easily)
--- Returns the localized map name, or nil if the uiMapID is invalid
+-- Returns the localized map or current instance name, or nil if the ID is invalid
 function MapInfo.GetMapNameByID(uiMapID)
 	local UiMapDetails = GetMapInfo(uiMapID)
-	return UiMapDetails and UiMapDetails.name
+	if UiMapDetails then
+		return UiMapDetails.name
+	end
+
+	local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+	if instanceID == tonumber(uiMapID) then
+		return instanceName
+	end
 end
 
 local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")

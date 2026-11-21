@@ -929,9 +929,26 @@ function R:OnChatCommand(input)
 		self.Validation:ValidateItemDB()
 	elseif strlower(input) == "mapinfo" then
 		local mapID = C_Map.GetBestMapForUnit("player")
-		local mapInfo = C_Map.GetMapInfo(mapID)
-		local mapName = mapInfo and mapInfo.name or "Unknown"
-		self:Print("Current map: " .. mapID .. " ~ " .. mapName)
+		local mapIDText, mapName
+		if mapID == nil then
+			mapIDText, mapName = "nil", "Unknown"
+		elseif issecretvalue and issecretvalue(mapID) then
+			mapIDText, mapName = "secret value", "secret value"
+		else
+			local mapInfo = C_Map.GetMapInfo(mapID)
+			mapIDText, mapName = tostring(mapID), mapInfo and mapInfo.name or "Unknown"
+		end
+
+		local instanceName, _, _, _, _, _, _, instanceID = GetInstanceInfo()
+		self:Print(
+			format(
+				"Current map: %s ~ %s | current instance: %s ~ %s",
+				mapIDText,
+				mapName,
+				tostring(instanceID),
+				tostring(instanceName)
+			)
+		)
 	elseif strlower(input) == "purge" then -- TODO: This should be done automatically, no?
 		self.Database:PurgeObsoleteEntries()
 	elseif strlower(input) == "progress" then
