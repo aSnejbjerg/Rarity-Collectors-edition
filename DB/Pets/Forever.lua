@@ -187,6 +187,30 @@ local foreverPets = {
 		sourceText = L["This pet requires you to /sing to a circle of frogs."],
 		coords = { { m = CONSTANTS.UIMAPIDS.ZEPHRAS_ISLE, x = 51.6, y = 72.6 } },
 	},
+	["Tiny Azure Whelpling"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.FOREVER,
+		type = CONSTANTS.ITEM_TYPES.PET,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Tiny Azure Whelpling"],
+		spellId = 10696,
+		itemId = 268503,
+		npcs = { 10660, 10661, 10659 },
+		chance = 100,
+		creatureId = 7547,
+		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_WINTERSPRING, x = 48.6, y = 61.6 } },
+	},
+	["Cat Carrier (Corrupted Kitten)"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.FOREVER,
+		type = CONSTANTS.ITEM_TYPES.PET,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Cat Carrier (Corrupted Kitten)"],
+		spellId = 15648,
+		itemId = 11903,
+		npcs = { 260422 },
+		chance = 100,
+		creatureId = 11903,
+		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_HYJAL, x = 47.8, y = 70.0 } },
+	},
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, foreverPets)
