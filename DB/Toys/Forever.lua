@@ -13,7 +13,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
 local foreverToys = {
-	["Piccolo of the Flaming Fire"] = { -- TODO Get the correct MapID
+	["Piccolo of the Flaming Fire"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.ITEM,
 		isToy = true,
@@ -25,7 +25,7 @@ local foreverToys = {
 		itemId = 13379,
 		npcs = { 10558 },
 		chance = 4,
-		coords = { { m = 317, i = true } },
+		coords = { { m = 317, i = true } }, -- No UIMAPID in dungeons. Need to change to Instance ID.
 	},
 	["Orb of Deception"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -41,6 +41,40 @@ local foreverToys = {
 			{ m = 1423 },
 			{ m = 1452 },
 			{ m = 1451 },
+		},
+	},
+	["Oozing Bag"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
+		type = CONSTANTS.ITEM_TYPES.ITEM,
+		isToy = false,
+		method = CONSTANTS.DETECTION_METHODS.NPC,
+		name = L["Oozing Bag"],
+		itemId = 20768,
+		npcs = {
+			-- Felwood
+			7092, -- Tainted Ooze
+			7093, -- Vile Ooze
+			-- EP
+			8607, -- Rotting Sludge
+			8606, -- Living Decay
+			-- Ungoro
+			6557, -- Primal Ooze
+			9477, -- Cloned Ooze
+			6559, -- Glutinous Ooze
+			-- WP
+			12387, -- Large Vile Slime
+			1808, -- Devouring Ooze
+			1806, -- Vile Slime
+			-- Hyjal
+			243509, -- Noxious Slime
+		},
+		chance = 33,
+		repeatable = true,
+		coords = {
+			{ m = 1448 }, -- Felwood
+			{ m = 1449 }, -- Ungoro
+			{ m = 1422 }, -- WP
+			{ m = 1423 }, -- EP
 		},
 	},
 }

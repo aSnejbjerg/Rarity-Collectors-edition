@@ -13,7 +13,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Rarity")
 local CONSTANTS = addonTable.constants
 
 local foreverPets = {
-	["Cat Carrier (Black Tabby)"] = { -- NOTE / TODO: MIGHT NEED TO REVISIT LATER, DALARAN SHIELD IS KINDA GONE ON FOREVER, MIGHT HAVE DIFFERENT SOURCE UNDATAMINED
+	["Cat Carrier (Black Tabby)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -26,7 +26,7 @@ local foreverPets = {
 		blackMarket = true,
 		coords = { { m = 1416, x = 20.6, y = 82.8 } },
 	},
-	["Dark Whelpling"] = { -- NOTE: ADJUSTED
+	["Dark Whelpling"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -38,13 +38,13 @@ local foreverPets = {
 		creatureId = 7543,
 		blackMarket = true,
 		coords = {
-			{ m = 15, x = 29.6, y = 44.2 },
-			{ m = 15, x = 71.8, y = 47.6 },
-			{ m = 15, x = 11.2, y = 41.0 },
-			{ m = 70, x = 47.6, y = 69.8 },
+			{ m = 1418, x = 29.6, y = 44.2 },
+			{ m = 1418, x = 71.8, y = 47.6 },
+			{ m = 1418, x = 11.2, y = 41.0 },
+			{ m = 1445, x = 47.6, y = 69.8 },
 		},
 	},
-	["Disgusting Oozeling"] = { -- NOTE: ADJUSTED, POSSIBLY MORE SPAWNS IN NEW ZONES, TODO LATER
+	["Disgusting Oozeling"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.USE,
@@ -70,15 +70,17 @@ local foreverPets = {
 			12387, -- Large Vile Slime
 			1808, -- Devouring Ooze
 			1806, -- Vile Slime
+			-- Hyjal
+			243509, -- Noxious Slime
 		},
 		coords = {
-			{ m = 77 },
-			{ m = 22 },
-			{ m = 23 },
-			{ m = 78 },
+			{ m = 1448 }, -- Felwood
+			{ m = 1449 }, -- Ungoro
+			{ m = 1422 }, -- WP
+			{ m = 1423 }, -- EP
 		},
 	},
-	["Parrot Cage (Green Wing Macaw)"] = { -- Not trackable, secret values in instances (deadmines in this case)
+	["Parrot Cage (Green Wing Macaw)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -89,9 +91,9 @@ local foreverPets = {
 		chance = 33,
 		creatureId = 7387,
 		blackMarket = true,
-		coords = { { m = 291, x = 55, y = 39.6, i = true } },
+		coords = { { m = 291, x = 55, y = 39.6, i = true } }, -- No UIMAPID in dungeons. Need to change to Instance ID.
 	},
-	["Parrot Cage (Hyacinth Macaw)"] = { -- NOTE: ADJUSTED
+	["Parrot Cage (Hyacinth Macaw)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -104,7 +106,7 @@ local foreverPets = {
 		blackMarket = true,
 		coords = { { m = 1434, x = 29.6, y = 81.6 } },
 	},
-	["Tiny Crimson Whelpling"] = { -- NOTE: ADJUSTED
+	["Tiny Crimson Whelpling"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
 		type = CONSTANTS.ITEM_TYPES.PET,
 		method = CONSTANTS.DETECTION_METHODS.NPC,
@@ -115,7 +117,7 @@ local foreverPets = {
 		chance = 10000,
 		creatureId = 7544,
 		blackMarket = true,
-		coords = { { m = CONSTANTS.UIMAPIDS.WETLANDS, x = 62.6, y = 41.6 } },
+		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_WETLANDS, x = 62.6, y = 41.6 } },
 	},
 	["Emerald Whelpling"] = { -- NOTE: ADJUSTED
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -128,7 +130,7 @@ local foreverPets = {
 		chance = 1000,
 		creatureId = 7545,
 		blackMarket = true,
-		coords = { { m = CONSTANTS.UIMAPIDS.SWAMP_OF_SORROWS, x = 14.6, y = 62.6 } },
+		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_SWAMP_OF_SORROWS, x = 14.6, y = 62.6 } },
 	},
 	["Cat Carrier (Siamese)"] = {
 		cat = CONSTANTS.ITEM_CATEGORIES.CLASSIC,
@@ -143,7 +145,7 @@ local foreverPets = {
 		itemId = 8490,
 		npcs = { 645 },
 		spellId = 10677,
-		coords = { { m = CONSTANTS.UIMAPIDS.DEADMINES } },
+		coords = { { m = CONSTANTS.UIMAPIDS.DEADMINES } }, -- No UIMAPID in dungeons. Need to change to Instance ID.
 	},
 	-- WoW Forever exclusives start here
 	["Tallstrider Hatchling"] = {
