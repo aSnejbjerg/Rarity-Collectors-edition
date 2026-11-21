@@ -38,6 +38,7 @@
    <p>For troubleshooting issues:</p> 
 <ul>
     <li><strong>/rarity mapinfo</strong> <br>prints the current map name and ID (if unavailable) as well as the current instance name and ID, which can help track zonewide custom items.</li>
+    <li><strong>/rarity mapinfoc</strong> <br>toggles printing the map and instance info every time it changes.</li>
     <li><strong>/rarity dump</strong> <br>displays the most recent debug log entries (even if the debug mode is disabled).</li>
     <li><strong>/rarity validate</strong> <br>checks the consistency of your item database, including custom items (experimental).</li>
     <li><strong>/rarity multifarm &lt;number&gt;</strong> <br>if you're farming the same items simultaneously on multiple accounts, sets the number of attempts added per detected event (e.g. <code>/rarity multifarm 3</code> adds 3 attempts instead of 1). This only lasts for your current session and resets to 1 the next time you log in. Run without a number to see the current value.</li>
