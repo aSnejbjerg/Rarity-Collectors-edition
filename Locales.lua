@@ -2,6 +2,8 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Spawn of Grubthor"] = true
+L["Shaking Egg"] = true
 L["Cat Carrier (Corrupted Kitten)"] = true
 L["Tiny Azure Whelpling"] = true
 L["Reins of the Time-Lost Proto-Drake"] = true
