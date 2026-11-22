@@ -2,6 +2,11 @@ local L
 L = LibStub("AceLocale-3.0"):NewLocale("Rarity", "enUS", true)
 
 -- L["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"] = true
+L["Wilted Lashling Bud"] = true
+L["Spawn of Grubthor"] = true
+L["Shaking Egg"] = true
+L["Cat Carrier (Corrupted Kitten)"] = true
+L["Tiny Azure Whelpling"] = true
 L["Reins of the Time-Lost Proto-Drake"] = true
 L["Drop chance is 100%. Tracking both Vyragosa and TLPD kills."] = true
 L["Orb of Deception"] = true
