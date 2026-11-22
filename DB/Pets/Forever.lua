@@ -235,6 +235,18 @@ local foreverPets = {
 		creatureId = 276331,
 		coords = { { m = CONSTANTS.UIMAPIDS.FOREVER_SILITHUS, x = 40.2, y = 74.7 } },
 	},
+	["Wilted Lashling Bud"] = {
+		cat = CONSTANTS.ITEM_CATEGORIES.FOREVER,
+		type = CONSTANTS.ITEM_TYPES.PET,
+		method = CONSTANTS.DETECTION_METHODS.USE,
+		name = L["Wilted Lashling Bud"],
+		spellId = 1250016,
+		itemId = 249898,
+		items = { 249900 },
+		chance = 20,
+		creatureId = 249702,
+		coords = { { m = CONSTANTS.UIMAPIDS.BLACKMAW_HOLD } }, -- Will need to use instance ID here, there is no MAPID.
+	},
 }
 
 Rarity.ItemDB.MergeItems(Rarity.ItemDB.pets, foreverPets)
